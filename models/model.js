@@ -6,20 +6,10 @@ var modelSchema = new mongoose.Schema({
     category: String,
     year: Number,
     colors: {
-        inner: [
-            {
-                name: String,
-                code: String
-            }
-        ],
-        outer: [
-            {
-                name: String,
-                code: String
-            }
-        ]
+        inner: [String],
+        outer: [String]
     },
-    variants:[
+    versions:[
         {
             description: String,
             cost: String,
@@ -47,7 +37,7 @@ var modelSchema = new mongoose.Schema({
     meta: {
         active: {type: Boolean, default: true},
         created_at: {type: Date, default: Date.now},
-        modified_at: {type: Date}
+        modified_at: {type: Date, default: Date.now}
     }
 });
 

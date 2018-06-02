@@ -48,9 +48,9 @@ var requestSchema = new mongoose.Schema({
         name: String
     },
     meta: {
-        active: Boolean,
-        created_at: { type: Date, default: Date.now},
-        modified_at: { type: Date }
+        active: {type: Boolean, default: true},
+        created_at: {type: Date, default: Date.now},
+        modified_at: {type: Date}
     }
 });
 

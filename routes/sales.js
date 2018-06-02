@@ -1,8 +1,10 @@
-var express = require("express"),
-    router  = express.Router();
+var express = require("express");
+var SalesController = require("../controllers/sale");
+var router  = express.Router();
 
-router.get("/", function(req, res){
-    res.send("Sales route get");
-});
+router.get("/", SalesController.findSales);
+router.post("/", SalesController.addSale);
+router.put("/", SalesController.updateSale);
+router.delete("/", SalesController.removeSale);
 
 module.exports = router;

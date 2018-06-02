@@ -1,20 +1,10 @@
-var express = require("express"),
-    router  = express.Router();
+var express        = require("express");
+var UserController = require("../controllers/user");
+var router         = express.Router();
 
-router.get("/", function(req, res){
-    res.send("Users route get");
-});
-
-router.post("/", function(req, res){
-    res.send("Users router post");
-});
-
-router.put("/", function(req, res){
-    res.send("Users router put");
-});
-
-router.delete("/", function(req, res){
-    res.send("Users route delete");
-})
+router.get("/", UserController.findUsers);
+router.post("/", UserController.addUser);
+router.put("/", UserController.updateUser);
+router.delete("/", UserController.removeUser);
 
 module.exports = router;

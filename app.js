@@ -1,55 +1,34 @@
-var express               = require("express"),
-    app                   = express(),
-    mongoose              = require("mongoose"),
-    Branch                = require("./models/branch"),
-    Client                = require("./models/client"),
-    CarModel              = require("./models/model"),
-    Request               = require("./models/request"),
-    Vehicle               = require("./models/vehicle"),
-    User                  = require("./models/user"),
-    seedDB                = require("./seeds"),
-    expressSanitizer      = require("express-sanitizer"),
-    methodOverride        = require("method-override"),
-    bodyParser            = require("body-parser"),
-    passport              = require("passport"),
-    LocalStrategy         = require("passport-local"),
-    passportLocalMongoose = require("passport-local-mongoose");
+var express               = require("express");
+var app                   = express();
+var Agency                = require("./models/agency");
+var Client                = require("./models/client");
+var CarModel              = require("./models/model");
+var Request               = require("./models/request");
+var Vehicle               = require("./models/vehicle");
+var User                  = require("./models/user");
+var seedDB                = require("./seeds");
+var expressSanitizer      = require("express-sanitizer");
+var methodOverride        = require("method-override");
+var bodyParser            = require("body-parser");
+var passport              = require("passport");
+var LocalStrategy         = require("passport-local");
+var passportLocalMongoose = require("passport-local-mongoose");
 
 //Requiring route files
-var carRoutes    = require("./routes/cars"),
-    clientRoutes = require("./routes/clients"),
-    agencyRoutes  = require("./routes/agencies"),
-    vehicleRoutes = require("./routes/vehicles"),
-    requestRoutes = require("./routes/requests"),
-    userRoutes    = require("./routes/users"),
-    loginRoutes   = require("./routes/login"),
-    catalogRoutes = require("./routes/catalog"),
-    salesRoutes   = require("./routes/sales"),
-    authRoutes   = require("./routes/index");
-
-//=======================Database setup==========================
-
-var connectionSettings = { 
-    server: { 
-        socketOptions: { 
-            keepAlive: 300000,
-            connectTimeoutMS: 30000 
-        } 
-    }, 
-    replset: { 
-        socketOptions: {
-            keepAlive: 300000,
-            connectTimeoutMS : 30000
-        } 
-    } 
-};       
-
-var mongoConnectionString = "mongodb://anuar:taquitos21@ds245250.mlab.com:45250/nissan";
-
-mongoose.connect(mongoConnectionString, connectionSettings);
+var carRoutes     = require("./routes/cars");
+var clientRoutes  = require("./routes/clients");
+var agencyRoutes  = require("./routes/agencies");
+var vehicleRoutes = require("./routes/vehicles");
+var requestRoutes = require("./routes/requests");
+var userRoutes    = require("./routes/users");
+var loginRoutes   = require("./routes/login");
+var catalogRoutes = require("./routes/catalog");
+var salesRoutes   = require("./routes/sales");
+var authRoutes    = require("./routes/authentication");
 
 //=======================App setup===============================
 
+//Middleware
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());
 app.use(methodOverride("_method"));
@@ -88,6 +67,4 @@ app.use("/login", loginRoutes);
 app.use("/catalog", catalogRoutes);
 app.use("/sales", salesRoutes);
 
-app.listen(3000, function(){
-    console.log("Server listening");
-});
+module.exports = app;

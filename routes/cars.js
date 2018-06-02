@@ -1,20 +1,10 @@
-var express = require("express"),
-    router  = express.Router();
+var express         = require("express");
+var ModelController = require("../controllers/model");
+var router          = express.Router();
 
-router.get("/", function(req, res){
-    res.send("Cars page route get");
-});
-
-router.post("/", function(req, res){
-   res.send("Cars page route post"); 
-});
-
-router.put("/", function(req, res){
-    res.send("Cars page route put");
-});
-
-router.delete("/", function(req, res){
-    res.send("Cars page route delete");
-});
+router.get("/", ModelController.findModels);
+router.post("/", ModelController.addModel);
+router.put("/", ModelController.updateModel);
+router.delete("/", ModelController.removeModel);
 
 module.exports = router;

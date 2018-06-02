@@ -1,20 +1,10 @@
-var express = require("express"),
-    router  = express();
+var express           = require("express");
+var RequestController = require("../controllers/request");
+var router            = express();
 
-router.get("/", function(req, res){
-    res.send("Request route get");
-})
-
-router.post("/", function(req, res){
-    res.send("Request route post");
-})
-
-router.put("/", function(req, res){
-    res.send("Request route put");
-})
-
-router.delete("/", function(req, res){
-    res.send("Request route delete");
-})
+router.get("/", RequestController.findRequests);
+router.post("/", RequestController.addRequest);
+router.put("/", RequestController.updateRequest);
+router.delete("/", RequestController.removeRequest);
 
 module.exports = router;

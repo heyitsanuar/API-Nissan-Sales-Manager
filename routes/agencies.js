@@ -1,20 +1,10 @@
-var express = require("express"),
-    router  = express.Router();
+var express          = require("express");
+var AgencyController = require("../controllers/agency");
+var router           = express.Router();
 
-router.get("/", function(req, res){
-    res.send("Agency route get");
-});
-
-router.post("/", function(req, res){
-    res.send("Agency route post");
-});
-
-router.put("/", function(req, res){
-    res.send("Agency route update");
-});
-
-router.delete("/", function(req, res){
-    res.send("Agency route delete");
-});
+router.get("/", AgencyController.findAgencies);
+router.post("/", AgencyController.addAgency);
+router.put("/", AgencyController.updateAgency);
+router.delete("/", AgencyController.removeAgency);
 
 module.exports = router;

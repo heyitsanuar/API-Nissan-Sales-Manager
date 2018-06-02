@@ -1,23 +1,28 @@
 var mongoose = require("mongoose");
 
-var vehicleSchema = new mongoose.Schema({
-    name: String,
-    model: {
+var saleSchema = new mongoose.Schema({
+    vehicle: {
+        id:{
+            type: mongoose.Schema.Types.ObjectId,
+            refer: "Vehicle"
+        },
+        name: String,
+        serieNumber: String
+    },
+    client: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
-            refer: "Model"
+            refer: "Client"
         },
         name: String
     },
-    serieNumber: String,
-    branch: {
+    salesman: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
-            refer: "Branch"
+            refer: "User"
         },
         name: String
     },
-    status: String,
     meta: {
         active: {type: Boolean, default: true},
         created_at: {type: Date, default: Date.now},
@@ -25,6 +30,6 @@ var vehicleSchema = new mongoose.Schema({
     }
 });
 
-var Vehicle = mongoose.model("Vehicle", vehicleSchema);
+var Sale = mongoose.model("Sale", saleSchema);
 
-module.exports = Vehicle;
+module.exports = Sale;

@@ -1,12 +1,8 @@
-var express = require("express"),
-    router  = express.Router();
+var express           = require("express");
+var CatalogController = require("../controllers/catalog");
+var router            = express.Router();
 
-router.get("/", function(req, res){
-    res.send("Catalog route get");
-});
-
-router.get("/details/:carId", function(req, res){
-    res.send("Details route get");
-});
+router.get("/", CatalogController.findCatalog);
+router.get("/details/:carId", CatalogController.findDetailsById);
 
 module.exports = router;

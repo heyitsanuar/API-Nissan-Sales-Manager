@@ -45,7 +45,7 @@ var modelSchema = new mongoose.Schema({
         imagesURL: [String]
     },
     meta: {
-        active: Boolean,
+        active: {type: Boolean, default: true},
         created_at: {type: Date, default: Date.now},
         modified_at: {type: Date}
     }

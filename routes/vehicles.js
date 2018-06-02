@@ -1,20 +1,10 @@
-var express = require("express"),
-    router  = express.Router();
+var express = require("express");
+var VehicleController = require("../controllers/vehicle");
+var router  = express.Router();
 
-router.get("/", function(req, res){
-    res.send("Vehicle route get");
-});
-
-router.post("/", function(req, res){
-    res.send("Vehicle route post");
-});
-
-router.put("/", function(req, res){
-    res.send("Vehicle route put");
-});
-
-router.delete("/", function(req, res){
-    res.send("Vehicle route delete");
-});
+router.get("/", VehicleController.findVehicles);
+router.post("/", VehicleController.addVehicle);
+router.put("/", VehicleController.updateVehicle);
+router.delete("/", VehicleController.removeVehicle);
 
 module.exports = router;

@@ -15,7 +15,7 @@ var branchSchema = new mongoose.Schema({
         name: String
     },
     meta: {
-        active: Boolean,
+        active: {type: Boolean, default: true},
         created_at: {type: Date, default: Date.now},
         modified_at: {type: Date}
     }

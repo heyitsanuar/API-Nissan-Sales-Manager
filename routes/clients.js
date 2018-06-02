@@ -1,20 +1,10 @@
-var express = require("express"),
-    router  = express.Router();
+var express          = require("express");
+var ClientController = require("../controllers/client");
+var router           = express.Router();
 
-router.get("/", function(req, res){
-    res.send("Clients route get");
-});
-
-router.post("/", function(req, res){
-    res.send("Clients route post");
-});
-
-router.put("/", function(req, res){
-    res.send("Clients route put");
-});
-
-router.delete("/", function(req, res){
-    res.send("Clients route delete");
-});
+router.get("/", ClientController.findClients);
+router.post("/", ClientController.addClient);
+router.put("/", ClientController.updateClient);
+router.delete("/", ClientController.removeClient);
 
 module.exports = router;

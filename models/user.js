@@ -1,4 +1,5 @@
-var mongoose = require("mongoose");
+var mongoose              = require("mongoose"),
+    passportLocalMongoose = require("passport-local-mongoose");
 
 var userSchema = new mongoose.Schema({
     user: String,
@@ -12,6 +13,8 @@ var userSchema = new mongoose.Schema({
         modified_at: {type: Date}
     }
 });
+
+userSchema.plugin(passportLocalMongoose);
 
 var User = mongoose.model("User", userSchema);
 

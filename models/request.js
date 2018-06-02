@@ -54,6 +54,6 @@ var requestSchema = new mongoose.Schema({
     }
 });
 
-var Request = mongoose.Schema("Request", requestSchema);
+var Request = mongoose.model("Request", requestSchema);
 
 module.exports = Request;

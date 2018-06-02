@@ -3,10 +3,10 @@ var express               = require("express"),
     mongoose              = require("mongoose"),
     Branch                = require("./models/branch"),
     Client                = require("./models/client"),
-    Model                 = require("./models/model"),
+    CarModel              = require("./models/model"),
     Request               = require("./models/request"),
-    User                  = require("./models/user"),
     Vehicle               = require("./models/vehicle"),
+    User                  = require("./models/user"),
     seedDB                = require("./seeds"),
     expressSanitizer      = require("express-sanitizer"),
     methodOverride        = require("method-override"),
@@ -15,10 +15,17 @@ var express               = require("express"),
     LocalStrategy         = require("passport-local"),
     passportLocalMongoose = require("passport-local-mongoose");
 
-//Route files
-var carRoutes     = require("./routes/cars"),
-    requestRoutes = require("./routes/request"),
-    authRoutes    = require("./routes/index");
+//Requiring route files
+var carRoutes    = require("./routes/cars"),
+    clientRoutes = require("./routes/clients"),
+    agencyRoutes  = require("./routes/agencies"),
+    vehicleRoutes = require("./routes/vehicles"),
+    requestRoutes = require("./routes/requests"),
+    userRoutes    = require("./routes/users"),
+    loginRoutes   = require("./routes/login"),
+    catalogRoutes = require("./routes/catalog"),
+    salesRoutes   = require("./routes/sales"),
+    authRoutes   = require("./routes/index");
 
 //=======================Database setup==========================
 
@@ -68,6 +75,18 @@ app.use(function(req, res, next){
     res.locals.currentUser = req.User;
     next();
 });
+
+//Routing instances
+
+app.use("/cars", carRoutes);
+app.use("/clients", clientRoutes);
+app.use("/agency", agencyRoutes);
+app.use("/vehicles", vehicleRoutes);
+app.use("/requests", requestRoutes);
+app.use("/employees", userRoutes);
+app.use("/login", loginRoutes);
+app.use("/catalog", catalogRoutes);
+app.use("/sales", salesRoutes);
 
 app.listen(3000, function(){
     console.log("Server listening");

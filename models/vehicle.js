@@ -10,10 +10,10 @@ var vehicleSchema = new mongoose.Schema({
         name: String
     },
     serieNumber: String,
-    branch: {
+    agency: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
-            refer: "Branch"
+            refer: "Agency"
         },
         name: String
     },

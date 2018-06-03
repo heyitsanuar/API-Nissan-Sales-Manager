@@ -19,8 +19,9 @@ var modelSchema = new mongoose.Schema({
             }
         ]
     },
-    variants:[
+    versions:[
         {
+            name: String,
             description: String,
             cost: String,
             torque: String,

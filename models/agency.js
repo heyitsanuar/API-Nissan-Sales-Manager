@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 
-var branchSchema = new mongoose.Schema({
+var agencySchema = new mongoose.Schema({
     name: String,
     region: String,
     city: String,
@@ -17,10 +17,10 @@ var branchSchema = new mongoose.Schema({
     meta: {
         active: {type: Boolean, default: true},
         created_at: {type: Date, default: Date.now},
-        modified_at: {type: Date}
+        modified_at: {type: Date, default: Date.now}
     }
 });
 
-var Branch = mongoose.model("Branch", branchSchema);
+var Agency = mongoose.model("Agency", agencySchema);
 
-module.exports = Branch;
+module.exports = Agency;

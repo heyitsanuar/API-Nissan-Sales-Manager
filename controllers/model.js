@@ -3,16 +3,14 @@
 var Model = require("../models/model");
 
 function findModels(req, res){
-    
     //Looks for all the models within the database
-    Model.find({}, (err, foundModels) =>{
+    Model.find({"meta.active": true}, (err, foundModels) =>{
         if(err){
             res.send(err);
         }else{
             res.send(foundModels);
         }
     });
-
 }
 
 function addModel(req, res){
@@ -36,27 +34,27 @@ function addModel(req, res){
             res.send(modelAdded);
         }
     });
-    
 }
 
 function updateModel(req, res){
 
-    //Creating new model updated
-    var updateModel = {
-        name: req.body.name,
-        description: req.body.description,
-        category: req.body.category,
-        year: req.body.year,
-        colors: req.body.colors,
-        versions: req.body.versions,
-        photos: req.body.photos
-    };
-
     //Looks for the model by id, if found, it's gonna be updated
-    Model.findByIdAndUpdate(req.params.id, updateModel, (err, modelUpdated) =>{
+    Model.findOne({"_id": req.params.id, "meta.active": true}, (err, modelUpdated) => {
         if(err){
             res.send(err);
         }else{
+
+            modelUpdated.name          = req.body.name;
+            modelUpdated.description   = req.body.description;
+            modelUpdated.category      = req.body.category;
+            modelUpdated.year          = req.body.year;
+            modelUpdated.colors        = req.body.colors;
+            modelUpdated.versions      = req.body.versions;
+            modelUpdated.photos        = req.body.photos;
+            modelUpdated.meta.modified = Date.now;
+
+            modelUpdated.save();
+
             res.send(modelUpdated);
         }
     });
@@ -66,7 +64,7 @@ function updateModel(req, res){
 function removeModel(req, res){
 
     //Looks for the model by id, if found, it's gonna be removed
-    Model.findByIdAndRemove(req.params.id, (err, modelToDelete) =>{
+    Model.findOneAndUpdate({"_id": req.params.id, "meta.active": true}, {"meta.active": false}, (err, modelToDelete) => {
         if(err){
             res.send(err);
         }else{

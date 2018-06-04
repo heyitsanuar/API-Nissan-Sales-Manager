@@ -3,13 +3,37 @@
 var Vehicle = require("../models/vehicle");
 var Model   = require("../models/model");
 var Agency  = require("../models/agency");
+var User    = require("../models/user");
 
 function findVehicles(req, res){
-    Vehicle.find({}, (err, foundVehicles) => {
+    Vehicle.find({"meta.active": true}, (err, foundVehicles) => {
         if(err){
             res.send(err);
         }else{
             res.send(foundVehicles);
+        }
+    });
+}
+
+function findVehiclesByAgency(req, res){
+    //Buscar usuario
+    User.findOne({"_id": currentUser._id, "meta.active": true},(err, foundUser) =>{
+        if(err){
+            res.send(err);
+        }else{
+            Agency.findOne({"manager.id": foundUser._id, "meta.active": true}, (err, foundAgency) =>{
+                if(err){
+                    res.send(err);
+                }else{
+                    Vehicle.find({"agency.id": foundAgency._id, "meta.active": true}, (err, foundVehicles) => {
+                        if(err){
+                            res.send(err);
+                        }else{
+                            res.send(foundVehicles);
+                        }
+                    });
+                }
+            });
         }
     });
 }
@@ -75,21 +99,26 @@ function updateVehicle(req, res){
         }
     };
 
+    //We always use meta.active to filter the ones that are not "deleted"
+
     Model.findOne({
         "name": updatedVehicle.model.name,
-        "versions.name": updatedVehicle.model.version
+        "versions.name": updatedVehicle.model.version,
+        "meta.active": true
     }, (err, foundModel) =>{
         if(err){
             res.send(err);
         }else{
-            Agency.findOne({"name": updatedVehicle.agency.name}, (err, foundAgency) => {
+            Agency.findOne({"name": updatedVehicle.agency.name, "meta.active": true}, (err, foundAgency) => {
                 if(err){
                     res.send(err);
                 }else{
-                    updatedVehicle.model.id  = foundModel._id;
-                    updatedVehicle.agency.id = foundAgency._id;
 
-                    Vehicle.findByIdAndUpdate(req.params.id, updatedVehicle, (err, modifiedVehicle) => {
+                    updatedVehicle.model.id      = foundModel._id;
+                    updatedVehicle.agency.id     = foundAgency._id;
+                    updatedVehicle.meta.modified = Date.now;
+
+                    Vehicle.findOneAndUpdate({"_id": req.params.id, "meta.active": true}, updatedVehicle, (err, modifiedVehicle) => {
                         if(err){
                             res.send(err);
                         }else{
@@ -103,17 +132,21 @@ function updateVehicle(req, res){
 }
 
 function removeVehicle(req, res){
-    Vehicle.findByIdAndRemove(req.params.id, (err, foundVehicle) => {
+    Vehicle.findOne({"_id": req.params.id, "meta.active": true}, (err, foundVehicle) => {
         if(err){
             res.send(err);
         }else{
-            res.send("Deleted succesfully");
+            foundVehicle.meta.active = false;
+            foundVehicle.save();
+
+            res.send(foundVehicle);
         }
     });
 }
 
 module.exports = {
     findVehicles,
+    findVehiclesByAgency,
     addVehicle,
     updateVehicle,
     removeVehicle

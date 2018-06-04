@@ -96,6 +96,9 @@ function updateVehicle(req, res){
         agency: {
             id: "",
             name: req.body.agency.name
+        },
+        meta: {
+            modified_at: ""
         }
     };
 
@@ -113,10 +116,11 @@ function updateVehicle(req, res){
                 if(err){
                     res.send(err);
                 }else{
-
-                    updatedVehicle.model.id      = foundModel._id;
-                    updatedVehicle.agency.id     = foundAgency._id;
-                    updatedVehicle.meta.modified = Date.now;
+                    
+                    //Updates modified at field
+                    updatedVehicle.model.id         = foundModel._id;
+                    updatedVehicle.agency.id        = foundAgency._id;
+                    updatedVehicle.meta.modified_at = Date.now;
 
                     Vehicle.findOneAndUpdate({"_id": req.params.id, "meta.active": true}, updatedVehicle, (err, modifiedVehicle) => {
                         if(err){

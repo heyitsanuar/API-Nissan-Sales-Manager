@@ -4,7 +4,7 @@ var Agency = require("../models/agency");
 var User   = require("../models/user");
 
 function findAgencies(req, res){
-    Agency.find({}, (err, foundAgencies) => {
+    Agency.find({"meta.active": true}, (err, foundAgencies) => {
         if(err){
             res.send(err);
         }else{
@@ -25,7 +25,7 @@ function addAgency(req, res){
         manager: req.body.manager
     };
 
-    User.findOne({username: newAgency.manager}, (err, foundUser) =>{
+    User.findOne({"username": newAgency.manager, "meta.active": true}, (err, foundUser) =>{
         
         if(err){
             res.send(err);
@@ -62,10 +62,13 @@ function updateAgency(req, res){
         cp: req.body.cp,
         colony: req.body.colony,
         address: req.body.address,
-        manager: req.body.manager
+        manager: req.body.manager,
+        meta: {
+            modified_at: ""
+        }
     };
 
-    User.findOne({username: updatedAgency.manager}, (err, foundUser) =>{
+    User.findOne({"username": updatedAgency.manager, "meta.active": true}, (err, foundUser) => {
         
         if(err){
             res.send(err);
@@ -78,9 +81,10 @@ function updateAgency(req, res){
                 fullName: fullName
             };
 
-            updatedAgency.manager = newManager;
+            updatedAgency.manager          = newManager;
+            updatedAgency.meta.modified_at = Date.now;
 
-            Agency.findByIdAndUpdate(req.params.id, updatedAgency, (err, agencyChanged) => {
+            Agency.findOneAndUpdate({"_id": req.params.id, "meta.active": true}, updatedAgency, (err, agencyChanged) =>{
                 if(err){
                     res.send(err);
                 }else{
@@ -94,12 +98,15 @@ function updateAgency(req, res){
 }
 
 function removeAgency(req, res){
-    
-    Agency.findByIdAndRemove(req.params.id, (err, agencyToRemoved) => {
+
+    Agency.findOne({"_id": req.params.id, "meta.active": true}, (err, agencyToRemove) => {
         if(err){
             res.send(err);
         }else{
-            res.send("Deleted Succesfully");
+            agencyToRemove.meta.active = false;
+            agencyToRemove.save();
+
+            res.send("Deleted Successfully");
         }
     });
 

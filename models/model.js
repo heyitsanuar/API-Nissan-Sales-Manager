@@ -11,6 +11,7 @@ var modelSchema = new mongoose.Schema({
     },
     versions:[
         {
+            name: String,
             description: String,
             cost: String,
             torque: String,

@@ -12,7 +12,7 @@ var agencySchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             refer: "User"
         },
-        name: String
+        fullName: String
     },
     meta: {
         active: {type: Boolean, default: true},

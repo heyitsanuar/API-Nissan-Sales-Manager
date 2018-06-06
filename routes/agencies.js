@@ -4,7 +4,7 @@ var router           = express.Router();
 
 router.get("/", AgencyController.findAgencies);
 router.post("/", AgencyController.addAgency);
-router.put("/", AgencyController.updateAgency);
-router.delete("/", AgencyController.removeAgency);
+router.put("/:id", AgencyController.updateAgency);
+router.delete("/:id", AgencyController.removeAgency);
 
 module.exports = router;

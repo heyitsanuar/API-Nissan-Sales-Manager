@@ -17,13 +17,13 @@ function addModel(req, res){
 
     //Creating the object of the model to be added and its properties
     var newModel = {
-        name: req.body.name,
-        description: req.body.description,
-        category: req.body.category,
-        year: req.body.year,
-        colors: req.body.colors,
-        versions: req.body.versions,
-        photos: req.body.photos
+        nombre: req.body.name,
+        descripcion: req.body.description,
+        categoria: req.body.category,
+        anio: req.body.year,
+        colores: req.body.colors,
+        variantes: req.body.versions,
+        imagenes: req.body.photos
     };
 
     //Creates the model and adds it to the database

@@ -1,6 +1,6 @@
 'use strict'
 
-var Client = require("../models/client");
+var Client  = require("../models/client");
 
 function findClients(req, res){
     res.send("Clients route get");

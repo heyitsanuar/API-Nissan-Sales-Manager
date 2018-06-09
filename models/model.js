@@ -27,7 +27,7 @@ var modelSchema = new mongoose.Schema({
     variantes:[
         {
             type: mongoose.Schema.Types.ObjectId,
-            refer: "Version"
+            ref: "Version"
         }
     ],
     imagenes: [String],

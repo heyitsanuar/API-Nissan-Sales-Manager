@@ -17,7 +17,21 @@ function addUser(req, res){
         role: req.body.role
     };
 
-    if(currentUser.role == "Global"){
+    User.register(newUser, req.body.password, function(err, registeredUser){
+        if(err){ //If not authenticated, the user won't go on
+            console.log(err);
+            //return res.render("register");
+            return res.send("Error");
+        }
+
+        //If authenticated, the user will be redirected to blogs
+        passport.authenticate("local")(req, res, function(){
+            //res.redirect("/blogs");
+            console.log("Authenticated");
+        });
+    });
+
+    /*if(currentUser.role == "Global"){
         User.register(newUser, req.body.password, function(err, registeredUser){
             if(err){ //If not authenticated, the user won't go on
                 console.log(err);
@@ -59,7 +73,7 @@ function addUser(req, res){
             });
         });
 
-    }
+    }*/
     
 }
 

@@ -6,7 +6,7 @@ var Branch  = require("../models/agency");
 var User    = require("../models/user");
 var Client  = require("../models/client");
 
-function findRequestsByAgency(req, res){
+function findRequests(req, res){
     Request.find({"meta.active": true}, (err, foundRequests) => {
         if(err){
             res.send(err);

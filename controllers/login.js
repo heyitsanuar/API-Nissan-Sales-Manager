@@ -3,14 +3,9 @@
 var User = require("../models/user");
 
 function goToLogin(req, res){
-    res.send("Login get route");
-}
-
-function signIn(req, res){
-    res.send("Login post route");
+    res.render("login");
 }
 
 module.exports = {
-    goToLogin,
-    signIn
+    goToLogin
 };

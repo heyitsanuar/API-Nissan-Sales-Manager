@@ -3,6 +3,10 @@
 var Agency = require("../models/agency");
 var User   = require("../models/user");
 
+function showAgencies(req, res){
+    res.render("admin/agencies");
+}
+
 function findAgencies(req, res){
 
     Agency.find({"meta.active": true}, (err, foundAgencies) => {
@@ -19,7 +23,7 @@ function addAgency(req, res){
     
     var newAgency = {
         name: req.body.name,
-        region: req.body.region,
+        state: req.body.state,
         city: req.body.city,
         cp: req.body.cp,
         colony: req.body.colony,
@@ -139,6 +143,7 @@ function setManager(req, res){
 }
 
 module.exports = {
+    showAgencies,
     findAgencies,
     addAgency,
     updateAgency,

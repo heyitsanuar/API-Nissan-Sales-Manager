@@ -7,7 +7,12 @@ router.get("/", ModelController.findModels);
 router.post("/", ModelController.addModel);
 router.put("/:id", ModelController.updateModel);
 router.delete("/:id", ModelController.removeModel);
+
+router.get("/:id", ModelController.findModelById);
+router.get("/category/:category", ModelController.findModelsByCategory);
+router.get("/images/:id", ModelController.findModelImages);
+
 //Routes for versions
-router.post("/version/:id", ModelController.addVersion);
+router.post("/version/new/:id", ModelController.addVersion);
 
 module.exports = router;

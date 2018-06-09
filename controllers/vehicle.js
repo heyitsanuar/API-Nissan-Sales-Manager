@@ -53,8 +53,8 @@ function findVehiclesByAgency(req, res){
 function addVehicle(req, res){
 
     Model.findOne({
-        "name": req.body.model.name,
-        "versions.name": req.body.model.version
+        "_id": req.params.id,
+        "meta.active": true
     }, (err, foundModel) =>{
 
         if(err){
@@ -75,7 +75,7 @@ function addVehicle(req, res){
                         serieNumber: req.body.serieNumber,
                         agency: {
                             id: foundAgency._id,
-                            name: req.body.agency.name
+                            name: foundAgency.name
                         }
                     };
 

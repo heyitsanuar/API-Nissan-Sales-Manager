@@ -16,6 +16,8 @@ var passport              = require("passport");
 var LocalStrategy         = require("passport-local");
 var passportLocalMongoose = require("passport-local-mongoose");
 
+//seedDB();
+
 //Requiring route files
 var carRoutes      = require("./routes/cars"),
     clientRoutes   = require("./routes/clients"),
@@ -28,11 +30,14 @@ var carRoutes      = require("./routes/cars"),
     salesRoutes    = require("./routes/sales"),
     comparerRoutes = require("./routes/comparer"),
     locationRoutes = require("./routes/location"),
+    indexRoutes    = require("./routes/index"),
     authRoutes     = require("./routes/authentication");
 
 //=======================App setup===============================
 
 //Middleware
+app.set("view engine", "ejs");
+app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());
 app.use(methodOverride("_method"));
@@ -55,12 +60,14 @@ passport.deserializeUser(User.deserializeUser());
 
 //Setting current user for local's
 app.use(function(req, res, next){
-    res.locals.currentUser = req.User;
+    res.locals.currentUser = req.user;
     next();
 });
 
 //Routing instances
 
+app.use(indexRoutes);
+app.use(authRoutes);
 app.use("/cars", carRoutes);
 app.use("/clients", clientRoutes);
 app.use("/agency", agencyRoutes);
@@ -71,5 +78,6 @@ app.use("/login", loginRoutes);
 app.use("/catalog", catalogRoutes);
 app.use("/sales", salesRoutes);
 app.use("/comparer", comparerRoutes);
+app.use("/locations", locationRoutes);
 
 module.exports = app;

@@ -24,6 +24,6 @@ var versionSchema = new mongoose.Schema({
     }
 });
 
-var Version = new mongoose.model("Version", versionSchema);
+var Version = mongoose.model("Version", versionSchema);
 
 module.exports = Version;

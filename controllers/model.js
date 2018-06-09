@@ -6,40 +6,47 @@ var Version = require("../models/version");
 function findModels(req, res){
     
     //Looks for all the models within the database
-    Model.find({"meta.active": true}).populate("versions").exec(function(err, foundModels){
-        if(err){
-            res.send(err);
-        }else{
-            res.send(foundModels);
-        }
-    });
+    Model.find({"meta.active": true})
+         .populate("variantes")
+         .exec( (err, foundModels) =>{
+             if(err){
+                 res.send(err);
+             }else{
+                 res.send(foundModels);
+             }
+         }
+    );
 
 }
 
 function findModelsByCategory(req, res){
 
-    var category = req.params.categoria;
+    var category = req.params.category;
 
-    Models.find({"categoria": category, "meta:active": true}).populate("versions").exec(function(err, foundModels){
-        if(err){
-            res.send(err);
-        }else{
-            res.send(foundModels);
-        }
-    });
+    Model.find({"categoria": category, "meta.active": true})
+         .populate("variantes")
+         .exec( (err, foundModels) => {
+             if(err){
+                 res.send(err);
+             }else{
+                 res.send(foundModels);
+             }
+         }
+    );
 
 }
 
 function findModelById(req, res){
-    
-    //Returns a specific car model by id
-    Model.findOne({"_id": req.params.id, "meta.active": true}, (err, foundModel) => {
-        if(err){
-            res.send(err);
-        }else{
-            res.send(foundModel);
-        }
-    });
+
+    Model.findOne({"_id": req.params.id, "meta.active": true})
+         .populate("variantes")
+         .exec( (err, foundModel) => {
+             if(err){
+                 res.send(err);
+             }else{
+                 res.send(foundModel)
+             }
+         });
 
 }
 

@@ -2,47 +2,52 @@
 
 var Agency = require("../models/agency");
 
-function findState(req, res){
+function findStates(req, res){
     
     Agency.find({"meta.active": true}, (err, foundAgencies) => {
         if(err){
             res.send(err);
         }else{
 
-            //The found agencies could have the same states many times
-            //This variable filters the array to have unique states
-            statesArray = foundAgencies.state.filter(function(element, position) {
-                return foundAgencies.state.indexOf(element) == position;
+            var states = [];
+
+            foundAgencies.forEach(function(agency){
+                states.push(agency.state);
+            });
+            
+            states = states.filter(function(element, position) {
+                return states.indexOf(element) == position;
             });
 
-            //Returns the list of states
-            res.send(statesArray);
+            res.send(states);
         }
     });
 
 }
 
 function findCities(req, res){
-    var state = req.body;
 
-    Agency.find({"state": state, "meta.active": true}, (err, foundAgencies) => {
+    Agency.find({"state": req.params.state, "meta.active": true}, (err, foundAgencies) => {
         if(err){
             res.send(err);
         }else{
-            
-            //The found agencies could have the same states many times
-            //This variable filters the array to have unique states
-            citiesArray = foundAgencies.state.filter(function(element, position) {
-                return foundAgencies.state.indexOf(element) == position;
+
+            var cities = [];
+
+            foundAgencies.forEach(function(agency){
+                cities.push(agency.city);
             });
 
-            //Returns the list of states
-            res.send(citiesArray);
+            cities = cities.filter(function(element, position){
+                return cities.indexOf(element) == position;
+            });
+            
+            res.send(cities);
         }
     });
 }
 
 module.exports = {
-    findState,
+    findStates,
     findCities
 }

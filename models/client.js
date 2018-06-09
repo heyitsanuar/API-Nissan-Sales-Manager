@@ -3,17 +3,16 @@ var mongoose = require("mongoose");
 var clientSchema = new mongoose.Schema({
     name: String,
     surname: String,
-    phone: String,
+    phone: Number,
     email: String,
-    cp: String,
-    address: String,
-    colony: String,
-    region: String,
+    state: String,
     city: String,
+    cp: Number,
+    address: String,
     meta: {
         active: {type: Boolean, default: true},
         created_at: {type: Date, default: Date.now},
-        modified_at: {type: Date}
+        modified_at: {type: Date, default: Date.now}
     }
 });
 

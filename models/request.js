@@ -6,20 +6,22 @@ var requestSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             refer: "Vehicle"
         },
-        name: String
+        name: String,
+        version: String,
+        serieNumber: String
     },
-    branches: {
+    agencies: {
         origin: {
             id: {
                 type: mongoose.Schema.Types.ObjectId,
-                refer: "Branch"
+                refer: "Agency"
             },
             name: String
         },
         destiny: {
             id: {
                 type: mongoose.Schema.Types.ObjectId,
-                refer: "Branch"
+                refer: "Agency"
             },
             name: String
         }
@@ -50,7 +52,7 @@ var requestSchema = new mongoose.Schema({
     meta: {
         active: {type: Boolean, default: true},
         created_at: {type: Date, default: Date.now},
-        modified_at: {type: Date}
+        modified_at: {type: Date, default: Date.now}
     }
 });
 

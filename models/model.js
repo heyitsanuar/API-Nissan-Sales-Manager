@@ -1,45 +1,36 @@
 var mongoose = require("mongoose");
 
 var modelSchema = new mongoose.Schema({
-    name: String,
-    description: String,
-    category: String,
-    year: Number,
-    colors: {
-        inner: [
+    modelo: String,
+    descripcion: String,
+    categoria: String,
+    anio: Number,
+    colores: {
+        interior: [
             {
-                name: String,
-                code: String
+                nombre: String,
+                codigo: String
             }
         ],
-        outer: [
+        exterior: [
             {
-                name: String,
-                code: String
+                nombre: String,
+                codigo: String
             }
         ]
     },
-    variants:[
+    dimensiones: {
+        largo: Number,
+        ancho: Number,
+        alto: Number
+    },
+    variantes:[
         {
-            description: String,
-            cost: String,
-            torque: String,
-            maxSpeed: String,
-            dimensions: {
-                height: Number,
-                width: Number,
-                length: Number
-            },
-            seats: Number,
-            doors: Number,
-            fuel: String,
-            yield: String,
-            airBags: Boolean,
-            gasTankCapacity: String,
-            hp: Number,
-            displacement: Number
+            type: mongoose.Schema.Types.ObjectId,
+            refer: "Version"
         }
     ],
+    imagenes: [String],
     photos: {
         bannerImageURL: String,
         imagesURL: [String]
@@ -47,7 +38,7 @@ var modelSchema = new mongoose.Schema({
     meta: {
         active: {type: Boolean, default: true},
         created_at: {type: Date, default: Date.now},
-        modified_at: {type: Date}
+        modified_at: {type: Date, default: Date.now}
     }
 });
 

@@ -1,27 +1,27 @@
 var mongoose = require("mongoose");
 
 var vehicleSchema = new mongoose.Schema({
-    name: String,
     model: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
             refer: "Model"
         },
-        name: String
+        name: String,
+        version: String
     },
     serieNumber: String,
-    branch: {
+    agency: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
-            refer: "Branch"
+            refer: "Agency"
         },
         name: String
     },
-    status: String,
+    status: {type: String, default: "Available"},
     meta: {
         active: {type: Boolean, default: true},
         created_at: {type: Date, default: Date.now},
-        modified_at: {type: Date}
+        modified_at: {type: Date, default: Date.now}
     }
 });
 

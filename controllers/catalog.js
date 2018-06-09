@@ -2,15 +2,16 @@
 
 var Model = require("../models/model");
 
-function findDetailsById(req, res){
-    res.send("Catalog details route get");
+function showDetailsPage(req, res){
+    res.render("details");
 }
 
-function findCatalog(req, res){
-    res.send("Catalog show get");
+function showCatalog(req, res){
+    //Gets all models back to the user
+    res.render("catalog");
 }
 
 module.exports = {
-    findDetailsById,
-    findCatalog
+    showDetailsPage,
+    showCatalog
 };

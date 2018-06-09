@@ -7,6 +7,7 @@ var saleSchema = new mongoose.Schema({
             refer: "Vehicle"
         },
         name: String,
+        version: String,
         serieNumber: String
     },
     client: {
@@ -21,12 +22,19 @@ var saleSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             refer: "User"
         },
+        username: String
+    },
+    agency: {
+        id: {
+            type: mongoose.Schema.Types.ObjectId,
+            refer: "Agency"
+        },
         name: String
     },
     meta: {
         active: {type: Boolean, default: true},
         created_at: {type: Date, default: Date.now},
-        modified_at: {type: Date}
+        modified_at: {type: Date, default: Date.now}
     }
 });
 

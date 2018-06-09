@@ -6,6 +6,8 @@ var CarModel              = require("./models/model");
 var Request               = require("./models/request");
 var Vehicle               = require("./models/vehicle");
 var User                  = require("./models/user");
+var Sale                  = require("./models/sale");
+var Version               = require("./models/version");
 var seedDB                = require("./seeds");
 var expressSanitizer      = require("express-sanitizer");
 var methodOverride        = require("method-override");
@@ -15,16 +17,18 @@ var LocalStrategy         = require("passport-local");
 var passportLocalMongoose = require("passport-local-mongoose");
 
 //Requiring route files
-var carRoutes     = require("./routes/cars");
-var clientRoutes  = require("./routes/clients");
-var agencyRoutes  = require("./routes/agencies");
-var vehicleRoutes = require("./routes/vehicles");
-var requestRoutes = require("./routes/requests");
-var userRoutes    = require("./routes/users");
-var loginRoutes   = require("./routes/login");
-var catalogRoutes = require("./routes/catalog");
-var salesRoutes   = require("./routes/sales");
-var authRoutes    = require("./routes/authentication");
+var carRoutes      = require("./routes/cars"),
+    clientRoutes   = require("./routes/clients"),
+    agencyRoutes   = require("./routes/agencies"),
+    vehicleRoutes  = require("./routes/vehicles"),
+    requestRoutes  = require("./routes/requests"),
+    userRoutes     = require("./routes/users"),
+    loginRoutes    = require("./routes/login"),
+    catalogRoutes  = require("./routes/catalog"),
+    salesRoutes    = require("./routes/sales"),
+    comparerRoutes = require("./routes/comparer"),
+    locationRoutes = require("./routes/location"),
+    authRoutes     = require("./routes/authentication");
 
 //=======================App setup===============================
 
@@ -66,5 +70,6 @@ app.use("/employees", userRoutes);
 app.use("/login", loginRoutes);
 app.use("/catalog", catalogRoutes);
 app.use("/sales", salesRoutes);
+app.use("/comparer", comparerRoutes);
 
 module.exports = app;

@@ -2,9 +2,12 @@ var express         = require("express");
 var ModelController = require("../controllers/model");
 var router          = express.Router();
 
+//Routes for car model
 router.get("/", ModelController.findModels);
 router.post("/", ModelController.addModel);
-router.put("/", ModelController.updateModel);
-router.delete("/", ModelController.removeModel);
+router.put("/:id", ModelController.updateModel);
+router.delete("/:id", ModelController.removeModel);
+//Routes for versions
+router.post("/version/:id", ModelController.addVersion);
 
 module.exports = router;

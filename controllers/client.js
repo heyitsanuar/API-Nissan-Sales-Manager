@@ -1,13 +1,37 @@
 'use strict'
 
-var Client = require("../models/client");
+var Client  = require("../models/client");
 
 function findClients(req, res){
-    res.send("Clients route get");
+    Client.find({"meta.active" : true}, (err, foundClients) => {
+        if(err){
+            res.send(err);
+        }else{
+            res.send(foundClients);
+        }
+    });
 }
 
 function addClient(req, res){
-    res.send("Clients route post");
+    
+    var newClient = {
+        name: req.body.name,
+        surname: req.body.surname,
+        phone: req.body.phone,
+        email: req.body.email,
+        state: req.body.state,
+        city: req.body.city,
+        cp: req.body.cp,
+        address: req.body.address
+    };
+    
+    Client.create(newClient, (err, createdClient) => {
+        if(err){
+            res.send(err);
+        }else{
+            res.send(createdClient);
+        }
+    });
 }
 
 function updateClient(req, res){

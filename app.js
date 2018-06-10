@@ -1,5 +1,6 @@
 var express               = require("express");
 var app                   = express();
+var cors                  = require("cors");
 var Agency                = require("./models/agency");
 var Client                = require("./models/client");
 var CarModel              = require("./models/model");
@@ -77,7 +78,7 @@ app.use("/employees", userRoutes);
 app.use("/login", loginRoutes);
 app.use(catalogRoutes);
 app.use("/sales", salesRoutes);
-app.use("/comparer", comparerRoutes);
+app.use("/comparer", cors(), comparerRoutes);
 app.use("/locations", locationRoutes);
 
 module.exports = app;

@@ -3,12 +3,13 @@
 var Model = require("../models/model");
 
 function showDetailsPage(req, res){
+    //Renders car details page
     res.render("details");
 }
 
 function showCatalog(req, res){
-    //Gets all models back to the user
-    res.render("catalog");
+    //Renders catalog main page
+    res.render("home");
 }
 
 module.exports = {

@@ -26,100 +26,57 @@ function addAgency(req, res){
         state: req.body.state,
         city: req.body.city,
         cp: req.body.cp,
-        colony: req.body.colony,
         address: req.body.address,
-        manager: req.body.manager
+        manager: {
+            id: req.user._id,
+            fullName: req.user.name + " " + req.user.surname
+        }
     };
 
-    User.findOne({"username": newAgency.manager, "meta.active": true}, (err, foundUser) =>{
-        
+    Agency.create(newAgency, (err, agencyAdded) => {
         if(err){
             res.send(err);
         }else{
-
-            var fullName = foundUser.name + " " + foundUser.surname;
-
-            var newManager = {
-                id: foundUser._id,
-                fullName: fullName
-            };
-
-            newAgency.manager = newManager;
-
-            Agency.create(newAgency, (err, agencyAdded) => {
-                if(err){
-                    res.send(err);
-                }else{
-                    res.send(agencyAdded);
-                }
-            });
-
+            res.send(agencyAdded);
         }
-
     });
-
+        
 }
 
 function updateAgency(req, res){
     
-    var updatedAgency = {
-        name: req.body.name,
-        region: req.body.region,
-        city: req.body.city,
-        cp: req.body.cp,
-        colony: req.body.colony,
-        address: req.body.address,
-        manager: req.body.manager,
-        meta: {
-            modified_at: ""
-        }
-    };
-
-    User.findOne({"username": updatedAgency.manager, "meta.active": true}, (err, foundUser) => {
-        
+    Agency.findOne({"_id": req.params.id, "meta.active": true}, (err, foundAgency) => {
         if(err){
             res.send(err);
         }else{
+            foundAgency.name = req.body.name;
+            foundAgency.state = req.body.state;
+            foundAgency.city = req.body.city;
+            foundAgency.cp = req.body.cp;
+            foundAgency.address = req.body.address;
+            foundAgency.modified_at = Date.now;
 
-            var fullName = foundUser.name + " " + foundUser.surname;
+            foundAgency.save();
 
-            var newManager = {
-                id: foundUser._id,
-                fullName: fullName
-            };
-
-            updatedAgency.manager          = newManager;
-            updatedAgency.meta.modified_at = Date.now;
-
-            Agency.findOneAndUpdate({"_id": req.params.id, "meta.active": true}, updatedAgency, (err, agencyChanged) =>{
-                if(err){
-                    res.send(err);
-                }else{
-                    res.send(agencyChanged);
-                }
-            });
-
+            res.send(foundAgency);
         }
     });
-
 }
 
 function removeAgency(req, res){
 
-    Agency.findOne({"_id": req.params.id, "meta.active": true}, (err, agencyToRemove) => {
+    Agency.findOneAndUpdate({"_id": req.params.id, "meta,active": true}, (err, agencyToRemove) => {
         if(err){
             res.send(err);
         }else{
-            agencyToRemove.meta.active = false;
-            agencyToRemove.save();
-
-            res.send("Deleted Successfully");
+            res.send("Deleted successfully");
         }
     });
 
 }
 
 function setManager(req, res){
+
     Agency.findOne({"_id": req.params.id ,"meta.active": true}, (err, foundAgency) => {
         if(err){
             res.send(err);
@@ -140,6 +97,7 @@ function setManager(req, res){
             });
         }
     });
+
 }
 
 module.exports = {

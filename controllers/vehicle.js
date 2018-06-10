@@ -156,10 +156,15 @@ function removeVehicle(req, res){
 
 }
 
+function showLocalStock(req, res){
+    res.render("manager/stock");
+}
+
 module.exports = {
     findVehicles,
     findVehiclesByAgency,
     addVehicle,
     updateVehicle,
-    removeVehicle
+    removeVehicle,
+    showLocalStock
 };

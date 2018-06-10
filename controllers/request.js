@@ -99,17 +99,24 @@ function addRequest(req, res){
     
 }
 
+//To Do
 function updateRequest(req, res){
     res.send("Request route put");
 }
 
+//To Do
 function removeRequest(req, res){
     res.send("Request route delte")
+}
+
+function showRequestsPage(req, res){
+    res.render("manager/requests");
 }
 
 module.exports = {
     findRequests,
     addRequest,
     updateRequest,
-    removeRequest
+    removeRequest,
+    showRequestsPage
 };

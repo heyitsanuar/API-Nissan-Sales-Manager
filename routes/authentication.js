@@ -4,7 +4,7 @@ var passport = require("passport");
 
 router.post("/sign-in", passport.authenticate("local", 
 {
-    successRedirect: "/agency/show",
+    successRedirect: "/home",
     failureRedirect: "/login"
 }), function(req, res){
 });

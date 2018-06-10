@@ -18,15 +18,16 @@
 			<nav class="header__menu">
 				<a class="header__link" href="home.html">Home</a>
 						<% if(currentUser.role == "Admin"){ %>
-								<a class="header__link" href="managers.html">Managers</a>
-								<a class="header__link" href="branches.html">Agency</a>
+								<a class="header__link" href="/employees/managers/show">Managers</a>
+								<a class="header__link" href="/agency/show">Agency</a>
 								<a class="header__link" href="models.html">Models</a>
 								<a class="header__link" href="stock.html">Stock</a>
 						<% } else{ %>
 							<% if(currentUser.role == "Manager"){ %>
-									<a class="header__link" href="clients.html">Employees</a>
+									<a class="header__link" href="/employees/salesmen/show">Employees</a>
+									<a class="header__link" href="/vehicles/local">Stock</a>
 									<a class="header__link" href="shippings.html">Sales</a>
-									<a class="header__link" href="stock.html">Requests</a>    
+									<a class="header__link" href="/requests/inbox">Requests</a>    
 							<% }else{ %>
 									<a class="header__link" href="clients.html">Clients</a>
 									<a class="header__link" href="shippings.html">Shipping</a>

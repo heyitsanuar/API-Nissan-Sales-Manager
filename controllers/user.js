@@ -4,8 +4,28 @@ var User     = require("../models/user");
 var Agency   = require("../models/agency");
 var passport = require("passport");
 
-function findUsers(req, res){
-    res.send("Users route get");
+function findManagers(req, res){
+    User.find({"role": "Manager", "meta.active": true}, (err, foundManagers) => {
+        if(err){
+            res.send(err);
+        }else{
+            res.send(foundManagers);
+        }
+    });
+}
+
+function findSalesmen(req, res){
+    
+    Agency.find({"manager.id": req.user._id, "meta.active": true})
+           .populate("employees")
+           .exec( (err, foundSalesmen) => {
+               if(err){
+                   res.send(err);
+               }else{
+                   res.send(foundSalesmen.employees);
+               }
+           });
+
 }
 
 function addUser(req, res){
@@ -14,79 +34,79 @@ function addUser(req, res){
         username: req.body.username,
         name: req.body.name,
         surname: req.body.surname,
-        role: req.body.role
+        role: "NA"
     };
 
-    User.register(newUser, req.body.password, function(err, registeredUser){
-        if(err){ //If not authenticated, the user won't go on
-            console.log(err);
-            //return res.render("register");
-            return res.send("Error");
-        }
+    if(req.user.role == "Admin"){
 
-        //If authenticated, the user will be redirected to blogs
-        passport.authenticate("local")(req, res, function(){
-            //res.redirect("/blogs");
-            console.log("Authenticated");
-        });
-    });
-
-    /*if(currentUser.role == "Global"){
+        newUser.role = "Manager";
+        
         User.register(newUser, req.body.password, function(err, registeredUser){
             if(err){ //If not authenticated, the user won't go on
-                console.log(err);
-                //return res.render("register");
-                return res.send("Error");
+                res.send(err);
+            }else{
+                res.send(registeredUser);
             }
-    
-            //If authenticated, the user will be redirected to blogs
-            passport.authenticate("local")(req, res, function(){
-                //res.redirect("/blogs");
-                console.log("Authenticated");
-            });
+        });
+
+    }else{
+        
+        newUser.role = "Salesman"
+
+        Agency.findOne({"manager.id": req.user._id, "meta.active": true}, (err, foundAgency) => {
+            if(err){
+                res.send(err);
+            }else{
+
+                User.register(newUser, req.body.password, function(err, registeredUser){
+                    if(err){ //If not authenticated, the user won't go on
+                        console.log(err);
+                        res.send(err);
+                    }else{
+            
+                        foundAgency.employees.push(registeredUser);
+                        foundAgency.meta.modified_at = Date.now;
+                
+                        foundAgency.save();
+        
+                        res.send(registeredUser);
+        
+                    }
+        
+                });
+
+            }
         });
         
-    }else{
 
-        User.register(newUser, req.body.password, function(err, registeredUser){
-            if(err){ //If not authenticated, the user won't go on
-                console.log(err);
-                //return res.render("register");
-                return res.send("Error");
-            }
-    
-            Agency.findOne({"manager.id": currentUser._id, "meta.active": true}, (err, foundAgency) => {
-                if(err){
-                    res.send(err);
-                }else{
-                    foundAgency.employees.push(registeredUser);
-                    foundAgency.meta.modified_at = Date.now;
-            
-                    foundAgency.save();
-                }
-            });
+    }
 
-            //If authenticated, the user will be redirected to blogs
-            passport.authenticate("local")(req, res, function(){
-                //res.redirect("/blogs");
-                console.log("Authenticated");
-            });
-        });
-
-    }*/
     
 }
 
+//To Do
 function updateUser(req, res){
     res.send("Users route put");
 }
 
+//To Do
 function removeUser(req, res){
     res.send("Users route delete");
 }
 
+function showManagers(req, res){
+    res.render("admin/managers");
+}
+
+function showEmployees(req, res){
+    res.render("manager/employees");
+}
+
 module.exports = {
-    findUsers,
+    showManagers,
+    showEmployees,
+    findManagers,
+    findSalesmen,
     addUser,
     updateUser,
     removeUser

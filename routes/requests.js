@@ -7,4 +7,6 @@ router.post("/", RequestController.addRequest);
 router.put("/", RequestController.updateRequest);
 router.delete("/", RequestController.removeRequest);
 
+router.get("/inbox", RequestController.showRequestsPage);
+
 module.exports = router;

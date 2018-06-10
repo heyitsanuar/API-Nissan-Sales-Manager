@@ -5,7 +5,6 @@ var agencySchema = new mongoose.Schema({
     state: String,
     city: String,
     cp: Number,
-    colony: String,
     address: String,
     manager: {
         id: {

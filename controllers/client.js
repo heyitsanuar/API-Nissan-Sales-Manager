@@ -3,6 +3,7 @@
 var Client  = require("../models/client");
 
 function findClients(req, res){
+    //To Check
     Client.find({"meta.active" : true}, (err, foundClients) => {
         if(err){
             res.send(err);
@@ -10,6 +11,8 @@ function findClients(req, res){
             res.send(foundClients);
         }
     });
+
+
 }
 
 function addClient(req, res){
@@ -34,12 +37,22 @@ function addClient(req, res){
     });
 }
 
+//To Do
 function updateClient(req, res){
-    res.send("Clients route put");
+
 }
 
+//To Do
 function removeClient(req, res){
-    res.send("Clients route remove");
+    
+    Client.findOneAndUpdate({"_id": req.params.id, "meta.active": true}, {"meta.active": false}, (err, clientToRemove) => {
+        if(err){
+            res.send(err);
+        }else{
+            res.send("Deleted successfully");
+        }
+    });
+    
 }
 
 module.exports = {

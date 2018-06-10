@@ -100,10 +100,12 @@ function addSale(req, res){
 
 }
 
+//To Do
 function updateSale(req, res){
     res.send("Sales route put");
 }
 
+//To Do
 function removeSale(req, res){
     res.send("Sales route delete");
 }

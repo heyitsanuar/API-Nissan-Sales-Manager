@@ -75,7 +75,7 @@ app.use("/vehicles", vehicleRoutes);
 app.use("/requests", requestRoutes);
 app.use("/employees", userRoutes);
 app.use("/login", loginRoutes);
-app.use("/catalog", catalogRoutes);
+app.use(catalogRoutes);
 app.use("/sales", salesRoutes);
 app.use("/comparer", comparerRoutes);
 app.use("/locations", locationRoutes);

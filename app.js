@@ -62,6 +62,9 @@ passport.deserializeUser(User.deserializeUser());
 //Setting current user for local's
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
+    if (res.locals.currentUser = "") {
+        res.redirect("/login");
+    }
     next();
 });
 

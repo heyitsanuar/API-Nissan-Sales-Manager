@@ -1,17 +1,13 @@
 var express = require("express");
 var router = express.Router();
-var passport = require("passport");
+var sesion = require("../controllers/authentication");
 
-router.post("/sign-in", passport.authenticate("local", 
-{
-    successRedirect: "/home",
-    failureRedirect: "/login"
-}), function(req, res){
+router.post("/sign-in", (req, res) => {
+    sesion.login(req, res);
 });
 
 router.get("/logout", (req, res) => {
-    req.logout();
-    res.redirect("/login");
+    sesion.logout(req, res);
 });
 
 module.exports = router;

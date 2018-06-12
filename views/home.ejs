@@ -1,0 +1,281 @@
+<% include ./partials/header %>
+
+<section class="main-home">
+    <div class="main-home__container container d-flex">
+        <aside class="filter col-md-4 col-lg-3 d-none d-md-block" id="filter">
+            <div class="container-fluid bg-white"></div>
+            <i class="filter__icon fas fa-times d-md-none" id="filter-back"></i>
+            <p class="filter__title filter__title--main">FILTER</p>
+            <ul class="filter__listdrop listdrop">
+                <li class="listdrop__item listdrop__item--active">
+                    <a class="listdrop__text listdrop__text--active" href="">All</a>
+                    <a class="listdrop__text listdrop__text--active" href="">18</a>
+                </li>
+                <ul class="listdrop">
+                    <li class="listdrop__item">
+                        <a class="listdrop__text listdrop__text--heading" href="">Bonitos</a>
+                        <a class="listdrop__text listdrop__text--heading" href="">15</a>
+                    </li>
+                    <ul class="listdrop">
+                        <li class="listdrop__item">
+                            <a class="listdrop__text" href="">Cars</a>
+                            <a class="listdrop__text" href="">3</a>
+                        </li>
+                        <li class="listdrop__item">
+                            <a class="listdrop__text" href="">Pick ups</a>
+                            <a class="listdrop__text" href="">3</a>
+                        </li>
+                        <li class="listdrop__item">
+                            <a class="listdrop__text" href="">SUVs</a>
+                            <a class="listdrop__text" href="">5</a>
+                        </li>
+                        <li class="listdrop__item">
+                            <a class="listdrop__text" href="">Service</a>
+                            <a class="listdrop__text" href="">4</a>
+                        </li>
+                    </ul>
+                </ul>
+            </ul>
+            <div class="range">
+                <div class="range__item">
+                    <p class="filter__title filter__title--control">Price</p>
+                    <div class="range__background">
+                        <input class="range__input" type="range">
+                    </div>
+                    <div class="range__interval">
+                        <p class="range__amount range__amount--min">$100,000</p>
+                        <p class="range__amount range__amount--max">$300,000</p>
+                    </div>
+                </div>
+                <div class="range__item">
+                    <p class="filter__title filter__title--control">Passengers</p>
+                    <div class="range__background">
+                        <input class="range__input" type="range">
+                    </div>
+                    <div class="range__interval">
+                        <p class="range__amount range__amount--min">2</p>
+                        <p class="range__amount range__amount--max">7</p>
+                    </div>
+                </div>
+                <div class="range__item">
+                    <p class="filter__title filter__title--control">Tank</p>
+                    <div class="range__background">
+                        <input class="range__input" type="range">
+                    </div>
+                    <div class="range__interval">
+                        <p class="range__amount range__amount--min">15</p>
+                        <p class="range__amount range__amount--max">30</p>
+                    </div>
+                </div>
+            </div>
+            <div class="checklist">
+                <p class="filter__title filter__title--control">Features</p>
+                <div class="checklist__item">
+                    <p class="checklist__title">GPS</p>
+                    <input class="checklist__checkbox" type="checkbox">
+                </div>
+                <div class="checklist__item">
+                    <p class="checklist__title">Elevator</p>
+                    <input class="checklist__checkbox" type="checkbox">
+                </div>
+                <div class="checklist__item">
+                    <p class="checklist__title">Hottub</p>
+                    <input class="checklist__checkbox" type="checkbox">
+                </div>
+                <div class="checklist__item">
+                    <p class="checklist__title">Plasma 4K</p>
+                    <input class="checklist__checkbox" type="checkbox">
+                </div>
+                <div class="checklist__item">
+                    <p class="checklist__title">Chocotorros</p>
+                    <input class="checklist__checkbox" type="checkbox">
+                </div>
+            </div>
+        </aside>
+        <section class="cars col-sm-12 col-md-8 col-lg-9 d-md-block" id="cars-page">
+            <div class="cars__search">
+                <div class="car__container">
+                    <i class="fas fa-filter d-md-none" id="filter-show"></i>
+                </div>
+            </div>
+            <div class="cars__car-list">
+                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        <img class="car__image" src="assets/img/home/car-1.jpg" alt="">
+                        <div class="car__info">
+                            <p class="car__name">Tsuru Bochito</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        <img class="car__image" src="assets/img/home/car-2.jpg" alt="">
+                        <div class="car__info">
+                            <p class="car__name">Tsuru Bochito</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        <img class="car__image" src="assets/img/home/car-3.jpg" alt="">
+                        <div class="car__info">
+                            <p class="car__name">Tsuru Bochito</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        <img class="car__image" src="assets/img/home/car-4.jpg" alt="">
+                        <div class="car__info">
+                            <p class="car__name">Tsuru Bochito</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        <img class="car__image" src="assets/img/home/car-5.jpg" alt="">
+                        <div class="car__info">
+                            <p class="car__name">Tsuru Bochito</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        <img class="car__image" src="assets/img/home/car-6.jpg" alt="">
+                        <div class="car__info">
+                            <p class="car__name">Tsuru Bochito</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        <img class="car__image" src="assets/img/home/car-7.jpg" alt="">
+                        <div class="car__info">
+                            <p class="car__name">Tsuru Bochito</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        <img class="car__image" src="assets/img/home/car-8.jpg" alt="">
+                        <div class="car__info">
+                            <p class="car__name">Tsuru Bochito</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        <img class="car__image" src="assets/img/home/car-1.jpg" alt="">
+                        <div class="car__info">
+                            <p class="car__name">Tsuru Bochito</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        <img class="car__image" src="assets/img/home/car-2.jpg" alt="">
+                        <div class="car__info">
+                            <p class="car__name">Tsuru Bochito</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        <img class="car__image" src="assets/img/home/car-3.jpg" alt="">
+                        <div class="car__info">
+                            <p class="car__name">Tsuru Bochito</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        <img class="car__image" src="assets/img/home/car-4.jpg" alt="">
+                        <div class="car__info">
+                            <p class="car__name">Tsuru Bochito</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <nav class="pagination" aria-label="Page navigation example">
+              <ul class="pagination__list pagination">
+                <li class="pagination__item disabled">
+                  <a class="pagination__link page-link" href="#" tabindex="-1">Back</a>
+                </li>
+                <li class="pagination__item">
+                    <a class="pagination__link pagination__link--is-active page-link" href="#">1</a>
+                </li>
+                <li class="pagination__item">
+                    <a class="pagination__link page-link" href="#">2</a>
+                </li>
+                <li class="pagination__item">
+                    <a class="pagination__link page-link" href="#">3</a>
+                </li>
+                <li class="pagination__item">
+                    <a class="pagination__link page-link" href="#">4</a>
+                </li>
+                <li class="pagination__item">
+                  <a class="pagination__link page-link" href="#">Next</a>
+                </li>
+              </ul>
+            </nav>
+        </section>
+    </div>
+
+    <div class="modal--fade modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modal-gallery">
+      <div class="modal-dialog modal-dialog-centered modal--lg">
+        <div class="modal__car modal-content">
+            <i class="modal__exit fas fa-times" id="modal-exit" data-dismiss="modal" aria-label="Close"></i>
+            <div class="modal__gallery">
+                <img class="modal__image" id="modal-image" src="assets/img/home/gallery/active.jpg" alt="">
+                <div class="modal__thumb-group" id="thumb-group">
+                    <img class="modal__thumbnail modal__thumbnail--is-active" src="assets/img/home/gallery/thumbnails/car-1.jpg" alt="">
+                    <img class="modal__thumbnail" src="assets/img/home/gallery/thumbnails/car-2.jpg" alt="">
+                    <img class="modal__thumbnail" src="assets/img/home/gallery/thumbnails/car-3.jpg" alt="">
+                    <img class="modal__thumbnail" src="assets/img/home/gallery/thumbnails/car-4.jpg" alt="">
+                    <img class="modal__thumbnail" src="assets/img/home/gallery/thumbnails/car-5.jpg" alt="">
+                    <img class="modal__thumbnail" src="assets/img/home/gallery/thumbnails/car-6.jpg" alt="">
+                </div>
+            </div>
+            <div class="modal__info">
+                <h2 class="modal__title">X-Terra</h2>
+                <p class="modal__description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis nihil facilis, aperiam voluptatum asperiores temporibus!</p>
+                <div class="modal-feature">
+                    <img class="modal-feature__sprite modal-feature__sprite--green" src="assets/img/icons/home/modal/feature-1.svg" alt="">
+                    <div class="modal-feature__info">
+                        <p class="modal-feature__amount">1234</p>
+                        <p class="modal-feature__name">Kilómetros por gota</p>
+                    </div>
+                </div>
+                <div class="modal-feature">
+                    <img class="modal-feature__sprite modal-feature__sprite--red" src="assets/img/icons/home/modal/feature-2.svg" alt="">
+                    <div class="modal-feature__info">
+                        <p class="modal-feature__amount">1234</p>
+                        <p class="modal-feature__name">Kilómetros por gota</p>
+                    </div>
+                </div>
+                <div class="modal-feature">
+                    <img class="modal-feature__sprite modal-feature__sprite--yellow" src="assets/img/icons/home/modal/feature-3.svg" alt="">
+                    <div class="modal-feature__info">
+                        <p class="modal-feature__amount">1234</p>
+                        <p class="modal-feature__name">Kilómetros por gota</p>
+                    </div>
+                </div>
+                <div class="modal-feature">
+                    <img class="modal-feature__sprite modal-feature__sprite--blue" src="assets/img/icons/home/modal/feature-4.svg" alt="">
+                    <div class="modal-feature__info">
+                        <p class="modal-feature__amount">1234</p>
+                        <p class="modal-feature__name">Kilómetros por gota</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+</section>
+
+<% include ./partials/footer %>
+<script src="/js/Script.js"></script>
+
+</body>
+</html>

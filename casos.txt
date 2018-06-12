@@ -1,0 +1,2 @@
+//Si un propio usuario intenta cambiarse de gerente de agencia a empleado
+//Si ya existe un manager y se quiere agregar otro, advertir que se removerá el previo

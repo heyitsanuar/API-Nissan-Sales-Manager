@@ -1,0 +1,118 @@
+<% include ../partials/header %>
+
+<section class="main">
+    <div class="heading container">
+        <h1 class="heading__title">Agencies</h1>
+        <div class="heading__controls">
+            <div class="table-filter__group">
+                <div class="table-filter__item">
+                    <p class="table-filter__title">State</p>
+                    <select class="modal-form__input modal-form__input--select" name="" id="filter-agency-state">
+                            <option value="">Select one</option>
+                    </select>
+                </div>
+                <div class="table-filter__item">
+                    <p class="table-filter__title">City</p>
+                    <select class="modal-form__input modal-form__input--select" name="" id="filter-agency-city">
+                            <option value="">Select one</option>
+                    </select>
+                </div>
+            </div>
+            <a class="table-filter__btn" href="#" data-toggle="modal" data-target=".branch-form">
+                Add Branch
+            </a>
+        </div>
+        <table class="table">
+            <thead class="table__head">
+                <tr class="table__row-th">
+                    <th class="table__th table__th--is-active">NAME <span class=""></span></th>
+                    <th class="table__th">STATE <span class=""></span></th>
+                    <th class="table__th">CITY <span class=""></span></th>
+                    <th class="table__th">CP <span class=""></span></th>
+                    <th class="table__th">ADDRESS <span class=""></span></th>
+                </tr>
+            </thead>
+            <tbody class="table__body" id="table-agency">		
+            </tbody>
+        </table>
+    </div>
+
+    <!--Add branch-->
+
+    <div class="modal--fade modal fade branch-form" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="add-branch">
+        <div class="modal-dialog modal--form-size">
+            <form id="agency-form">
+                <div class="modal-form modal-content">
+                    <div class="modal-form__header">
+                        <h2 class="modal-form__title" id="form-agency_title">Add Branch</h2>
+                        <i class="modal-form__exit fas fa-times" id="modal-exit" data-dismiss="modal" aria-label="Close"></i>
+                    </div>
+                    <div class="modal-form__body">
+                        <div class="modal-form__group modal-form__group--small">
+                            <label for="" class="modal-form__label">Name</label>
+                            <input id="form-agency_name" type="text" class="modal-form__input" name="name">
+                        </div>
+                        <div class="modal-form__group modal-form__group--small">
+                            <label for="" class="modal-form__label">State</label>
+                            <input id="form-agency_name" type="text" class="modal-form__input" name="state">				  
+                        </div>
+                        <div class="modal-form__group modal-form__group--small">
+                            <label for="" class="modal-form__label">City</label>
+                            <input id="form-agency_name" type="text" class="modal-form__input" name="city">
+                        </div>
+                        <div class="modal-form__group modal-form__group--small">
+                            <label for="" class="modal-form__label">C.P.</label>
+                            <input id="form-agency_cp" type="text" class="modal-form__input" name="cp">							  
+                        </div>
+                        <div class="modal-form__group modal-form__group--large">
+                            <label for="" class="modal-form__label">Address</label>
+                            <input id="form-agency_address" type="text" class="modal-form__input" name="address">
+                        </div>
+                    </div>
+                    <div class="modal-form__footer">
+                        <div class="modal-form__btn-group">
+                            <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close">Cancel</a>
+                            <a href="#" class="modal-form__btn modal-form__btn--confirm" id="agency-submit" data-dismiss="modal" aria-label="Close">Confirm</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal--fade modal fade save-changes" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="add-branch">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-form modal-content modal-form--text-centered">
+              <p class="modal-form__delete-title">¿Seguro que desea guardar los cambios?</p>
+              <p class="modal-form__delete-description">Este elemento presenta cambios</p>
+              <div class="modal-form__footer modal-form__footer--centered">
+                  <div class="modal-form__btn-group modal-form__btn-group--centered">
+                      <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target=".edit-branch">Nel, prro</a>
+                      <a href="#" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Saimón</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="modal--fade modal fade delete-element" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="add-branch">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-form modal-content modal-form--text-centered">
+              <p class="modal-form__delete-title">¿Seguro que desea eliminar este elemento?</p>
+              <div class="modal-form__footer modal-form__footer--centered">
+                  <div class="modal-form__btn-group modal-form__btn-group--centered">
+                      <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close">Nel, prro</a>
+                      <a href="#" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Saimón</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+</section>
+
+<% include ../partials/footer %>
+<script src="/js/ajax/admin/agency.js"></script>
+<script src="/js/Script.js"></script>
+</body>
+</html>

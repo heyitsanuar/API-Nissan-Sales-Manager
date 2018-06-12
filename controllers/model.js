@@ -99,6 +99,7 @@ function findVersions(req, res){
 function addModel(req, res){
 
     //Creates the object of the model to be added and its properties
+
     var newModel = {
         modelo: req.body.name,
         descripcion: req.body.description,
@@ -109,6 +110,9 @@ function addModel(req, res){
         photos: req.body.photos,
         imagenes: req.body.photos.imagesURL
     };
+
+
+    console.log(colors);
 
     //Creates the model and adds it to the database
     Model.create(newModel, (err, modelAdded) =>{

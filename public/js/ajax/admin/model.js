@@ -1,12 +1,9 @@
 $(document).ready(function(){
 
+    var editButtons;
     refreshModels();
 
     $("#add-model-submit").on('click', addModel);
-    $("i .edit-model_show").on('click', function(){
-        console.log("Hey");
-    });
-
     $("#filter-category").on('change', filterCategory);
 
     function showModels(models){
@@ -20,13 +17,16 @@ $(document).ready(function(){
             result += "<td class='table__td'>" + model.modelo + "</td>";
             result += "<td class='table__td'>" + model.categoria + "</td>";
             result += "<td class='table__controls'>";
-            result += "<i class='edit-model_show table__dropdown-item' data-toggle='modal' data-target='.edit-model' data-id='" + model._id +"'>Edit</i>";
+            result += "<a class='edit-model_show table__dropdown-item' data-toggle='modal' data-target='.edit-model' data-id='" + model._id +"'>Edit</a>";
             result += "<a class='table__dropdown-item' href='#' data-toggle='modal' data-target='.delete-element'>Delete</a>";
             result += "</td>";
             result += "</tr>";
         });
     
         $("#table-models").html(result);
+        
+        editButtons = $(".edit-model_show");
+        editButtons.on('click', fillFormWithModelInfo);
     }
    
     function refreshModels(){
@@ -65,7 +65,7 @@ $(document).ready(function(){
 
     function fillFormWithModelInfo(){
 
-        var id = $(this).attr("data-id").val();
+        var id = $(this).attr("data-id");
         var URL = "/cars/" + id;
 
         console.log(URL);
@@ -74,15 +74,33 @@ $(document).ready(function(){
             url: URL,
             method: "GET",
             dataType: "json",
-            success: function(models){
+            success: function(modelFound){
+
+                console.log(modelFound);
                 
                 var form = $("#edit-model-form");
+
+                var exteriores = modelFound.colores.exterior,
+                    interiores = modelFound.colores.interior;
+
+                var images = modelFound.photos.imagesURL;
                 
-                $.each(models, function(name, value){
-                    var el = $('[name="'+name+'"]', form );
+                $('[name="model"]', form).val(modelFound.modelo);
+                $('[name="year"]', form).val(modelFound.anio);
+                $('[name="description"]', form).val(modelFound.descripcion);
+                $('[name="category"]', form).val(modelFound.categoria);
+                $('[name="dimensions[alto]"]', form).val(modelFound.dimensiones.alto);
+                $('[name="dimensions[ancho]"]', form).val(modelFound.dimensiones.ancho);
+                $('[name="dimensions[largo]"]', form).val(modelFound.dimensiones.largo);
+                $('[name="photos[bannerImageURL]"]', form).val(modelFound.photos.bannerImageURL);
                 
-                    el.val(value);
-                });
+                var imagesInput = $('[name="photos[imagesURL]"]', form);
+
+                console.log(imagesInput);
+                while(images.length > 0){
+                    imagesInput.val(images.pop());
+                    imagesInput.pop();
+                }
 
             }
         });

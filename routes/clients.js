@@ -9,5 +9,4 @@ router.delete("/", ClientController.removeClient);
 
 router.get("/show", ClientController.showClientsPage);
 router.get("/agency/:id", ClientController.findClientsByAgency);
-
 module.exports = router;

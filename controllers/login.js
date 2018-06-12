@@ -3,7 +3,13 @@
 var User = require("../models/user");
 
 function goToLogin(req, res){
-    res.render("login");
+
+    if (req.user == undefined) {
+        res.render("login");
+    } else {
+        res.redirect("/home");
+    }
+    
 }
 
 module.exports = {

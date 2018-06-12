@@ -45,7 +45,7 @@ function findCities(req, res){
             });
 
             cities = JSON.stringify(cities);
-            
+
             res.send(cities);
         }
     });

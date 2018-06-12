@@ -17,21 +17,21 @@
               <source srcset="/img/login/logo.png" media="(min-width: 1024px)">
               <img srcset="/img/login/logo.png" alt="Coastal view of ocean and mountains" class="login__logo">
             </picture>
-            <form class="login__form" action="/sign-in" method="POST">
+            <div class="login__form">
                 <div class="login__input-group input-group">
                   <div class="input-group-prepend">
                     <span class="login__input-group-text input-group-text" id="icon_user"><i class="fa fa-user"></i></span>
                   </div>
-                  <input type="text" class="login__input form-control" name="username" placeholder="Usuario" aria-label="Username" aria-describedby="basic-addon1">
+                  <input id="user" type="text" class="login__input form-control" name="username" placeholder="Usuario" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
                 <div class="login__input-group input-group">
                   <div class="input-group-prepend">
                     <span class="login__input-group-text input-group-text" id="icon_password"><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
                   </div>
-                  <input type="password" class="login__input form-control" name="password" placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1">
+                  <input id="pass" type="password" class="login__input form-control" name="password" placeholder="Contraseña" aria-label="Username" aria-describedby="basic-addon1">
                 </div>
-                <input type="submit" class="btn login__btn-sign-in" value="INICIAR">
-            </form>
+                <input id="login" type="button" class="btn login__btn-sign-in" value="INICIAR">
+            </div>
         </div>
     </section>
     <section class="slide-show">
@@ -56,8 +56,9 @@
         </div>
     </section>
 </section>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+<script src="/js/login.js"></script>
 </body>
 </html>

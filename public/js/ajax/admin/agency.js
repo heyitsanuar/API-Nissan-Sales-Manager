@@ -3,11 +3,10 @@ $(document).ready(function(){
     refreshAgencies();
     fillSelectStates();
 
-    $("#agency-submit").on('click', addAgency);
+    $("#btn-add-agency").on('click', prepareFormToAdd);
+    $("#btn-remove-agency").on('click', removeAgency);
     $("#filter-agency-state").on('change', fillSelectCities);
     $("#filter-agency-city").on('change', showAgenciesByCity);;
-
-    $(".table__dropdown-item").click(fillAgencyFormForUpdate);
 
     function showAgencies(agencies){
         var result = "";
@@ -24,8 +23,8 @@ $(document).ready(function(){
             result += "<div class='table__dropdown dropdown dropleft'>";
             result += "<a class='table__dropdown-button' id='data1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>...</a>";
             result += "<div class='table__dropdown-menu dropdown-menu' aria-labelledby='data1'>";
-            result +=   "<a class='table__dropdown-item dropdown-item' href='#' data-toggle='modal' data-target='.branch-form' data-id='" + agency._id + "'>Edit</a>";
-            result +=   "<a class='table__dropdown-item dropdown-item' href='#' data-toggle='modal' data-target='.delete-element'>Delete</a>";
+            result +=   "<a class='edit-agency_show table__dropdown-item dropdown-item' href='#' data-toggle='modal' data-target='.form-agency' data-id='" + agency._id + "'>Edit</a>";
+            result +=   "<a class='remove-agency_show table__dropdown-item dropdown-item' href='#' data-toggle='modal' data-target='.delete-element' data-id='" + agency._id + "'>Delete</a>";
             result += "</div>";
             result += "</div>";
             result += "</td>";
@@ -34,26 +33,87 @@ $(document).ready(function(){
         });
     
         $("#table-agency").html(result);
+
+        editButtons = $(".edit-agency_show");
+        editButtons.on('click', prepareFormToUpdate);
+        
+        removeButtons = $(".remove-agency_show");
+        removeButtons.on('click', function(){
+            var id = $(this).attr("data-id");
+            $("#btn-remove-agency").attr("data-id", id);
+        });
     }
 
-    function fillAgencyFormForUpdate(){
-        var id = $(this).attr("data-id").val(),
+    function prepareFormToUpdate(){
+        var id = $(this).attr("data-id"),
             url = "/agency/" + id;
-        
+            
+        var formTitle    = $("#form-agency_title"),
+            inputName    = $("#form-agency_name"),
+            inputState   = $("#form-agency_state"),
+            inputCity    = $("#form-agency_city"),
+            inputCp      = $("#form-agency_cp"),
+            inputAddress = $("#form-agency_address");
+
         $.ajax({
             url: url,
             method: "GET",
             dataType: "json",
             success: function(agency){
-                $("#form-agency_title").html("Edit branch");
-                $("#form-agency_name").val(agency.name);
-                $("#form-agency_state").val(agency.state);
-                $("#form-agency_city").val(agency.city);
-                $("#form-agency_cp").val(agency.cp);
-                $("#form-agency_address").val(agency.address);
+                formTitle.text("Edit agency");
+
+                agency.forEach(function(agency){
+                    inputName.val(agency.name);
+                    inputState.val(agency.state);
+                    inputCity.val(agency.city);
+                    inputCp.val(agency.cp);
+                    inputAddress.val(agency.address);
+
+                    //Changing button id to trigger another function
+                });
+                
+                $("#agency-add").attr("id", "agency-edit");
+                
+                $("#agency-edit").on('click', function(){
+                    
+                    var userForm = $("#agency-form"),
+                    urlUpdate = "/agency/" + id + "?_method=PUT",
+                    data = {};
+                
+                    console.log(url);
+            
+                    userForm.find('[name]').each(function(index, value){
+                        var name  = $(this).attr('name'),
+                            value = $(this).val();
+            
+                        data[name] = value;
+                    });
+            
+                    console.log(data);
+                    
+                    $.ajax({
+                        url: urlUpdate,
+                        method: "POST",
+                        data: data,
+                        success: refreshAgencies
+                    });
+
+                });
             }
         });
-
+        
+    }
+    
+    function prepareFormToAdd(){
+        $("#form-agency_title").text("Add branch");
+        $("#form-agency_name").val("");
+        $("#form-agency_state").val("");
+        $("#form-agency_city").val("");
+        $("#form-agency_cp").val("");
+        $("#form-agency_address").val("");
+        
+        $("#agency-edit").attr("id", "agency-add");
+        $("#agency-add").on('click', addAgency);
     }
     
     function refreshAgencies(){
@@ -86,28 +146,21 @@ $(document).ready(function(){
             data: data,
             success: refreshAgencies
         });
+
+        fillSelectStates();
     }
 
-    function updateAgency(){
-        var userForm = $("#agency-form"),
-            url = "/agency?_method=PUT",
-            data = {};
+    function removeAgency(){
+        var id = $("#btn-remove-agency").attr("data-id");
+        var url = "/agency/" + id + "?_method=DELETE";
 
+        console.log(url);
 
-        userForm.find('[name]').each(function(index, value){
-            var name  = $(this).attr('name'),
-                value = $(this).val();
-
-            data[name] = value;
-        });
-        
         $.ajax({
             url: url,
             method: "POST",
-            data: data,
             success: refreshAgencies
         });
-        
     }
 
     function fillSelectStates(){

@@ -75,7 +75,7 @@ function updateAgency(req, res){
 
 function removeAgency(req, res){
 
-    Agency.findOneAndUpdate({"_id": req.params.id, "meta,active": true}, (err, agencyToRemove) => {
+    Agency.findOneAndUpdate({"_id": req.params.id, "meta.active": true}, {"meta.active": false}, (err, agencyToRemove) => {
         if(err){
             res.send(err);
         }else{

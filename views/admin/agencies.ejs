@@ -18,8 +18,8 @@
                     </select>
                 </div>
             </div>
-            <a class="table-filter__btn" href="#" data-toggle="modal" data-target=".branch-form">
-                Add Branch
+            <a class="table-filter__btn" href="#" data-toggle="modal" data-target=".form-agency" id="btn-add-agency">
+                Add Agency
             </a>
         </div>
         <table class="table">
@@ -37,9 +37,9 @@
         </table>
     </div>
 
-    <!--Add branch-->
+    <!--Agency form-->
 
-    <div class="modal--fade modal fade branch-form" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="add-branch">
+    <div class="modal--fade modal fade form-agency" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="add-branch">
         <div class="modal-dialog modal--form-size">
             <form id="agency-form">
                 <div class="modal-form modal-content">
@@ -54,11 +54,11 @@
                         </div>
                         <div class="modal-form__group modal-form__group--small">
                             <label for="" class="modal-form__label">State</label>
-                            <input id="form-agency_name" type="text" class="modal-form__input" name="state">				  
+                            <input id="form-agency_state" type="text" class="modal-form__input" name="state">				  
                         </div>
                         <div class="modal-form__group modal-form__group--small">
                             <label for="" class="modal-form__label">City</label>
-                            <input id="form-agency_name" type="text" class="modal-form__input" name="city">
+                            <input id="form-agency_city" type="text" class="modal-form__input" name="city">
                         </div>
                         <div class="modal-form__group modal-form__group--small">
                             <label for="" class="modal-form__label">C.P.</label>
@@ -72,7 +72,7 @@
                     <div class="modal-form__footer">
                         <div class="modal-form__btn-group">
                             <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close">Cancel</a>
-                            <a href="#" class="modal-form__btn modal-form__btn--confirm" id="agency-submit" data-dismiss="modal" aria-label="Close">Confirm</a>
+                            <a href="#" class="modal-form__btn modal-form__btn--confirm" id="agency-add" data-dismiss="modal" aria-label="Close">Confirm</a>
                         </div>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
               <div class="modal-form__footer modal-form__footer--centered">
                   <div class="modal-form__btn-group modal-form__btn-group--centered">
                       <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close">Nel, prro</a>
-                      <a href="#" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Saimón</a>
+                      <a href="#" id="btn-remove-agency" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Saimón</a>
                   </div>
               </div>
           </div>

@@ -24,15 +24,13 @@ function findManagers(req, res){
 
 function findSalesmen(req, res){
     
-    Agency.find({"manager.id": req.user._id, "meta.active": true})
-           .populate("employees")
-           .exec( (err, foundSalesmen) => {
-               if(err){
-                   res.send(err);
-               }else{
-                   res.send(foundSalesmen.employees);
-               }
-           });
+    Agency.find({"manager.id": req.user._id, "meta.active": true}, (err, foundAgency) => {
+        if(err){
+            res.send(err);
+        }else{
+            res.send(foundAgency);
+        }
+    });
 
 }
 
@@ -59,16 +57,38 @@ function addUser(req, res){
     };
 
     if(req.user.role == "Admin"){
-
+        //If the user is an admin, the employee will be added as a manager
         newUser.role = "Manager";
         
-        User.register(newUser, req.body.password, function(err, registeredUser){
-            if(err){ //If not authenticated, the user won't go on
-                res.send(err);
-            }else{
-                res.send(registeredUser);
+        Agency.findOne(
+            {   //We look for the agency the user will run
+                "state": req.body.agencyState,
+                "city": req.body.agencyCity,
+                "name": req.body.agencyName,
+                "meta.active":true
+            }, (err, foundAgency) => {
+                if(err){
+                    res.send(err);
+                }else{
+
+                    User.register(newUser, req.body.password, function(err, registeredUser){
+                        if(err){ //If not authenticated, the user won't go on
+                            res.send(err);
+                        }else{
+                            //We save the created user as the new manager
+                            foundAgency.manager.id = registeredUser._id;
+                            foundAgency.manager.fullName = registeredUser.name + " " + registeredUser.surname;
+                            foundAgency.meta.modified_at = Date.now();
+
+                            foundAgency.save();
+
+                            res.send(registeredUser);
+                        }
+                    });
+
+                }
             }
-        });
+        );
 
     }else{
         
@@ -79,14 +99,24 @@ function addUser(req, res){
                 res.send(err);
             }else{
 
+                console.log(foundAgency);
+
                 User.register(newUser, req.body.password, function(err, registeredUser){
                     if(err){ //If not authenticated, the user won't go on
                         console.log(err);
                         res.send(err);
                     }else{
-            
-                        foundAgency.employees.push(registeredUser);
-                        foundAgency.meta.modified_at = Date.now;
+                        console.log(registeredUser);
+
+                        var employee = {
+                            fullName: registeredUser.name + " " + registeredUser.surname,
+                            email: registeredUser.email,
+                            phone: registeredUser.phone,
+                            address: registeredUser.address
+                        };
+
+                        foundAgency.employees.push(employee);
+                        foundAgency.meta.modified_at = Date.now();
                 
                         foundAgency.save();
         

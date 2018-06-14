@@ -31,33 +31,21 @@ function findVehicles(req, res){
 
 function findVehiclesByAgency(req, res){
 
-    //Buscar usuario
-    User.findOne({"_id": currentUser._id, "meta.active": true},(err, foundUser) => {
-        
+    Agency.findOne({"manager.id": req.user._id ,"meta.active": true}, (err, foundAgency) => {
         if(err){
             res.send(err);
         }else{
-            
-            Agency.findOne({"manager.id": foundUser._id, "meta.active": true}, (err, foundAgency) => {
-                
+            if(!foundAgency)
+                res.send("No hay agencia");
+
+            Vehicle.find({"agency.id": foundAgency._id, "meta.active": true}, (err, foundVehicle) => {
                 if(err){
                     res.send(err);
                 }else{
-
-                    Vehicle.find({"agency.id": foundAgency._id, "meta.active": true}, (err, foundVehicles) => {
-                        if(err){
-                            res.send(err);
-                        }else{
-                            res.send(foundVehicles);
-                        }
-                    });
-
+                    res.send(foundVehicle);
                 }
-
             });
-
         }
-
     });
 
 }

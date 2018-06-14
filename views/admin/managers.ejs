@@ -5,24 +5,6 @@
         <h1 class="heading__title">Managers</h1>
         <div class="heading__controls">
             <div class="table-filter__group">
-                <div class="table-filter__item">
-                    <p class="table-filter__title">Policy</p>
-                    <select class="modal-form__input modal-form__input--select" name="" id="">
-                            <option value="">Select one</option>
-                    </select>
-                </div>
-                <div class="table-filter__item">
-                    <p class="table-filter__title">Policy</p>
-                    <select class="modal-form__input modal-form__input--select" name="" id="">
-                            <option value="">Select one</option>
-                    </select>
-                </div>
-                <div class="table-filter__item">
-                    <p class="table-filter__title">Policy</p>
-                    <select class="modal-form__input modal-form__input--select" name="" id="">
-                            <option value="">Select one</option>
-                    </select>
-                </div>
             </div>
             <a class="table-filter__btn" href="#" data-toggle="modal" data-target=".add-employee">
                 Add Employee
@@ -55,6 +37,14 @@
                         </div>
                         <div class="modal-form__body">
                             <div class="modal-form__group modal-form__group--small">
+                                <label for="" class="modal-form__label">Username</label>
+                                <input type="text" class="modal-form__input" name="username">
+                            </div>
+                            <div class="modal-form__group modal-form__group--small">
+                                <label for="" class="modal-form__label">Password</label>
+                                <input type="password" class="modal-form__input" name="password">
+                            </div>
+                            <div class="modal-form__group modal-form__group--small">
                                 <label for="" class="modal-form__label">Name</label>
                                 <input type="text" class="modal-form__input" name="name">
                             </div>
@@ -74,19 +64,30 @@
                                 <label for="" class="modal-form__label">Address</label>
                                 <input type="text" class="modal-form__input" name="address">
                             </div>
+                            <p class="modal-form__label modal-form__label--title">Agency</p>
                             <div class="modal-form__group modal-form__group--small">
-                                <label for="" class="modal-form__label">Username</label>
-                                <input type="text" class="modal-form__input" name="username">
+                                <label for="" class="modal-form__label">State</label>
+                                <select id="form-stock-state" class="modal-form__input" name="agencyState">
+                                    <option value="Servicio">Select a city</option>
+                                </select>
                             </div>
                             <div class="modal-form__group modal-form__group--small">
-                                <label for="" class="modal-form__label">Password</label>
-                                <input type="password" class="modal-form__input" name="password">
+                                <label for="" class="modal-form__label">City</label>
+                                <select id="form-stock-city" class="modal-form__input" name="agencyCity">
+                                    <option value="Servicio">Select a city</option>
+                                </select>								  
+                            </div>
+                            <div class="modal-form__group modal-form__group--small">
+                                <label for="" class="modal-form__label">Agency</label>
+                                <select id="form-stock-agency" class="modal-form__input" name="agencyName">
+                                    <option value="Servicio">Select an agency</option>
+                                </select>								  
                             </div>
                         </div>
                         <div class="modal-form__footer">
                             <div class="modal-form__btn-group">
                                 <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close">Cancel</a>
-                                <a href="#" id="add-employee-submit" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Confirm</a>
+                                <a href="#" id="add-manager-submit" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Confirm</a>
                             </div>
                         </div>
                     </form>

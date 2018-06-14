@@ -2,7 +2,7 @@
 
 <section class="main">
     <div class="heading container">
-        <h1 class="heading__title">Vehicles</h1>
+        <h1 class="heading__title">Models</h1>
         <div class="heading__controls">
             <div class="table-filter__group">
                 <div class="table-filter__item">
@@ -17,7 +17,7 @@
                 </div>
             </div>
             <a class="table-filter__btn" href="#" data-toggle="modal" data-target=".add-model" id="add-model-btn">
-                Add Vehicle
+                Add Model
             </a>
         </div>
         <table class="table">
@@ -80,24 +80,38 @@
                             </div>
                             <p class="modal-form__label modal-form__label--title">Colors</p>
                             <div class="modal-form__group modal-form__group--small">
-                                    <label for="" class="modal-form__label">Outer</label>
+                                <label for="" class="modal-form__label">Outer</label>
                             </div>
                             <div class="modal-form__group modal-form__group--small">
-                                    <label for="" class="modal-form__label">Inner</label>						  
+                                <label for="" class="modal-form__label">Inner</label>						  
                             </div>						
-                            <div class="modal-form__group modal-form__group--small">
+                            <div class="modal-form__group modal-form__group--minium">
                                 <label for="" class="modal-form__label">Color code</label>
-                                <input type="text" class="modal-form__input" name="colors[interior]">							  
+                                <input type="text" class="modal-form__input" name="colors[interior][0][codigo]">							  
                             </div>
-                            <div class="modal-form__group modal-form__group--small">
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">Name</label>
+                                <input type="text" class="modal-form__input" name="colors[interior][0][nombre]">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--minium">
                                 <label for="" class="modal-form__label">Color code</label>
-                                <input type="text" class="modal-form__input" name="colors[interior]">							  
+                                <input type="text" class="modal-form__input" name="colors[exterior][0][codigo]">							  
                             </div>
-                            <div class="modal-form__group modal-form__group--small">
-                                <input type="text" class="modal-form__input" name="colors[interior]">							  
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">Name</label>
+                                <input type="text" class="modal-form__input" name="colors[exterior][0][nombre]">							  
                             </div>
-                            <div class="modal-form__group modal-form__group--small">
-                                <input type="text" class="modal-form__input" name="colors[interior]">							  
+                            <div class="modal-form__group modal-form__group--minium">
+                                <input type="text" class="modal-form__input" name="colors[interior][1][codigo]">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--minium">
+                                <input type="text" class="modal-form__input" name="colors[interior][1][nombre]">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--minium">
+                                <input type="text" class="modal-form__input" name="colors[exterior][1][codigo]">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--minium">
+                                <input type="text" class="modal-form__input" name="colors[exterior][1][nombre]">							  
                             </div>
                             <p class="modal-form__label modal-form__label--title">Images</p>
                             <div class="modal-form__group modal-form__group--large">
@@ -186,19 +200,21 @@
                             <div class="modal-form__group modal-form__group--small">
                                 <label for="" class="modal-form__label">Inner</label>						  
                             </div>						
-                            <div class="modal-form__group modal-form__group--small">
+                            <div class="modal-form__group modal-form__group--minium">
                                 <label for="" class="modal-form__label">Color code</label>
                                 <input type="text" class="modal-form__input" name="colors[interior]">							  
                             </div>
-                            <div class="modal-form__group modal-form__group--small">
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">Name</label>
+                                <input type="text" class="modal-form__input" name="colors[interior]">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--minium">
                                 <label for="" class="modal-form__label">Color code</label>
-                                <input type="text" class="modal-form__input" name="colors[interior]">							  
+                                <input type="text" class="modal-form__input" name="colors[exterior]">							  
                             </div>
-                            <div class="modal-form__group modal-form__group--small">
-                                <input type="text" class="modal-form__input" name="colors[interior]">							  
-                            </div>
-                            <div class="modal-form__group modal-form__group--small">
-                                <input type="text" class="modal-form__input" name="colors[interior]">							  
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">Name</label>
+                                <input type="text" class="modal-form__input" name="colors[exterior]">							  
                             </div>
                             <p class="modal-form__label modal-form__label--title">Images</p>
                             <div class="modal-form__group modal-form__group--large">

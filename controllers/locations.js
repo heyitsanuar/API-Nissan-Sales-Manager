@@ -51,12 +51,46 @@ function findCities(req, res){
     });
 }
 
-//Shows agencies with no manager
-function findAgenciesByStateAndCity(req, res){
+//Shows agencies with manager
+function findAgenciesWithManager(req, res){
     Agency.find(
         {
             "state": req.params.state,
             "manager.id": { $ne: req.user._id},
+            "city": req.params.city,
+            "meta.active": true
+        }, (err, foundAgencies) => {
+            if(err){
+                res.send(foundAgencies);
+            }else{
+                if(!foundAgencies){
+                    res.send("There are no agencies");
+                }else{
+                    var agencies = [];
+
+                    foundAgencies.forEach(function(agency){
+                        agencies.push(agency.name);
+                    });
+
+                    agencies = agencies.filter(function(element, position) {
+                        return agencies.indexOf(element) == position;
+                    });
+
+                    agencies = JSON.stringify(agencies);
+
+                    res.send(agencies);
+                }
+            }
+        }
+    );
+}
+
+//Shows agencies with no manager
+function findAgenciesWithNoManager(req, res){
+    Agency.find(
+        {
+            "state": req.params.state,
+            "manager.id": req.user._id,
             "city": req.params.city,
             "meta.active": true
         }, (err, foundAgencies) => {
@@ -120,7 +154,8 @@ function findAllAgenciesByStateAndCity(req, res){
 module.exports = {
     findStates,
     findCities,
-    findAgenciesByStateAndCity,
+    findAgenciesWithManager,
+    findAgenciesWithNoManager,
     findAgenciesByState,
     findAllAgenciesByStateAndCity
 }

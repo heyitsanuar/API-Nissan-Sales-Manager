@@ -6,8 +6,18 @@ var modelSchema = new mongoose.Schema({
     categoria: String,
     anio: Number,
     colores: {
-        interior: [String],
-        exterior: [String]
+        interior: [
+            {
+                nombre: String,
+                codigo: String
+            }
+        ],
+        exterior: [
+            {
+                nombre: String,
+                codigo: String
+            }
+        ]
     },
     dimensiones: {
         largo: Number,

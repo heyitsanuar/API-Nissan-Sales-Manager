@@ -64,7 +64,7 @@ function updateAgency(req, res){
             foundAgency.city = req.body.city;
             foundAgency.cp = req.body.cp;
             foundAgency.address = req.body.address;
-            foundAgency.modified_at = Date.now;
+            foundAgency.modified_at = Date.now();
 
             foundAgency.save();
 

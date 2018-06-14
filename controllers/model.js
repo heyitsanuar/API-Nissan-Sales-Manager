@@ -99,7 +99,6 @@ function findVersions(req, res){
 function addModel(req, res){
 
     //Creates the object of the model to be added and its properties
-
     var newModel = {
         modelo: req.body.name,
         descripcion: req.body.description,
@@ -111,8 +110,7 @@ function addModel(req, res){
         imagenes: req.body.photos.imagesURL
     };
 
-
-    console.log(colors);
+    console.log(req.body.colors);
 
     //Creates the model and adds it to the database
     Model.create(newModel, (err, modelAdded) =>{
@@ -121,7 +119,7 @@ function addModel(req, res){
         }else{
             res.send(modelAdded);
         }
-    });
+    }); 
 
 }
 
@@ -146,7 +144,6 @@ function updateModel(req, res){
             res.send(modelUpdated);
         }
     });
-
 }
 
 function removeModel(req, res){

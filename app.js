@@ -9,6 +9,7 @@ var Vehicle               = require("./models/vehicle");
 var User                  = require("./models/user");
 var Sale                  = require("./models/sale");
 var Version               = require("./models/version");
+var Version               = require("./models/stock");
 var seedDB                = require("./seeds");
 var expressSanitizer      = require("express-sanitizer");
 var methodOverride        = require("method-override");
@@ -31,6 +32,7 @@ var carRoutes      = require("./routes/cars"),
     salesRoutes    = require("./routes/sales"),
     comparerRoutes = require("./routes/comparer"),
     locationRoutes = require("./routes/location"),
+    stockRoutes    = require("./routes/stock"),
     indexRoutes    = require("./routes/index"),
     authRoutes     = require("./routes/authentication");
 
@@ -86,5 +88,6 @@ app.use("/login", loginRoutes);
 app.use("/sales", salesRoutes);
 app.use("/comparer", cors(), comparerRoutes);
 app.use("/locations", locationRoutes);
+app.use(stockRoutes);
 
 module.exports = app;

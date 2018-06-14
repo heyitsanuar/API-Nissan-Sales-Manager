@@ -1,70 +1,67 @@
 $(document).ready(function(){
 
-    refreshStock();
+    refreshStocks();
     fillSelectStates();
 
     $("#add-stock-submit").on('click', addStock);
     $("#form-stock-state").on('change', fillSelectCities);
     $("#form-stock-city").on('change', fillSelectAgencies);
 
-    function showModels(models){
+    function showStocks(stocks){
         var result = "";
-    
-        $.each(models, function(index, model){
+
+        console.log(stocks);
+        
+        $.each(stocks, function(index, stock){
             result += "<tr class='table__row-td'>";
-            result += "<tr class='table__row-td'>";
-            result += "<td class='table__td'>" + model.modelo + "</td>";
-            result += "<td class='table__td'>" + model.anio + "</td>";
-            result += "<td class='table__td'>" + model.modelo + "</td>";
-            result += "<td class='table__td'>" + model.categoria + "</td>";
-            result += "<td class='table__controls'>";
-            result += "<div class='table__dropdown dropdown dropleft'>";
-            result +=  "<a class='table__dropdown-button' id='data1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>...</a>";
-            result += "<div class='table__dropdown-menu dropdown-menu' aria-labelledby='data1'>";
-            result += "<a class='edit-model_show table__dropdown-item dropdown-item' href='#' data-toggle='modal' data-target='.edit-model' data-id='" + model._id +"'>Edit</a>";
-            result += "<a class='table__dropdown-item dropdown-item' href='#' data-toggle='modal' data-target='.delete-element'>Delete</a>";
-            result += "</div>";
-            result += "</div>";
-            result += "</td>";
+            result += "<td class='table__td'>" + stock.agency.name + "</td>";
+            result += "<td class='table__td'>" + stock.category + "</td>";
+            result += "<td class='table__td'>" + stock.meta.created_at + "</td>";
             result += "</tr>";
         });
     
-        $("#table-models").html(result);
+        $("#table-stock").html(result);
     }
     
-    function refreshStock(){
+    function refreshStocks(){
 
-        var URL = "/cars";
+        var URL = "/stock";
         
         $.ajax({
             url: URL,
             method: "GET",
             dataType: "json",
-            success: showModels
+            success: showStocks
         });
 
     }
 
     function addStock(){
         
-        var modelForm = $("#add-model-form"),
-            url = "/cars",
+        var stockForm = $("#add-stock-form"),
+            url = "/stock",
             data = {};
+
+        var category = $("#form-category").val();
+
+        if(category != "All"){
+            url += "/" + category;
+        }else{
+            url += "/" + "all";
+        }
         
-        modelForm.find('[name]').each(function(index, value){
+        stockForm.find('[name]').each(function(index, value){
             var name  = $(this).attr('name'),
                 value = $(this).val();
 
             data[name] = value;
         });
-
-        console.log(data);
         
         $.ajax({
             url: url,
             method: "POST",
             data: data,
-            success: refreshModels
+            success: refreshStocks
         });
     }
 

@@ -17,8 +17,13 @@ $(document).ready(function(){
             result += "<td class='table__td'>" + model.modelo + "</td>";
             result += "<td class='table__td'>" + model.categoria + "</td>";
             result += "<td class='table__controls'>";
-            result += "<a class='edit-model_show table__dropdown-item' data-toggle='modal' data-target='.edit-model' data-id='" + model._id +"'>Edit</a>";
-            result += "<a class='table__dropdown-item' href='#' data-toggle='modal' data-target='.delete-element'>Delete</a>";
+            result += "<div class='table__dropdown dropdown dropleft'>";
+            result += "<a class='table__dropdown-button' id='data1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>...</a>";
+            result += "<div class='table__dropdown-menu dropdown-menu' aria-labelledby='data1'>";
+            result += "<a class='edit-employee_show table__dropdown-item dropdown-item' href='#' data-toggle='modal' data-target='.edit-employee' data-id='" + model._id + "'>Edit</a>";
+            result += "<a class='remove-employee_show table__dropdown-item dropdown-item' href='#' data-toggle='modal' data-target='.delete-element' data-id='" + model._id + "'>Delete</a>";
+            result += "</div>";
+            result += "</div>";
             result += "</td>";
             result += "</tr>";
         });

@@ -2,16 +2,17 @@ $(document).ready(function(){
 
     refreshStock();
 
-    function showModels(models){
+    function showModels(vehicles){
         var result = "";
+
+        console.log(vehicles);
     
-        $.each(models, function(index, model){
+        $.each(vehicles, function(index, vehicle){
             result += "<tr class='table__row-td'>";
             result += "<tr class='table__row-td'>";
-            result += "<td class='table__td'>" + model.modelo + "</td>";
-            result += "<td class='table__td'>" + model.anio + "</td>";
-            result += "<td class='table__td'>" + model.serieNumber + "</td>";
-            result += "<td class='table__td'>" + model.categoria + "</td>";
+            result += "<td class='table__td'>" + vehicle.model.name + "</td>";
+            result += "<td class='table__td'>" + vehicle.serieNumber + "</td>";
+            result += "<td class='table__td'>" + vehicle.status + "</td>";
             result += "</tr>";
         });
     

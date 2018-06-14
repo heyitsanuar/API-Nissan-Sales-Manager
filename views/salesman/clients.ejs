@@ -137,11 +137,11 @@
         </table>
     </div>
 
-    <!--Add employee-->
-    <div class="modal--fade modal fade add-employee" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="add-branch">
+    <!--Add client-->
+    <div class="modal--fade modal fade add-client" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="add-branch">
             <div class="modal-dialog modal--form-size">
                 <div class="modal-form modal-content">
-                    <form action="/employees" method="POST">
+                    <form id="add-client-form">
                         <div class="modal-form__header">
                             <h2 class="modal-form__title">Add Employee</h2>
                             <i class="modal-form__exit fas fa-times" id="modal-exit" data-dismiss="modal" aria-label="Close"></i>
@@ -164,23 +164,22 @@
                                 <input type="email" class="modal-form__input" name="email">
                             </div>
                             <div class="modal-form__group modal-form__group--large">
+                                <label for="" class="modal-form__label">State</label>
+                                <input type="text" class="modal-form__input" name="state">
+                            </div>
+                            <div class="modal-form__group modal-form__group--large">
+                                <label for="" class="modal-form__label">City</label>
+                                <input type="text" class="modal-form__input" name="city">
+                            </div>
+                            <div class="modal-form__group modal-form__group--large">
                                 <label for="" class="modal-form__label">Address</label>
                                 <input type="text" class="modal-form__input" name="address">
-                            </div>
-                            <div class="modal-form__group modal-form__group--small">
-                                <label for="" class="modal-form__label">Username</label>
-                                <input type="text" class="modal-form__input" name="username">
-                            </div>
-                            <div class="modal-form__group modal-form__group--small">
-                                <label for="" class="modal-form__label">Password</label>
-                                <input type="password" class="modal-form__input" name="password">
                             </div>
                         </div>
                         <div class="modal-form__footer">
                             <div class="modal-form__btn-group">
                                 <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close">Cancel</a>
-                                <!--<a href="#" class="modal-form__btn modal-form__btn--confirm">Confirm</a>-->
-                                <input type="submit" class="modal-form__btn modal-form__btn--confirm" value="Confirm">
+                                <a href="#" id="add-client-submit" class="modal-form__btn modal-form__btn--confirm">Confirm</a>
                             </div>
                         </div>
                     </form>
@@ -188,8 +187,8 @@
             </div>
     </div>
         
-    <!--Edit employee agency manager-->
-    <div class="modal--fade modal fade edit-employee" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="edit-branch">
+    <!--Edit client-->
+    <div class="modal--fade modal fade edit-client" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="edit-branch">
             <div class="modal-dialog modal--form-size">
                 <div class="modal-form modal-content">
                     <div class="modal-form__header">
@@ -250,7 +249,7 @@
                 <div class="modal-form__footer modal-form__footer--centered">
                     <div class="modal-form__btn-group modal-form__btn-group--centered">
                         <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close">Nel, prro</a>
-                        <a href="#" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Saimón</a>
+                        <a href="#" id="btn-remove-client" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Saimón</a>
                     </div>
                 </div>
             </div>

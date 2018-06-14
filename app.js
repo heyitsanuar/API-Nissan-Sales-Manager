@@ -20,19 +20,20 @@ var passportLocalMongoose = require("passport-local-mongoose");
 //seedDB();
 
 //Requiring route files
-var carRoutes      = require("./routes/cars"),
-    clientRoutes   = require("./routes/clients"),
-    agencyRoutes   = require("./routes/agencies"),
-    vehicleRoutes  = require("./routes/vehicles"),
-    requestRoutes  = require("./routes/requests"),
-    userRoutes     = require("./routes/users"),
-    loginRoutes    = require("./routes/login"),
-    catalogRoutes  = require("./routes/catalog"),
-    salesRoutes    = require("./routes/sales"),
-    comparerRoutes = require("./routes/comparer"),
-    locationRoutes = require("./routes/location"),
-    indexRoutes    = require("./routes/index"),
-    authRoutes     = require("./routes/authentication");
+var carRoutes             = require("./routes/cars"),
+    clientRoutes          = require("./routes/clients"),
+    agencyRoutes          = require("./routes/agencies"),
+    vehicleRoutes         = require("./routes/vehicles"),
+    requestRoutes         = require("./routes/requests"),
+    userRoutes            = require("./routes/users"),
+    loginRoutes           = require("./routes/login"),
+    catalogRoutes         = require("./routes/catalog"),
+    salesRoutes           = require("./routes/sales"),
+    comparerRoutes        = require("./routes/comparer"),
+    comparerExtRoutes     = require("./routes/comparerExt"),
+    locationRoutes        = require("./routes/location"),
+    indexRoutes           = require("./routes/index"),
+    authRoutes            = require("./routes/authentication");
 
 //=======================App setup===============================
 
@@ -59,13 +60,28 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+var disallowedWithLogin = [
+    "/login",
+    "/sign-in"
+];
+
+var allowedWithoutLogin = [
+    "/comparerExt",
+    "/login",
+    "/sign-in"
+];
+
 //Setting current user for local's
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
-    if (res.locals.currentUser = "") {
-        res.redirect("/login");
+    console.log(req.user);
+    if (res.locals.currentUser == undefined && !allowedWithoutLogin.includes(req.url)) {
+        res.redirect("/login")
+    } else if (res.locals.currentUser != undefined && disallowedWithLogin.includes(req.url)) {
+        res.redirect("/home");
+    } else {
+        next();
     }
-    next();
 });
 
 //Routing instances
@@ -81,7 +97,8 @@ app.use("/employees", userRoutes);
 app.use("/login", loginRoutes);
 app.use(catalogRoutes);
 app.use("/sales", salesRoutes);
-app.use("/comparer", cors(), comparerRoutes);
+app.use("/comparerExt", cors(), comparerExtRoutes);
+app.use("/comparer", comparerRoutes);
 app.use("/locations", locationRoutes);
 
 module.exports = app;

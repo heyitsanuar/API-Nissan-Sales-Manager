@@ -19,7 +19,8 @@ function SharedModels() {}
                         "variantes.precio": 1,
                         "_id": 0
                     };
-                    db.collection("carmodels").find({}, proyection).toArray()
+                    // console.log(proyection);
+                    db.collection("carmodels").find({"modelo": "Nissan Chido"}).project(proyection).toArray()
                         .then((result) => {
                             // console.log(result);
                             resolve(result)

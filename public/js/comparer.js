@@ -1,4 +1,5 @@
 
+let cb_agencias;
 let cb_categorias;
 let cb_modelos;
 let cb_variantes;
@@ -6,7 +7,6 @@ let bt_agregar;
 
 let tRow_Modelo;
 let tRow_Categoria;
-let tRow_Colores;
 let tRow_Dimensiones;
 let tRow_Rendimiento;
 let tRow_Potencia;
@@ -15,20 +15,24 @@ let tRow_Transmision;
 let tRow_Traccion;
 let tRow_Precio;
 
-let modelos;
+let agencias = new Object();
+let agenciaSeleccionada;
+let categoriaSeleccionada;
 let modeloSeleccionado;
 let varianteSeleccionada;
 
 let idsComparados = [];
 
 $(() => {
-    cb_categorias = $("#cb_categorias").append($("<option>").val("nope").html("Seleccione una categoría"));
+    cb_agencias = $("#cb_agencias")
+        .append($("<option>").val("nope").html("Seleccione una agencia"));
+        // .css("display", "none");
+    cb_categorias = $("#cb_categorias").append($("<option>").val("nope").html("Seleccione una categoría")).attr("disabled", true);
     cb_modelos = $("#cb_modelos").append($("<option>").val("nope").html("Seleccione un modelo")).attr("disabled", true);
     cb_variantes = $("#cb_variantes").append($("<option>").val("nope").html("Seleccione una variante")).attr("disabled", true);
     bt_agregar = $("#bt_agregar").attr("disabled", true);
     tRow_Modelo = $("#tRow_Modelo");
     tRow_Categoria = $("#tRow_Categoria");
-    tRow_Colores = $("#tRow_Colores");
     tRow_Dimensiones = $("#tRow_Dimensiones");
     tRow_Rendimiento = $("#tRow_Rendimiento");
     tRow_Potencia = $("#tRow_Potencias");
@@ -37,110 +41,162 @@ $(() => {
     tRow_Traccion = $("#tRow_Tracción");
     tRow_Precio = $("#tRow_Precio");
 
-    $.get("/cars", (result) => {
-        modelos = result;
-        
-        let categorias = [];
-        $.each(modelos, (index, modelo) => {
-            if (!categorias.includes(modelo.categoria)) {
-                categorias.push(modelo.categoria);
-                cb_categorias.append($("<option>").val(modelo.categoria).html(modelo.categoria));
-            }
+    $.get("/comparerExt", (result) => {
+        agregarAgencia("Nissan", result);
+        // cb_agencias.val("Nissan");
+    });
+
+    $.get("http://andreaml.ddns.net/volkswagen/modelos/publico", (result) => {
+        $.each(result, (index, modelo) => {
+            modelo.categoria = "Generico";
         });
+        agregarAgencia("Volkswagen", result);
+    });
 
-        cb_categorias.change(function(e) {
-            if (cb_categorias.val() != "nope") {
-                cb_variantes.html("").append($("<option>").val("nope").html("Seleccione una variante")).attr("disabled", true);
-                cb_modelos.html("").append($("<option>").val("nope").html("Seleccione un modelo")).attr("disabled", false);
-                bt_agregar.attr("disabled", true);
+    cb_agencias.change(function() {
+        if (cb_agencias.val() != "nope") {
+            agenciaSeleccionada = agencias[cb_agencias.val()];
+            cb_categorias.html("").append($("<option>").val("nope").html("Seleccione una categoría")).attr("disabled", false);
+            cb_modelos.html("").append($("<option>").val("nope").html("Seleccione un modelo")).attr("disabled", true);
+            cb_variantes.html("").append($("<option>").val("nope").html("Seleccione una variante")).attr("disabled", true);
+            bt_agregar.attr("disabled", true);
 
-                let modelosPorCategoria = modelos.filter( modelo => modelo.categoria == cb_categorias.val());
+            let categorias = [];
+            $.each(agenciaSeleccionada, (index, modelo) => {
+                if (!categorias.includes(modelo.categoria)) {
+                    categorias.push(modelo.categoria);
+                    cb_categorias.append($("<option>").val(modelo.categoria).html(modelo.categoria));
+                }
+            });
+        }
+    });
 
-                $.each(modelosPorCategoria, (index, modelo) => {
-                    cb_modelos.append($("<option>").val(modelo._id).html(modelo.modelo));
-                });
-            }
-        });
+    cb_categorias.change(function() {
+        if (cb_categorias.val() != "nope") {
+            categoriaSeleccionada = cb_categorias.val();
+            cb_variantes.html("").append($("<option>").val("nope").html("Seleccione una variante")).attr("disabled", true);
+            cb_modelos.html("").append($("<option>").val("nope").html("Seleccione un modelo")).attr("disabled", false);
+            bt_agregar.attr("disabled", true);
 
-        cb_modelos.change(function(e) {
-            if (cb_modelos.val() != null && cb_modelos.val() != "nope") {
-                cb_variantes.html("").append($("<option>").val("nope").html("Seleccione una variante")).attr("disabled", false);
-                bt_agregar.attr("disabled", true);
-                modeloSeleccionado = modelos.filter( modelo => modelo._id == cb_modelos.val())[0];
+            let modelosPorCategoria = agenciaSeleccionada.filter( modelo => modelo.categoria == categoriaSeleccionada);
 
-                $.each(modeloSeleccionado.variantes, (index, variante) => {
-                    cb_variantes.append($("<option>").val(variante._id).html(variante.variante));
-                });
-            }
-        });
+            $.each(modelosPorCategoria, (index, modelo) => {
+                cb_modelos.append($("<option>").val(modelo.modelo).html(modelo.modelo));
+            });
+        }
+    });
 
-        cb_variantes.change(function(e) {
-            if (cb_variantes.val() != null && cb_variantes.val() != "nope") {
-                bt_agregar.attr("disabled", false);
-                varianteSeleccionada = modeloSeleccionado.variantes.filter( variante => variante._id == cb_variantes.val())[0];
-            }   
-        });
+    cb_modelos.change(function() {
+        if (cb_modelos.val() != "nope") {
+            modeloSeleccionado = agenciaSeleccionada.filter(modelo => modelo.modelo == cb_modelos.val())[0];
+            cb_variantes.html("").append($("<option>").val("nope").html("Seleccione una variante")).attr("disabled", false);
+            bt_agregar.attr("disabled", true);
 
-        bt_agregar.click(function() {
-            if (idsComparados.includes(varianteSeleccionada._id)) {
-                return;
-            }
-            let idComparado = varianteSeleccionada._id;
-            let cellModelo = $("<td>").attr("id", "modelo" + idComparado);
-            let cellCategoria = $("<td>").attr("id", "categoria" + idComparado);
-            let cellColores = $("<td>").attr("id", "colores" + idComparado);
-            let cellDimensiones = $("<td>").attr("id", "dimensiones" + idComparado);
-            let cellRendimiento = $("<td>").attr("id", "rendimiento" + idComparado);
-            let cellPotencia = $("<td>").attr("id", "potencia" + idComparado);
-            let cellTorque = $("<td>").attr("id", "torque" + idComparado);
-            let cellTransmision = $("<td>").attr("id", "transmision" + idComparado);
-            let cellTraccion = $("<td>").attr("id", "traccion" + idComparado);
-            let cellPrecio = $("<td>").attr("id", "precio" + idComparado);
+            $.each(modeloSeleccionado.variantes, (index, variante) => {
+                cb_variantes.append($("<option>").val(variante.variante).html(variante.variante));
+            });
+        }
+    });
 
-            cellModelo
-                .append($("<span>").html(modeloSeleccionado.modelo).css("display", "block"))
-                .append($("<span>").html(varianteSeleccionada.variante).css("display", "block"));
-            cellCategoria.html(modeloSeleccionado.categoria);
-            cellColores.html(modeloSeleccionado.colores.exterior[0].nombre);
+    cb_variantes.change(function() {
+        if (cb_variantes.val() != "nope") {
+            varianteSeleccionada = modeloSeleccionado.variantes.filter(variante => variante.variante == cb_variantes.val())[0];
+            bt_agregar.attr("disabled", false);
+        }   
+    });
+
+    bt_agregar.click(function() {
+        let cellModelo = $("<td>");
+        let cellCategoria = $("<td>");
+        let cellDimensiones = $("<td>");
+        let cellRendimiento = $("<td>");
+        let cellPotencia = $("<td>");
+        let cellTorque = $("<td>");
+        let cellTransmision = $("<td>");
+        let cellTraccion = $("<td>");
+        let cellPrecio = $("<td>");
+
+        cellModelo
+            .append($("<span>").html(modeloSeleccionado.modelo).css("display", "block"))
+            .append($("<span>").html(varianteSeleccionada.variante).css("display", "block"));
+
+        cellCategoria.html(modeloSeleccionado.categoria);
+
+        if (modeloSeleccionado.dimensiones != undefined) {
             cellDimensiones.html(modeloSeleccionado.dimensiones.alto + "x" +
-                                 modeloSeleccionado.dimensiones.largo + "x" +
-                                 modeloSeleccionado.dimensiones.ancho);
+                                    modeloSeleccionado.dimensiones.largo + "x" +
+                                    modeloSeleccionado.dimensiones.ancho);
+        } else {
+            cellDimensiones.html("No Disponible");
+        }
+
+        if (varianteSeleccionada.caracteristicas.rendimiento != undefined)
             cellRendimiento.html(varianteSeleccionada.caracteristicas.rendimiento + " Km/L");
+        else 
+        cellRendimiento.html("No Disponible");
+
+        if (varianteSeleccionada.caracteristicas.potencia != undefined) {
             cellPotencia.html(varianteSeleccionada.caracteristicas.potencia + " HP");
+        } else {
+            cellPotencia.html("No Disponible");
+        }
+
+        if (varianteSeleccionada.caracteristicas.torque != undefined) {
             cellTorque.html(varianteSeleccionada.caracteristicas.torque + " lb/ft");
+        } else {
+            cellTorque.html("No Disponible");
+        }
+
+        if (varianteSeleccionada.caracteristicas.transmision != undefined) {
             cellTransmision.html(varianteSeleccionada.caracteristicas.transmision);
+        } else {
+            cellTransmision.html("No disponible");
+        }
+
+        if (varianteSeleccionada.caracteristicas.traccion != undefined) {
             cellTraccion.html(varianteSeleccionada.caracteristicas.traccion);
+        } else {
+            cellTraccion.html("No disponible");
+        }
+
+        if (varianteSeleccionada.precio) {
             cellPrecio.html("$" + varianteSeleccionada.precio);
+        } else {
+            cellPrecio.html("No Disponible");
+        }
 
-            cellModelo.append($("<button>").html("Quitar").click(function() {
-                cellModelo.remove();
-                cellCategoria.remove();
-                cellColores.remove();
-                cellDimensiones.remove();
-                cellRendimiento.remove();
-                cellPotencia.remove();
-                cellTorque.remove();
-                cellTransmision.remove();
-                cellTraccion.remove();
-                cellPrecio.remove();
+        cellModelo.append($("<button>").html("Quitar").click(function() {
+            cellModelo.remove();
+            cellCategoria.remove();
+            cellColores.remove();
+            cellDimensiones.remove();
+            cellRendimiento.remove();
+            cellPotencia.remove();
+            cellTorque.remove();
+            cellTransmision.remove();
+            cellTraccion.remove();
+            cellPrecio.remove();
 
-                console.log(idsComparados.indexOf(idComparado));
-                idsComparados.splice(idsComparados.indexOf(idComparado), 1);
-                console.log(idsComparados);
-            }));
-            
-            tRow_Modelo.append(cellModelo);
-            tRow_Categoria.append(cellCategoria);
-            tRow_Colores.append(cellColores);
-            tRow_Dimensiones.append(cellDimensiones);
-            tRow_Rendimiento.append(cellRendimiento);
-            tRow_Potencia.append(cellPotencia);
-            tRow_Torque.append(cellTorque);
-            tRow_Transmision.append(cellTransmision);
-            tRow_Traccion.append(cellTraccion);
-            tRow_Precio.append(cellPrecio);
+            console.log(idsComparados.indexOf(idComparado));
+            idsComparados.splice(idsComparados.indexOf(idComparado), 1);
+            console.log(idsComparados);
+        }));
+        
+        tRow_Modelo.append(cellModelo);
+        tRow_Categoria.append(cellCategoria);
+        tRow_Dimensiones.append(cellDimensiones);
+        tRow_Rendimiento.append(cellRendimiento);
+        tRow_Potencia.append(cellPotencia);
+        tRow_Torque.append(cellTorque);
+        tRow_Transmision.append(cellTransmision);
+        tRow_Traccion.append(cellTraccion);
+        tRow_Precio.append(cellPrecio);
 
-            idsComparados.push(idComparado);
-        });
+        // idsComparados.push(idComparado);
     });
 });
+
+function agregarAgencia(agencia, modelos) {
+    agencias[agencia] = modelos;
+    cb_agencias.append($("<option>").val(agencia).html(agencia));
+}

@@ -11,6 +11,7 @@ function SharedModels() {}
                     let db = client.db();
                     let proyection = {
                         "modelo": 1,
+                        "categoria": 1,
                         "dimensiones": 1,
                         "variantes": 1,
                         "imagenes": 1,
@@ -20,7 +21,7 @@ function SharedModels() {}
                         "_id": 0
                     };
                     // console.log(proyection);
-                    db.collection("carmodels").find({"modelo": "Nissan Chido"}).project(proyection).toArray()
+                    db.collection("carmodels").find({}).project(proyection).toArray()
                         .then((result) => {
                             // console.log(result);
                             resolve(result)

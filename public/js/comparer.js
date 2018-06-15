@@ -43,7 +43,7 @@ $(() => {
 
     $.get("/comparerExt", (result) => {
         agregarAgencia("Nissan", result);
-        // cb_agencias.val("Nissan");
+        cb_agencias.val("Nissan").trigger("change");
     });
 
     $.get("http://andreaml.ddns.net/volkswagen/modelos/publico", (result) => {
@@ -184,7 +184,7 @@ $(() => {
             if (variantesComparadas.length == 0) {
                 tabla.hide();
             } else {
-                tabla.css("width", (150 + (variantesComparadas.length * 180)) + "px")
+                // tabla.css("width", (150 + (variantesComparadas.length * 180)) + "px")
             }
         }));
         
@@ -199,7 +199,7 @@ $(() => {
         tRow_Precio.append(cellPrecio);
 
         tabla.show();
-        tabla.css("width", (150 + ((variantesComparadas.length + 1) * 180)) + "px")
+        // tabla.css("width", (150 + ((variantesComparadas.length + 1) * 180)) + "px")
         variantesComparadas.push(varianteSeleccionada);
     });
 });

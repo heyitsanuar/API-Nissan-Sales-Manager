@@ -1,4 +1,4 @@
-
+let tabla;
 let cb_agencias;
 let cb_categorias;
 let cb_modelos;
@@ -21,12 +21,12 @@ let categoriaSeleccionada;
 let modeloSeleccionado;
 let varianteSeleccionada;
 
-let idsComparados = [];
+let variantesComparadas = [];
 
 $(() => {
+    tabla = $("#tabla").hide();
     cb_agencias = $("#cb_agencias")
         .append($("<option>").val("nope").html("Seleccione una agencia"));
-        // .css("display", "none");
     cb_categorias = $("#cb_categorias").append($("<option>").val("nope").html("Seleccione una categoría")).attr("disabled", true);
     cb_modelos = $("#cb_modelos").append($("<option>").val("nope").html("Seleccione un modelo")).attr("disabled", true);
     cb_variantes = $("#cb_variantes").append($("<option>").val("nope").html("Seleccione una variante")).attr("disabled", true);
@@ -106,15 +106,19 @@ $(() => {
     });
 
     bt_agregar.click(function() {
-        let cellModelo = $("<td>");
-        let cellCategoria = $("<td>");
-        let cellDimensiones = $("<td>");
-        let cellRendimiento = $("<td>");
-        let cellPotencia = $("<td>");
-        let cellTorque = $("<td>");
-        let cellTransmision = $("<td>");
-        let cellTraccion = $("<td>");
-        let cellPrecio = $("<td>");
+        if (variantesComparadas.includes(varianteSeleccionada)) {
+            return;
+        }
+
+        let cellModelo = $("<td>").addClass("table__td_comparer");
+        let cellCategoria = $("<td>").addClass("table__td_comparer");
+        let cellDimensiones = $("<td>").addClass("table__td_comparer");
+        let cellRendimiento = $("<td>").addClass("table__td_comparer");
+        let cellPotencia = $("<td>").addClass("table__td_comparer");
+        let cellTorque = $("<td>").addClass("table__td_comparer");
+        let cellTransmision = $("<td>").addClass("table__td_comparer");
+        let cellTraccion = $("<td>").addClass("table__td_comparer");
+        let cellPrecio = $("<td>").addClass("table__td_comparer");
 
         cellModelo
             .append($("<span>").html(modeloSeleccionado.modelo).css("display", "block"))
@@ -168,7 +172,6 @@ $(() => {
         cellModelo.append($("<button>").html("Quitar").click(function() {
             cellModelo.remove();
             cellCategoria.remove();
-            cellColores.remove();
             cellDimensiones.remove();
             cellRendimiento.remove();
             cellPotencia.remove();
@@ -177,9 +180,12 @@ $(() => {
             cellTraccion.remove();
             cellPrecio.remove();
 
-            console.log(idsComparados.indexOf(idComparado));
-            idsComparados.splice(idsComparados.indexOf(idComparado), 1);
-            console.log(idsComparados);
+            variantesComparadas.splice(variantesComparadas.indexOf(varianteSeleccionada), 1);
+            if (variantesComparadas.length == 0) {
+                tabla.hide();
+            } else {
+                tabla.css("width", (150 + (variantesComparadas.length * 180)) + "px")
+            }
         }));
         
         tRow_Modelo.append(cellModelo);
@@ -192,7 +198,9 @@ $(() => {
         tRow_Traccion.append(cellTraccion);
         tRow_Precio.append(cellPrecio);
 
-        // idsComparados.push(idComparado);
+        tabla.show();
+        tabla.css("width", (150 + ((variantesComparadas.length + 1) * 180)) + "px")
+        variantesComparadas.push(varianteSeleccionada);
     });
 });
 

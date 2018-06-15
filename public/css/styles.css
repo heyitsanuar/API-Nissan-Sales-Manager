@@ -1979,6 +1979,15 @@ a, a:hover {
   color: #979797;
 }
 
+.table__th_comparer {
+  color: #979797;
+  width: 150px;
+}
+
+.table__td_comparer {
+  width: 180px;
+}
+
 .table__th--is-active {
   color: #CD0041;
 }

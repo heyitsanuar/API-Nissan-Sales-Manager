@@ -4,7 +4,15 @@ var Model = require("../models/model");
 
 function showDetailsPage(req, res){
     //Renders car details page
-    res.render("details");
+
+    Model.findOne({"_id": req.params.id, "meta.active": true}, (err, foundModel) => {
+        if(err){
+            res.send(err);
+        }else{
+            res.render("details", {model: foundModel});
+        }
+    });
+
 }
 
 function showCatalog(req, res){

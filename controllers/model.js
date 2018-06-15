@@ -10,17 +10,13 @@ function showModelsPage(req, res){
 function findModels(req, res){
     
     //Looks for all the models within the database
-    Model.find({"meta.active": true})
-         .populate("variantes")
-         .exec( (err, foundModels) =>{
-             if(err){
-                 res.send(err);
-             }else{
-                 res.send(foundModels);
-             }
-         }
-    );
-
+    Model.find({"meta.active": true}, (err, foundModels) =>{
+        if(err){
+            res.send(err);
+        }else{
+            res.send(foundModels);
+        }
+    });
 }
 
 function findModelsByCategory(req, res){

@@ -1984,9 +1984,9 @@ a, a:hover {
   width: 150px;
 }
 
-.table__td_comparer {
+/* .table__td_comparer {
   width: 180px;
-}
+} */
 
 .table__th--is-active {
   color: #CD0041;

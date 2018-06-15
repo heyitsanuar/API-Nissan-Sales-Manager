@@ -132,9 +132,12 @@ function updateModel(req, res){
             modelUpdated.photos           = req.body.photos;
             modelUpdated.meta.modified_at = Date.now;
 
-            modelUpdated.save();
-
-            res.send(modelUpdated);
+            modelUpdated.save((err, updatedModel) => {
+                if (err) {
+                    res.send(err);
+                }
+                res.send(updatedModel)
+            });
         }
     });
 }
@@ -189,9 +192,12 @@ function updateVersion(req, res){
             foundVersion.caracteristicas  = req.body.caracteristicas;
             foundVersion.meta.modified_at = Date.now;
 
-            foundVersion.save();
-
-            res.send(foundVersion);
+            foundVersion.save((err, updatedVersion) => {
+                if (err) {
+                    res.send(err);
+                }
+                res.send(updatedVersion)
+            });
         }
     });
 
@@ -202,11 +208,14 @@ function removeVersion(req, res){
     Version.findOne({"_id": req.params.id, "meta.active": true}, (err, foundVersion) => {
         if(err){
             res.send(err);
-        }else{
+        } else {
             foundVersion.meta.active = false;
-            foundVersion.save();
-            
-            res.send(foundVersion);
+            foundVersion.save((err, deleteddVersion) => {
+                if (err) {
+                    res.send(err);
+                }
+                res.send(deleteddVersion)
+            });
         }
     });
 

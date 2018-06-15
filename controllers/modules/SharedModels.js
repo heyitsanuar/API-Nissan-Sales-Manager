@@ -5,7 +5,8 @@ let mongodb = require("mongodb").MongoClient;
 function SharedModels() {}
     SharedModels.prototype.getModels = () => {
         let promise = new Promise(function(resolve, reject) {
-            let url = "mongodb://casabi.ddns.net:5000,casabi.ddns.net:5001,casabi.ddns.net:5002,casabi.ddns.net:5003/nissan?replicaSet=repl0&readPreference=secondary";
+            // let url = "mongodb://casabi.ddns.net:5000,casabi.ddns.net:5001,casabi.ddns.net:5002,casabi.ddns.net:5003/nissan?replicaSet=repl0&readPreference=secondary";
+            let url = "mongodb://anuar:taquitos21@ds245250.mlab.com:45250/nissan";
             mongodb.connect(url)
                 .then((client) => {
                     let db = client.db();

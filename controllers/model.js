@@ -27,31 +27,24 @@ function findModelsByCategory(req, res){
 
     var category = req.params.category;
 
-    Model.find({"categoria": category, "meta.active": true})
-         .populate("variantes")
-         .exec( (err, foundModels) => {
-             if(err){
-                 res.send(err);
-             }else{
-                 res.send(foundModels);
-             }
-         }
-    );
-
+    Model.find({"categoria": category, "meta.active": true}, (err, foundModels) => {
+        if(err){
+            res.send(err);
+        }else{
+            res.send(foundModels);
+        }
+    });
 }
 
 function findModelById(req, res){
 
-    Model.findOne({"_id": req.params.id, "meta.active": true})
-         .populate("variantes")
-         .exec( (err, foundModel) => {
-             if(err){
-                 res.send(err);
-             }else{
-                 res.send(foundModel)
-             }
-         });
-
+    Model.findOne({"_id": req.params.id, "meta.active": true}, (err, foundModel) => {
+        if(err){
+            res.send(err);
+        }else{
+            res.send(foundModel)
+        }
+    });
 }
 
 function findModelImages(req ,res){
@@ -167,23 +160,18 @@ function addVersion(req, res){
         }else{
 
             var newVersion = {
-                model: foundModel.model,
-                variante: req.body.version,
-                precio: req.body.cost,
-                caracteristicas: req.body.caracteristicas
+                variante: req.body.variante,
+                precio: req.body.precio,
+                caracteristicas: req.body.caracteristicas,
             };
 
-            Version.create(newVersion, (err, createdVersion) => {
-                if(err){
+            foundModel.variantes.push(newVersion);
+            foundModel.save((err, updatedModel) => {
+                if (err) {
                     res.send(err);
-                }else{
-                    foundModel.variantes.push(createdVersion);
-                    foundModel.save();
-
-                    res.send(foundModel);
                 }
+                res.send(updatedModel)
             });
-
         }
 
     });

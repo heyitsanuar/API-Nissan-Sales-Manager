@@ -7,7 +7,7 @@ var clientSchema = new mongoose.Schema({
     email: String,
     state: String,
     city: String,
-    cp: Number,
+    cp: String,
     address: String,
     meta: {
         active: {type: Boolean, default: true},
@@ -16,6 +16,6 @@ var clientSchema = new mongoose.Schema({
     }
 });
 
-var Client = mongoose.model("Model", clientSchema);
+var Client = mongoose.model("Client", clientSchema);
 
 module.exports = Client;

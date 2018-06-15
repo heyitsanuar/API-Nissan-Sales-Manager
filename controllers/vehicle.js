@@ -36,7 +36,7 @@ function findVehiclesByAgency(req, res){
             res.send(err);
         }else{
             if(!foundAgency)
-                res.send("No hay agencia");
+                return res.send("No hay agencia");
 
             Vehicle.find({"agency.id": foundAgency._id, "meta.active": true}, (err, foundVehicle) => {
                 if(err){

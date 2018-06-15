@@ -23,16 +23,24 @@ function findClients(req, res){
 
 }
 
-function findClientsByAgency(req, res){
-    Agency.findOne({"_id": req.params.id, "meta.active": true}, (err, foundClients) => {
+function findClientsByState(req, res){
+    
+    Client.find({"state": req.params.state, "meta.active": true}, (err, foundClients) => {
         if(err){
             res.send(err);
         }else{
-            if(foundClients){
-                res.send(foundClients);
-            }else{
-                res.send("No hay cliente");
-            }
+            res.send(foundClients);
+        }
+    });
+}
+
+function findClientsByStateAndCity(req, res){
+    
+    Client.find({"state": req.params.state, "city" : req.params.city, "meta.active": true}, (err, foundClients) => {
+        if(err){
+            res.send(err);
+        }else{
+            res.send(foundClients);
         }
     });
 }
@@ -54,6 +62,7 @@ function addClient(req, res){
         if(err){
             res.send(err);
         }else{
+            console.log(createdClient);
             res.send(createdClient);
         }
     });
@@ -100,7 +109,8 @@ function removeClient(req, res){
 module.exports = {
     showClientsPage,
     findClients,
-    findClientsByAgency,
+    findClientsByState,
+    findClientsByStateAndCity,
     addClient,
     updateClient,
     removeClient

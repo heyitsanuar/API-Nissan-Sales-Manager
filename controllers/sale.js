@@ -10,6 +10,10 @@ function showSalesBySalesman(req, res){
     res.render("salesman/sales");
 }
 
+function showSalesByAgency(req, res){
+    res.render("manager/sales");
+}
+
 function findSales(req, res){
 
     Sale.find({"meta.active": true}, (err, foundSales) => {
@@ -116,6 +120,7 @@ function removeSale(req, res){
 
 module.exports = {
     showSalesBySalesman,
+    showSalesByAgency,
     findSales,
     findSalesByAgency,
     findSalesBySalesman,

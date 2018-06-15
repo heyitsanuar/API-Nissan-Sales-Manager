@@ -9,10 +9,10 @@
                     <p class="table-filter__title">Category</p>
                     <select class="modal-form__input modal-form__input--select" name="" id="filter-category">
                         <option value="All">All</option>    
-                        <option value="Cars">Cars</option>
-                        <option value="Pick-Up">Pick Up</option>
+                        <option value="Sports">Sports</option>
+                        <option value="PickUp">Pick Up</option>
                         <option value="SUVS">SUVS</option>
-                        <option value="Service">Service</option>
+                        <option value="Auto">Auto</option>
                     </select>
                 </div>
             </div>
@@ -51,9 +51,9 @@
                             <div class="modal-form__group modal-form__group--minium">
                                 <label for="" class="modal-form__label">Category</label>
                                 <select class="modal-form__input" name="category" id="">
-                                        <option value="Servicio">Serviciio</option>
+                                        <option value="Sports">Sports</option>
                                         <option value="Auto">Auto</option>
-                                        <option value="Pick Up">PickUp</option>
+                                        <option value="PickUp">Pick Up</option>
                                         <option value="SUV">SUV</option>
                                 </select>								  
                             </div>
@@ -120,22 +120,22 @@
                             </div>
                             <div class="modal-form__group modal-form__group--large">
                                 <label for="" class="modal-form__label">Images</label>
-                                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+                                <input type="text" class="modal-form__input" name="photos[imagesURL][0]" placeholder="Link">							  
                             </div>
                             <div class="modal-form__group modal-form__group--large">
-                                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+                                <input type="text" class="modal-form__input" name="photos[imagesURL][1]" placeholder="Link">							  
                             </div>
                             <div class="modal-form__group modal-form__group--large">
-                                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+                                <input type="text" class="modal-form__input" name="photos[imagesURL][2]" placeholder="Link">							  
                             </div>
                             <div class="modal-form__group modal-form__group--large">
-                                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+                                <input type="text" class="modal-form__input" name="photos[imagesURL][3]" placeholder="Link">							  
                             </div>
                             <div class="modal-form__group modal-form__group--large">
-                                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+                                <input type="text" class="modal-form__input" name="photos[imagesURL][4]" placeholder="Link">							  
                             </div>
                             <div class="modal-form__group modal-form__group--large">
-                                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+                                <input type="text" class="modal-form__input" name="photos[imagesURL][5]" placeholder="Link">							  
                             </div>
                     </form>
                 </div>
@@ -176,7 +176,7 @@
                                 <label for="" class="modal-form__label">Year</label>
                                 <input type="text" class="modal-form__input" name="year">							  
                             </div>
-                            <p class="modal-form__label modal-form__label--title">Dimensions</p>
+                            <p class="modal-form__label modal-form__label--title">Dimensions - Enter in mm</p>
                             <div class="modal-form__group modal-form__group--extra-small">
                                 <label for="" class="modal-form__label">Height</label>
                                 <input type="text" class="modal-form__input" name="dimensions[alto]">							  
@@ -194,27 +194,18 @@
                                 <textarea class="modal-form__input modal-form__input--textarea" name="description" id="" cols="30" rows="10"></textarea>			  
                             </div>
                             <p class="modal-form__label modal-form__label--title">Colors</p>
-                            <div class="modal-form__group modal-form__group--small">
-                                <label for="" class="modal-form__label">Outer</label>
-                            </div>
-                            <div class="modal-form__group modal-form__group--small">
-                                <label for="" class="modal-form__label">Inner</label>						  
-                            </div>						
                             <div class="modal-form__group modal-form__group--minium">
-                                <label for="" class="modal-form__label">Color code</label>
-                                <input type="text" class="modal-form__input" name="colors[interior]">							  
+                                <label for="" class="modal-form__label">Code</label>
+                                <input type="text" class="modal-form__input" name="colors[0]">							  
                             </div>
                             <div class="modal-form__group modal-form__group--minium">
-                                <label for="" class="modal-form__label">Name</label>
-                                <input type="text" class="modal-form__input" name="colors[interior]">							  
+                                <input type="text" class="modal-form__input" name="colors[1]">							  
                             </div>
                             <div class="modal-form__group modal-form__group--minium">
-                                <label for="" class="modal-form__label">Color code</label>
-                                <input type="text" class="modal-form__input" name="colors[exterior]">							  
+                                <input type="text" class="modal-form__input" name="colors[2]">							  
                             </div>
                             <div class="modal-form__group modal-form__group--minium">
-                                <label for="" class="modal-form__label">Name</label>
-                                <input type="text" class="modal-form__input" name="colors[exterior]">							  
+                                <input type="text" class="modal-form__input" name="colors[3]">							  
                             </div>
                             <p class="modal-form__label modal-form__label--title">Images</p>
                             <div class="modal-form__group modal-form__group--large">

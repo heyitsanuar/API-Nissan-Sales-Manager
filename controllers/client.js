@@ -1,6 +1,11 @@
 'use strict'
 
 var Client  = require("../models/client");
+var Agency  = require("../models/agency");
+
+function showClientsPage(req, res){
+    res.render("salesman/clients");
+}
 
 function findClients(req, res){
     //To Check
@@ -8,11 +13,36 @@ function findClients(req, res){
         if(err){
             res.send(err);
         }else{
-            res.send(foundClients);
+            if(foundClients){
+                res.send(foundClients);
+            }else{
+                res.send("No hay clientes.");
+            }
         }
     });
 
+}
 
+function findClientsByState(req, res){
+    
+    Client.find({"state": req.params.state, "meta.active": true}, (err, foundClients) => {
+        if(err){
+            res.send(err);
+        }else{
+            res.send(foundClients);
+        }
+    });
+}
+
+function findClientsByStateAndCity(req, res){
+    
+    Client.find({"state": req.params.state, "city" : req.params.city, "meta.active": true}, (err, foundClients) => {
+        if(err){
+            res.send(err);
+        }else{
+            res.send(foundClients);
+        }
+    });
 }
 
 function addClient(req, res){
@@ -32,17 +62,38 @@ function addClient(req, res){
         if(err){
             res.send(err);
         }else{
+            console.log(createdClient);
             res.send(createdClient);
         }
     });
 }
 
-//To Do
 function updateClient(req, res){
+    
+    var updatedClient = {
+        name: req.body.name,
+        surname: req.body.surname,
+        phone: req.body.phone,
+        email: req.body.email,
+        state: req.body.state,
+        city: req.body.city,
+        cp: req.body.cp,
+        address: req.body.address
+    };
 
+    Client.findOneAndUpdate({"_id": req.params.id, "meta.active": true}, updatedClient, (err, foundClient) => {
+        if(err){
+            res.send(err);
+        }else{
+            if(foundClient){
+                res.send(foundClient);
+            }else{
+                res.send("El cliente no existe");
+            }
+        }
+    });
 }
 
-//To Do
 function removeClient(req, res){
     
     Client.findOneAndUpdate({"_id": req.params.id, "meta.active": true}, {"meta.active": false}, (err, clientToRemove) => {
@@ -56,7 +107,10 @@ function removeClient(req, res){
 }
 
 module.exports = {
+    showClientsPage,
     findClients,
+    findClientsByState,
+    findClientsByStateAndCity,
     addClient,
     updateClient,
     removeClient

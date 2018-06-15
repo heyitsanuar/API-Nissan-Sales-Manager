@@ -1,0 +1,49 @@
+<% include ../partials/header %>
+
+<script src="js/comparer.js"></script>
+<section class="main">
+    <div class="heading container">
+        <h1 class="heading__title">Model Comparer</h1>
+        <select id="cb_agencias"></select>
+        <select id="cb_categorias"></select>
+        <select id="cb_modelos"></select>
+        <select id="cb_variantes"></select>
+        <button id="bt_agregar">Agregar a Comparación</button>
+        <table id="tabla" class="table">
+            <thead class="table__head">
+                <tr id="tRow_Modelo" class="table__row-th">
+                    <th class="table__th_comparer">Características <span class=""></span></th>
+                </tr>
+            </thead>
+            <tbody class="table__body">
+                <tr id="tRow_Categoria" class="table__row-td">
+                    <td class="table__th_comparer">Categoria</td>
+                </tr>
+                <tr id="tRow_Dimensiones" class="table__row-td">
+                    <td class="table__th_comparer">Dimensiones</td>
+                </tr>
+                <tr id="tRow_Rendimiento" class="table__row-td">
+                    <td class="table__th_comparer">Rendimiento</td>
+                </tr>
+                <tr id="tRow_Potencias" class="table__row-td">
+                    <td class="table__th_comparer">Potencia</td>
+                </tr>
+                <tr id="tRow_Torque" class="table__row-td">
+                    <td class="table__th_comparer">Torque</td>
+                </tr>
+                <tr id="tRow_Transmisión" class="table__row-td">
+                    <td class="table__th_comparer">Transmisión</td>
+                </tr>
+                <tr id="tRow_Tracción" class="table__row-td">
+                    <td class="table__th_comparer">Tracción</td>
+                </tr>
+                <tr id="tRow_Precio" class="table__row-td">
+                    <td class="table__th_comparer">Precio</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</section>
+
+<% include ../partials/footer %>

@@ -9,6 +9,7 @@ var Vehicle               = require("./models/vehicle");
 var User                  = require("./models/user");
 var Sale                  = require("./models/sale");
 var Version               = require("./models/version");
+var Version               = require("./models/stock");
 var seedDB                = require("./seeds");
 var expressSanitizer      = require("express-sanitizer");
 var methodOverride        = require("method-override");
@@ -30,7 +31,9 @@ var carRoutes      = require("./routes/cars"),
     catalogRoutes  = require("./routes/catalog"),
     salesRoutes    = require("./routes/sales"),
     comparerRoutes = require("./routes/comparer"),
+    comparerExtRoutes = require("./routes/comparerExt"),
     locationRoutes = require("./routes/location"),
+    stockRoutes    = require("./routes/stock"),
     indexRoutes    = require("./routes/index"),
     authRoutes     = require("./routes/authentication");
 
@@ -59,19 +62,35 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+var disallowedWithLogin = [
+    "/login",
+    "/sign-in"
+];
+
+var allowedWithoutLogin = [
+    "/comparerExt",
+    "/login",
+    "/sign-in"
+];
+
 //Setting current user for local's
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
-    if (res.locals.currentUser = "") {
-        res.redirect("/login");
+    console.log(req.user);
+    if (res.locals.currentUser == undefined && !allowedWithoutLogin.includes(req.url)) {
+        res.redirect("/login")
+    } else if (res.locals.currentUser != undefined && disallowedWithLogin.includes(req.url)) {
+        res.redirect("/home");
+    } else {
+        next();
     }
-    next();
 });
 
 //Routing instances
 
 app.use(indexRoutes);
 app.use(authRoutes);
+app.use(catalogRoutes);
 app.use("/cars", carRoutes);
 app.use("/clients", clientRoutes);
 app.use("/agency", agencyRoutes);
@@ -79,9 +98,10 @@ app.use("/vehicles", vehicleRoutes);
 app.use("/requests", requestRoutes);
 app.use("/employees", userRoutes);
 app.use("/login", loginRoutes);
-app.use(catalogRoutes);
 app.use("/sales", salesRoutes);
-app.use("/comparer", cors(), comparerRoutes);
+app.use("/comparerExt", cors(), comparerExtRoutes);
+app.use("/comparer", comparerRoutes);
 app.use("/locations", locationRoutes);
+app.use(stockRoutes);
 
 module.exports = app;

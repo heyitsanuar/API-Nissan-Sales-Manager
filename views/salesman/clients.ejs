@@ -1,0 +1,173 @@
+<% include ../partials/header %>
+
+<section class="main">
+    <div class="heading container">
+        <h1 class="heading__title">Clients</h1>
+        <div class="heading__controls">
+            <div class="table-filter__group">
+                <div class="table-filter__item">
+                    <p class="table-filter__title">State</p>
+                    <select class="modal-form__input modal-form__input--select" name="" id="filter-client-state">
+                        <option value="">Select one</option>
+                    </select>
+                </div>
+                <div class="table-filter__item">
+                    <p class="table-filter__title">City</p>
+                    <select class="modal-form__input modal-form__input--select" name="" id="filter-client-city">
+                        <option value="">Select one</option>
+                    </select>
+                </div>
+            </div>
+            <a class="table-filter__btn" href="#" data-toggle="modal" data-target=".add-client">
+                Add Client
+            </a>
+        </div>
+        <table class="table">
+            <thead class="table__head">
+                <tr class="table__row-th">
+                    <th class="table__th table__th--is-active">NAME <span class=""></span></th>
+                    <th class="table__th">PHONE <span class=""></span></th>
+                    <th class="table__th">EMAIL <span class=""></span></th>
+                    <th class="table__th">STATE <span class=""></span></th>
+                    <th class="table__th">CITY <span class=""></span></th>
+                    <th class="table__th">CP <span class=""></span></th>
+                    <th class="table__th">ADDRESS <span class=""></span></th>
+                </tr>
+            </thead>
+            <tbody class="table__body" id="table-clients">			
+            </tbody>
+        </table>
+    </div>
+
+    <!--Add client-->
+    <div class="modal--fade modal fade add-client" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="add-branch">
+            <div class="modal-dialog modal--form-size">
+                <div class="modal-form modal-content">
+                    <form id="add-client-form">
+                        <div class="modal-form__header">
+                            <h2 class="modal-form__title">Add Client</h2>
+                            <i class="modal-form__exit fas fa-times" id="modal-exit" data-dismiss="modal" aria-label="Close"></i>
+                        </div>
+                        <div class="modal-form__body">
+                            <div class="modal-form__group modal-form__group--small">
+                                <label for="" class="modal-form__label">Name</label>
+                                <input type="text" class="modal-form__input" name="name">
+                            </div>
+                            <div class="modal-form__group modal-form__group--small">
+                                <label for="" class="modal-form__label">Last Name</label>
+                                <input type="text" class="modal-form__input" name="surname">
+                            </div>
+                            <div class="modal-form__group modal-form__group--small">
+                                <label for="" class="modal-form__label">Phone</label>
+                                <input type="text" class="modal-form__input" name="phone">
+                            </div>
+                            <div class="modal-form__group modal-form__group--small">
+                                <label for="" class="modal-form__label">Email</label>
+                                <input type="email" class="modal-form__input" name="email">
+                            </div>
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">State</label>
+                                <input type="text" class="modal-form__input" name="state">
+                            </div>
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">City</label>
+                                <input type="text" class="modal-form__input" name="city">
+                            </div>
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">CP</label>
+                                <input type="text" class="modal-form__input" name="cp">
+                            </div>
+                            <div class="modal-form__group modal-form__group--large">
+                                <label for="" class="modal-form__label">Address</label>
+                                <input type="text" class="modal-form__input" name="address">
+                            </div>
+                        </div>
+                        <div class="modal-form__footer">
+                            <div class="modal-form__btn-group">
+                                <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close">Cancel</a>
+                                <a href="#" id="add-client-submit" data-dismiss="modal" aria-label="Close" class="modal-form__btn modal-form__btn--confirm">Confirm</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+        
+    <!--Edit client-->
+    <div class="modal--fade modal fade edit-client" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="edit-branch">
+            <div class="modal-dialog modal--form-size">
+                <div class="modal-form modal-content">
+                    <div class="modal-form__header">
+                        <h2 class="modal-form__title">Edit Employee</h2>
+                        <i class="modal-form__exit fas fa-times" id="modal-exit" data-dismiss="modal" aria-label="Close"></i>
+                    </div>
+                    <div class="modal-form__body">
+                        <div class="modal-form__group modal-form__group--small">
+                            <label for="" class="modal-form__label">Name</label>
+                            <input type="text" class="modal-form__input">
+                        </div>
+                        <div class="modal-form__group modal-form__group--small">
+                            <label for="" class="modal-form__label">Last Name</label>
+                            <input type="text" class="modal-form__input">
+                        </div>
+                        <div class="modal-form__group modal-form__group--small">
+                            <label for="" class="modal-form__label">Phone</label>
+                            <input type="text" class="modal-form__input">
+                        </div>
+                        <div class="modal-form__group modal-form__group--small">
+                            <label for="" class="modal-form__label">Email</label>
+                            <input type="email" class="modal-form__input">
+                        </div>
+                        <div class="modal-form__group modal-form__group--large">
+                            <label for="" class="modal-form__label">Address</label>
+                            <input type="text" class="modal-form__input">
+                        </div>
+                    </div>
+                    <div class="modal-form__footer">
+                        <div class="modal-form__btn-group">
+                            <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close">Cancel</a>
+                            <a href="#" class="modal-form__btn modal-form__btn--confirm">Confirm</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <div class="modal--fade modal fade save-changes" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="add-branch">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-form modal-content modal-form--text-centered">
+                <p class="modal-form__delete-title">¿Seguro que desea guardar los cambios?</p>
+                <p class="modal-form__delete-description">Este elemento presenta cambios</p>
+                <div class="modal-form__footer modal-form__footer--centered">
+                    <div class="modal-form__btn-group modal-form__btn-group--centered">
+                        <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target=".edit-employee">Nel, prro</a>
+                        <a href="#" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Saimón</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal--fade modal fade delete-element" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="add-branch">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-form modal-content modal-form--text-centered">
+                <p class="modal-form__delete-title">¿Seguro que desea eliminar este elemento?</p>
+                <div class="modal-form__footer modal-form__footer--centered">
+                    <div class="modal-form__btn-group modal-form__btn-group--centered">
+                        <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close">Nel, prro</a>
+                        <a href="#" id="btn-remove-client" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Saimón</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<% include ../partials/footer %>
+<script src="/js/ajax/salesman/client.js"></script>
+<script src="/js/Script.js"></script>
+
+</body>
+</html>

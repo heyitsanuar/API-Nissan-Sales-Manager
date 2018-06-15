@@ -3,51 +3,44 @@
 var Model   = require("../models/model");
 var Version = require("../models/version");
 
+function showModelsPage(req, res){
+    res.render("admin/models");
+}
+
 function findModels(req, res){
     
     //Looks for all the models within the database
-    Model.find({"meta.active": true})
-         .populate("variantes")
-         .exec( (err, foundModels) =>{
-             if(err){
-                 res.send(err);
-             }else{
-                 res.send(foundModels);
-             }
-         }
-    );
-
+    Model.find({"meta.active": true}, (err, foundModels) =>{
+        if(err){
+            res.send(err);
+        }else{
+            res.send(foundModels);
+        }
+    });
 }
 
 function findModelsByCategory(req, res){
 
     var category = req.params.category;
 
-    Model.find({"categoria": category, "meta.active": true})
-         .populate("variantes")
-         .exec( (err, foundModels) => {
-             if(err){
-                 res.send(err);
-             }else{
-                 res.send(foundModels);
-             }
-         }
-    );
-
+    Model.find({"categoria": category, "meta.active": true}, (err, foundModels) => {
+        if(err){
+            res.send(err);
+        }else{
+            res.send(foundModels);
+        }
+    });
 }
 
 function findModelById(req, res){
 
-    Model.findOne({"_id": req.params.id, "meta.active": true})
-         .populate("variantes")
-         .exec( (err, foundModel) => {
-             if(err){
-                 res.send(err);
-             }else{
-                 res.send(foundModel)
-             }
-         });
-
+    Model.findOne({"_id": req.params.id, "meta.active": true}, (err, foundModel) => {
+        if(err){
+            res.send(err);
+        }else{
+            res.send(foundModel)
+        }
+    });
 }
 
 function findModelImages(req ,res){
@@ -62,6 +55,36 @@ function findModelImages(req ,res){
 
 }
 
+function findModelsDistinct(req, res){
+    Model.find({"meta.active": true}, (err, foundModels) => {
+        if(err){
+            res.send(err);
+        }else{
+            if(!foundModels)
+                return res.send("No hay modelos.");
+
+            var models = [];
+
+            foundModels.forEach(function(model){
+                models.push(model.modelo);
+            });
+            
+            models = models.filter(function(element, position) {
+                return models.indexOf(element) == position;
+            });
+
+            models = JSON.stringify(models);
+
+            res.send(models);
+        }
+    });
+}
+
+//To Do
+function findVersions(req, res){
+
+}
+
 function addModel(req, res){
 
     //Creates the object of the model to be added and its properties
@@ -72,10 +95,11 @@ function addModel(req, res){
         categoria: req.body.category,
         anio: req.body.year,
         colores: req.body.colors,
-        variantes: req.body.versions,
         photos: req.body.photos,
         imagenes: req.body.photos.imagesURL
     };
+
+    console.log(req.body.colors);
 
     //Creates the model and adds it to the database
     Model.create(newModel, (err, modelAdded) =>{
@@ -84,7 +108,7 @@ function addModel(req, res){
         }else{
             res.send(modelAdded);
         }
-    });
+    }); 
 
 }
 
@@ -101,16 +125,17 @@ function updateModel(req, res){
             modelUpdated.category         = req.body.category;
             modelUpdated.year             = req.body.year;
             modelUpdated.colors           = req.body.colors;
-            modelUpdated.versions         = req.body.versions;
             modelUpdated.photos           = req.body.photos;
             modelUpdated.meta.modified_at = Date.now;
 
-            modelUpdated.save();
-
-            res.send(modelUpdated);
+            modelUpdated.save((err, updatedModel) => {
+                if (err) {
+                    res.send(err);
+                }
+                res.send(updatedModel)
+            });
         }
     });
-
 }
 
 function removeModel(req, res){
@@ -134,23 +159,18 @@ function addVersion(req, res){
         }else{
 
             var newVersion = {
-                model: foundModel.model,
-                variante: req.body.version,
-                precio: req.body.cost,
-                caracteristicas: req.body.caracteristicas
+                variante: req.body.variante,
+                precio: req.body.precio,
+                caracteristicas: req.body.caracteristicas,
             };
 
-            Version.create(newVersion, (err, createdVersion) => {
-                if(err){
+            foundModel.variantes.push(newVersion);
+            foundModel.save((err, updatedModel) => {
+                if (err) {
                     res.send(err);
-                }else{
-                    foundModel.variantes.push(createdVersion);
-                    foundModel.save();
-
-                    res.send(foundModel);
                 }
+                res.send(updatedModel)
             });
-
         }
 
     });
@@ -168,9 +188,12 @@ function updateVersion(req, res){
             foundVersion.caracteristicas  = req.body.caracteristicas;
             foundVersion.meta.modified_at = Date.now;
 
-            foundVersion.save();
-
-            res.send(foundVersion);
+            foundVersion.save((err, updatedVersion) => {
+                if (err) {
+                    res.send(err);
+                }
+                res.send(updatedVersion)
+            });
         }
     });
 
@@ -181,17 +204,21 @@ function removeVersion(req, res){
     Version.findOne({"_id": req.params.id, "meta.active": true}, (err, foundVersion) => {
         if(err){
             res.send(err);
-        }else{
+        } else {
             foundVersion.meta.active = false;
-            foundVersion.save();
-            
-            res.send(foundVersion);
+            foundVersion.save((err, deleteddVersion) => {
+                if (err) {
+                    res.send(err);
+                }
+                res.send(deleteddVersion)
+            });
         }
     });
 
 }
 
 module.exports = {
+    showModelsPage,
     findModels,
     findModelsByCategory,
     findModelById,

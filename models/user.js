@@ -6,6 +6,9 @@ var userSchema = new mongoose.Schema({
     password: String,
     name: String,
     surname: String,
+    email: String,
+    phone: String,
+    address: String,
     role: String,
     meta: {
         active: {type: Boolean, default: true},

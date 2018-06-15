@@ -20,14 +20,26 @@ var modelSchema = new mongoose.Schema({
         ]
     },
     dimensiones: {
-        largo: Number,
-        ancho: Number,
-        alto: Number
+        largo: String,
+        ancho: String,
+        alto: String
     },
     variantes:[
         {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Version"
+            variante: String,
+            precio: String,
+            caracteristicas: {
+                rendimiento: Number,
+                potencia: Number,
+                torque: Number,
+                transmision: String,
+                traccion: String
+            },
+            meta: {
+                active: {type: Boolean, default: true},
+                created_at: {type: Date, default: Date.now},
+                modified_at: {type: Date, default: Date.now}
+            }
         }
     ],
     imagenes: [String],

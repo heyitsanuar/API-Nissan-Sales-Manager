@@ -8,39 +8,43 @@
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 	<link rel="stylesheet" href="/css/styles.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 </head>
 <body>
 	<header class="header">
 		<div class="header__container container">
-			<a href="" class="header__logo-link">
+			<a href="/home" class="header__logo-link">
 				<img class="header__logo-link" src="/img/header/logo.png" alt="">
 			</a>
+			<i class="header__button fas fa-align-justify" id="menu-icon"></i>
 			<nav class="header__menu">
-				<a class="header__link" href="home.html">Home</a>
+				<a class="header__link" href="/home">Home</a>
 						<% if(currentUser.role == "Admin"){ %>
 								<a class="header__link" href="/employees/managers/show">Managers</a>
 								<a class="header__link" href="/agency/show">Agency</a>
-								<a class="header__link" href="models.html">Models</a>
-								<a class="header__link" href="stock.html">Stock</a>
+								<a class="header__link" href="/cars/models">Models</a>
+								<a class="header__link" href="/vehicles/global">Stock</a>
 						<% } else{ %>
 							<% if(currentUser.role == "Manager"){ %>
 									<a class="header__link" href="/employees/salesmen/show">Employees</a>
 									<a class="header__link" href="/vehicles/local">Stock</a>
-									<a class="header__link" href="shippings.html">Sales</a>
-									<a class="header__link" href="/requests/inbox">Requests</a>
+									<a class="header__link" href="/requests/shippings">Shippings</a>
+									<a class="header__link" href="/sales/local">Sales</a>
+									<a class="header__link" href="/requests/inbox">Requests</a>    
 							<% }else{ %>
-									<a class="header__link" href="clients.html">Clients</a>
-									<a class="header__link" href="shippings.html">Shipping</a>
-									<a class="header__link" href="stock.html">Stock</a>
+									<a class="header__link" href="/clients/show">Clients</a>
+									<a class="header__link" href="/sales/own">Sales</a>
+									<a class="header__link" href="/vehicles/salesman">Stock</a>
 							<% } %>
 						<% } %>
+						<a class="header__link" href="/comparer">Comparer</a>
 				<div class="btn-group header__link--sign-drop">
 				  <a href="" class="header__link "><%= currentUser.name %></a>
 				  <a href="" class="header__link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				    <span class="sr-only">Toggle Dropdown</span>
 				  </a>
 				  <div class="dropdown-menu dropdown-menu-right">
-				    <a id="logout" class="dropdown-item" href="#">Sign out</a>
+				    <a id="logout" class="dropdown-item" href="/logout">Sign out</a>
 				  </div>
 				</div>
 			</nav>

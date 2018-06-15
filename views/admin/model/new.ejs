@@ -1,0 +1,391 @@
+<% include ../partials/header %>
+
+<section class="main">
+    <div class="heading container">
+        <h1 class="heading__title">Vehicles</h1>
+        <div class="heading__controls d-flex flex-wrap px-5">
+            <div class="modal-form__group modal-form__group--extra-small">
+                <label for="" class="modal-form__label">Name</label>
+                <input type="text" class="modal-form__input" name="name">
+            </div>
+            <div class="modal-form__group modal-form__group--minium">
+                <label for="" class="modal-form__label">Category</label>
+                <select class="modal-form__input" name="category" id="">
+                        <option value="Servicio">Serviciio</option>
+                        <option value="Auto">Auto</option>
+                        <option value="Pick Up">PickUp</option>
+                        <option value="SUV">SUV</option>
+                </select>								  
+            </div>
+            <div class="modal-form__group modal-form__group--minium">
+                <label for="" class="modal-form__label">Year</label>
+                <input type="text" class="modal-form__input" name="year">							  
+            </div>
+            <p class="modal-form__label modal-form__label--title">Dimensions</p>
+            <div class="modal-form__group modal-form__group--extra-small">
+                <label for="" class="modal-form__label">Height</label>
+                <input type="text" class="modal-form__input" name="dimensions[alto]">							  
+            </div>
+            <div class="modal-form__group modal-form__group--extra-small">
+                <label for="" class="modal-form__label">Length</label>
+                <input type="text" class="modal-form__input" name="dimensions[largo]">							  
+            </div>
+            <div class="modal-form__group modal-form__group--extra-small">
+                <label for="" class="modal-form__label">Width</label>
+                <input type="text" class="modal-form__input" name="dimensions[ancho]">							  
+            </div>
+            <div class="modal-form__group modal-form__group--large">
+                <label for="" class="modal-form__label">Description</label>				
+                <textarea class="modal-form__input modal-form__input--textarea" name="" id="" cols="30" rows="10"></textarea>			  
+            </div>
+            <p class="modal-form__label modal-form__label--title">Colors</p>
+            <div class="modal-form__group modal-form__group--small">
+                    <label for="" class="modal-form__label">Outer</label>
+            </div>
+            <div class="modal-form__group modal-form__group--small">
+                    <label for="" class="modal-form__label">Inner</label>						  
+            </div>						
+            <div class="modal-form__group modal-form__group--minium">
+                <label for="" class="modal-form__label">Color</label>
+                <input type="text" class="modal-form__input" name="colors[interior][nombre]">							  
+            </div>
+            <div class="modal-form__group modal-form__group--minium">
+                <label for="" class="modal-form__label">Code</label>
+                <input type="text" class="modal-form__input" name="colors[interior][codigo]">							  
+            </div>
+            <div class="modal-form__group modal-form__group--minium">
+                <label for="" class="modal-form__label">Color</label>
+                <input type="text" class="modal-form__input" name="colors[exterior][nombre]">							  
+            </div>
+            <div class="modal-form__group modal-form__group--minium">
+                <label for="" class="modal-form__label">Code</label>
+                <input type="text" class="modal-form__input" name="colors[exterior][codigo]">							  
+            </div>
+            <p class="modal-form__label modal-form__label--title">Advertisement image</p>
+            <div class="modal-form__group modal-form__group--large">
+                <label for="" class="modal-form__label">Banner</label>
+                <input type="text" class="modal-form__input" name="photos[bannerImageURL]" placeholder="Link">							  
+            </div>
+            <p class="modal-form__label modal-form__label--title">Images</p>
+            <div class="modal-form__group modal-form__group--small">
+                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+            </div>
+            <div class="modal-form__group modal-form__group--small">
+                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+            </div>
+            <div class="modal-form__group modal-form__group--small">
+                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+            </div>
+            <div class="modal-form__group modal-form__group--small">
+                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+            </div>
+            <div class="modal-form__group modal-form__group--small">
+                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+            </div>
+            <div class="modal-form__group modal-form__group--small">
+                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+            </div>
+        </div>
+    </div>
+
+    <!--Add vehicle-->
+    <div class="modal--fade modal fade add-model" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="add-vehicle">
+        <div class="modal-dialog modal--form-size">
+            <div class="modal-form modal-content">
+                <div class="modal-form__header">
+                    <h2 class="modal-form__title">Add Vehicle</h2>
+                    <i class="modal-form__exit fas fa-times" id="modal-exit" data-dismiss="modal" aria-label="Close"></i>
+                </div>
+                    <form action="" id="add-model-form">
+                        <div class="modal-form__body">
+                            <div class="modal-form__group modal-form__group--small">
+                                <label for="" class="modal-form__label">Name</label>
+                                <input type="text" class="modal-form__input" name="name">
+                            </div>
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">Category</label>
+                                <select class="modal-form__input" name="category" id="">
+                                        <option value="Servicio">Serviciio</option>
+                                        <option value="Auto">Auto</option>
+                                        <option value="Pick Up">PickUp</option>
+                                        <option value="SUV">SUV</option>
+                                </select>								  
+                            </div>
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">Year</label>
+                                <input type="text" class="modal-form__input" name="year">							  
+                            </div>
+                            <p class="modal-form__label modal-form__label--title">Dimensions</p>
+                            <div class="modal-form__group modal-form__group--extra-small">
+                                <label for="" class="modal-form__label">Height</label>
+                                <input type="text" class="modal-form__input" name="dimensions[alto]">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--extra-small">
+                                <label for="" class="modal-form__label">Length</label>
+                                <input type="text" class="modal-form__input" name="dimensions[largo]">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--extra-small">
+                                <label for="" class="modal-form__label">Width</label>
+                                <input type="text" class="modal-form__input" name="dimensions[ancho]">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--large">
+                                <label for="" class="modal-form__label">Description</label>				
+                                <textarea class="modal-form__input modal-form__input--textarea" name="" id="" cols="30" rows="10"></textarea>			  
+                            </div>
+                            <p class="modal-form__label modal-form__label--title">Colors</p>
+                            <div class="modal-form__group modal-form__group--small">
+                                    <label for="" class="modal-form__label">Outer</label>
+                            </div>
+                            <div class="modal-form__group modal-form__group--small">
+                                    <label for="" class="modal-form__label">Inner</label>						  
+                            </div>						
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">Color</label>
+                                <input type="text" class="modal-form__input" name="colors[interior][nombre]">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">Code</label>
+                                <input type="text" class="modal-form__input" name="colors[interior][codigo]">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">Color</label>
+                                <input type="text" class="modal-form__input" name="colors[exterior][nombre]">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">Code</label>
+                                <input type="text" class="modal-form__input" name="colors[exterior][codigo]">							  
+                            </div>
+                            <p class="modal-form__label modal-form__label--title">Images</p>
+                            <div class="modal-form__group modal-form__group--large">
+                                <label for="" class="modal-form__label">Banner</label>
+                                <input type="text" class="modal-form__input" name="photos[bannerImageURL]" placeholder="Link">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--large">
+                                <label for="" class="modal-form__label">Images</label>
+                                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--large">
+                                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--large">
+                                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--large">
+                                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--large">
+                                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--large">
+                                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+                            </div>
+                    </form>
+                </div>
+                <div class="modal-form__footer">
+                    <div class="modal-form__btn-group">
+                        <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close">Cancel</a>
+                        <a id="add-model-submit" href="#" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Confirm</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Edit vehicle-->
+    <div class="modal--fade modal fade edit-model" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="edit-vehicle">
+        <div class="modal-dialog modal--form-size">
+            <div class="modal-form modal-content">
+                <div class="modal-form__header">
+                    <h2 class="modal-form__title">Edit Vehicle</h2>
+                    <i class="modal-form__exit fas fa-times" id="modal-exit" data-dismiss="modal" aria-label="Close"></i>
+                </div>
+                    <form action="" id="edit-model-form">
+                        <div class="modal-form__body">
+                            <div class="modal-form__group modal-form__group--small">
+                                <label for="" class="modal-form__label">Name</label>
+                                <input type="text" class="modal-form__input" name="name">
+                            </div>
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">Category</label>
+                                <select class="modal-form__input" name="category" id="">
+                                        <option value="Servicio">Serviciio</option>
+                                        <option value="Auto">Auto</option>
+                                        <option value="Pick Up">PickUp</option>
+                                        <option value="SUV">SUV</option>
+                                </select>								  
+                            </div>
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">Year</label>
+                                <input type="text" class="modal-form__input" name="year">							  
+                            </div>
+                            <p class="modal-form__label modal-form__label--title">Dimensions</p>
+                            <div class="modal-form__group modal-form__group--extra-small">
+                                <label for="" class="modal-form__label">Height</label>
+                                <input type="text" class="modal-form__input" name="dimensions[alto]">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--extra-small">
+                                <label for="" class="modal-form__label">Length</label>
+                                <input type="text" class="modal-form__input" name="dimensions[largo]">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--extra-small">
+                                <label for="" class="modal-form__label">Width</label>
+                                <input type="text" class="modal-form__input" name="dimensions[ancho]">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--large">
+                                <label for="" class="modal-form__label">Description</label>				
+                                <textarea class="modal-form__input modal-form__input--textarea" name="" id="" cols="30" rows="10"></textarea>			  
+                            </div>
+                            <p class="modal-form__label modal-form__label--title">Colors</p>
+                            <div class="modal-form__group modal-form__group--small">
+                                    <label for="" class="modal-form__label">Outer</label>
+                            </div>
+                            <div class="modal-form__group modal-form__group--small">
+                                    <label for="" class="modal-form__label">Inner</label>						  
+                            </div>						
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">Color</label>
+                                <input type="text" class="modal-form__input" name="colors[interior][nombre]">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">Code</label>
+                                <input type="text" class="modal-form__input" name="colors[interior][codigo]">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">Color</label>
+                                <input type="text" class="modal-form__input" name="colors[exterior][nombre]">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">Code</label>
+                                <input type="text" class="modal-form__input" name="colors[exterior][codigo]">							  
+                            </div>
+                            <p class="modal-form__label modal-form__label--title">Images</p>
+                            <div class="modal-form__group modal-form__group--large">
+                                <label for="" class="modal-form__label">Banner</label>
+                                <input type="text" class="modal-form__input" name="photos[bannerImageURL]" placeholder="Link">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--large">
+                                <label for="" class="modal-form__label">Images</label>
+                                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--large">
+                                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--large">
+                                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--large">
+                                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--large">
+                                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+                            </div>
+                            <div class="modal-form__group modal-form__group--large">
+                                <input type="text" class="modal-form__input" name="photos[imagesURL]" placeholder="Link">							  
+                            </div>
+                    
+                    </form>
+                </div>
+                <div class="modal-form__footer">
+                    <div class="modal-form__btn-group">
+                        <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close">Cancel</a>
+                        <a id="edit-model-submit" href="#" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Confirm</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Add stock-->
+    <div class="modal--fade modal fade add-stock" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="add-stock">
+    <div class="modal-dialog modal--form-size">
+        <div class="modal-form modal-content">
+            <div class="modal-form__header">
+                <h2 class="modal-form__title">Send Stock</h2>
+                <i class="modal-form__exit fas fa-times" id="modal-exit" data-dismiss="modal" aria-label="Close"></i>
+            </div>
+            <form action="" id="add-model-form">
+                <div class="modal-form__body">
+                        <div class="modal-form__group modal-form__group--small">
+                            <label for="" class="modal-form__label">State</label>
+                            <select id="form-stock-state" class="modal-form__input" name="state">
+                                <option value="Servicio">Select a city</option>
+                            </select>
+                        </div>
+                        <div class="modal-form__group modal-form__group--small">
+                            <label for="" class="modal-form__label">City</label>
+                            <select id="form-stock-city" class="modal-form__input" name="city">
+                                <option value="Servicio">Select a city</option>
+                            </select>								  
+                        </div>
+                        <div class="modal-form__group modal-form__group--small">
+                            <label for="" class="modal-form__label">Agency</label>
+                            <select id="form-stock-agency" class="modal-form__input" name="agency">
+                                <option value="Servicio">Select an agency</option>
+                            </select>								  
+                        </div>
+                        <div class="modal-form__group modal-form__group--small">
+                            <label for="" class="modal-form__label">Category</label>
+                            <select class="modal-form__input" name="category">
+                                <option value="Servicio">Full stock</option>
+                                <option value="Servicio">Servicio</option>
+                                <option value="Auto">Auto</option>
+                                <option value="Pick Up">PickUp</option>
+                                <option value="SUV">SUV</option>
+                            </select>								  
+                        </div>                    
+                </div>
+            </form>
+            <div class="modal-form__footer">
+                <div class="modal-form__btn-group">
+                    <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close">Cancel</a>
+                    <a id="add-stock-submit" href="#" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Confirm</a>
+                </div>
+            </div>
+            </div>
+            <div class="modal-form__footer">
+                <div class="modal-form__btn-group">
+                    <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close">Cancel</a>
+                    <a id="add-stock-submit" href="#" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Confirm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <div class="modal--fade modal fade save-changes" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="add-branch">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-form modal-content modal-form--text-centered">
+              <p class="modal-form__delete-title">¿Seguro que desea guardar los cambios?</p>
+              <p class="modal-form__delete-description">Este elemento presenta cambios</p>
+              <div class="modal-form__footer modal-form__footer--centered">
+                  <div class="modal-form__btn-group modal-form__btn-group--centered">
+                      <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close" data-toggle="modal" data-target=".edit-branch">Nel, prro</a>
+                      <a href="#" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Saimón</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="modal--fade modal fade delete-element" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="add-branch">
+      <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-form modal-content modal-form--text-centered">
+              <p class="modal-form__delete-title">¿Seguro que desea eliminar este elemento?</p>
+              <div class="modal-form__footer modal-form__footer--centered">
+                  <div class="modal-form__btn-group modal-form__btn-group--centered">
+                      <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close">Nel, prro</a>
+                      <a href="#" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Saimón</a>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+
+</section>
+
+<% include ../partials/footer %>
+<script src="/js/ajax/admin/model.js"></script>
+<script src="/js/Script.js"></script>
+<script src="/js/sessionControl.js"></script>
+</body>
+</html>

@@ -6,6 +6,14 @@ var Client  = require("../models/client");
 var Vehicle = require("../models/vehicle");
 var Agency  = require("../models/agency");
 
+function showSalesBySalesman(req, res){
+    res.render("salesman/sales");
+}
+
+function showSalesByAgency(req, res){
+    res.render("manager/sales");
+}
+
 function findSales(req, res){
 
     Sale.find({"meta.active": true}, (err, foundSales) => {
@@ -32,7 +40,7 @@ function findSalesByAgency(req, res){
 
 function findSalesBySalesman(req, res){
 
-    Sale.find({"salesman.id": currentUser._id, "meta.active": true}, (err, foundSales) => {
+    Sale.find({"salesman.id": req.user._id, "meta.active": true}, (err, foundSales) => {
         if(err){
             res.send(err);
         }else{
@@ -44,7 +52,7 @@ function findSalesBySalesman(req, res){
 
 function addSale(req, res){
 
-    User.findOne({"_id": currentUser._id, "meta.active": true}, (err, foundUser) => {
+    User.findOne({"_id": req.user._id, "meta.active": true}, (err, foundUser) => {
         if(err){
             res.send(err);
         }else{
@@ -111,6 +119,8 @@ function removeSale(req, res){
 }
 
 module.exports = {
+    showSalesBySalesman,
+    showSalesByAgency,
     findSales,
     findSalesByAgency,
     findSalesBySalesman,

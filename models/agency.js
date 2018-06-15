@@ -15,8 +15,14 @@ var agencySchema = new mongoose.Schema({
     },
     employees: [
         {
-            type: mongoose.Schema.Types.ObjectId,
-            refer: "User"
+            id: {
+                type: mongoose.Schema.Types.ObjectId,
+                refer: "User"
+            },
+            fullName: String,
+            phone: String,
+            email: String,
+            address: String
         }
     ],
     meta: {

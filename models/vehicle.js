@@ -6,8 +6,7 @@ var vehicleSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             refer: "Model"
         },
-        name: String,
-        version: String
+        name: String
     },
     serieNumber: String,
     agency: {

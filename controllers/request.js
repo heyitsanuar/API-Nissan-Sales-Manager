@@ -113,10 +113,15 @@ function showRequestsPage(req, res){
     res.render("manager/requests");
 }
 
+function showShippingsPage(req, res){
+    res.render("manager/shippings");
+}
+
 module.exports = {
     findRequests,
     addRequest,
     updateRequest,
     removeRequest,
-    showRequestsPage
+    showRequestsPage,
+    showShippingsPage
 };

@@ -8,5 +8,6 @@ router.put("/", RequestController.updateRequest);
 router.delete("/", RequestController.removeRequest);
 
 router.get("/inbox", RequestController.showRequestsPage);
+router.get("/shippings", RequestController.showShippingsPage);
 
 module.exports = router;

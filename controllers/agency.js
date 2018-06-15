@@ -19,6 +19,16 @@ function findAgencies(req, res){
 
 }
 
+function findAgencyById(req, res){
+    Agency.find({"_id": req.params.id, "meta.active": true}, (err, foundAgency) => {
+        if(err){
+            res.send(err);
+        }else{
+            res.send(foundAgency);
+        }
+    });
+}
+
 function addAgency(req, res){
     
     var newAgency = {
@@ -54,7 +64,7 @@ function updateAgency(req, res){
             foundAgency.city = req.body.city;
             foundAgency.cp = req.body.cp;
             foundAgency.address = req.body.address;
-            foundAgency.modified_at = Date.now;
+            foundAgency.modified_at = Date.now();
 
             foundAgency.save();
 
@@ -65,7 +75,7 @@ function updateAgency(req, res){
 
 function removeAgency(req, res){
 
-    Agency.findOneAndUpdate({"_id": req.params.id, "meta,active": true}, (err, agencyToRemove) => {
+    Agency.findOneAndUpdate({"_id": req.params.id, "meta.active": true}, {"meta.active": false}, (err, agencyToRemove) => {
         if(err){
             res.send(err);
         }else{
@@ -103,6 +113,7 @@ function setManager(req, res){
 module.exports = {
     showAgencies,
     findAgencies,
+    findAgencyById,
     addAgency,
     updateAgency,
     removeAgency,

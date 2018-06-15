@@ -4,13 +4,13 @@ var passport = require("passport");
 function login(req, res) {
     passport.authenticate('local', function(err, user, info) {
         if (err) {
-            res.status(500).json({
+            return res.status(500).json({
                 error: "Ocurrió un error",
                 desc: err
             });
         }
         if (!user) {
-            res.status(404).json({
+            return res.status(404).json({
                 error: "Usuario y/o Contraseña incorrectos"
             });
         }

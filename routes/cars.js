@@ -8,6 +8,8 @@ router.post("/", ModelController.addModel);
 router.put("/:id", ModelController.updateModel);
 router.delete("/:id", ModelController.removeModel);
 
+router.get("/models", ModelController.showModelsPage);
+
 router.get("/:id", ModelController.findModelById);
 router.get("/category/:category", ModelController.findModelsByCategory);
 router.get("/images/:id", ModelController.findModelImages);

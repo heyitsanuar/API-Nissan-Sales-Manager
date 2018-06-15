@@ -1,2 +1,24 @@
 //Si un propio usuario intenta cambiarse de gerente de agencia a empleado
 //Si ya existe un manager y se quiere agregar otro, advertir que se removerá el previo
+
+Global Manager
+	
+	Stock
+	-Puede agregar vehículos, una vez ahí, selecciona mediante 		checkboxes los vehículos a pasar
+	-Una vez hecho eso, aparece un modal diciendo a que estado, 		municipio, y agencia se desea mandar
+	
+	Sales
+	-Busca ventas por modelo, sucursal, por municipio, estado en
+	ciertas fechas
+
+Manager
+	
+	Shipping
+	-Debe hacer filtros por estado, municipio, y agencia
+	-No puede editar, agregar, ni borrar
+
+	Sales
+	-Busca ventas por modelo, sucursal, por municipio
+	ciertas fechas
+	-Genera reporte por fechas
+	-No puede editar, agregar, ni borrar

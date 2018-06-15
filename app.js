@@ -9,6 +9,7 @@ var Vehicle               = require("./models/vehicle");
 var User                  = require("./models/user");
 var Sale                  = require("./models/sale");
 var Version               = require("./models/version");
+var Version               = require("./models/stock");
 var seedDB                = require("./seeds");
 var expressSanitizer      = require("express-sanitizer");
 var methodOverride        = require("method-override");
@@ -20,20 +21,20 @@ var passportLocalMongoose = require("passport-local-mongoose");
 //seedDB();
 
 //Requiring route files
-var carRoutes             = require("./routes/cars"),
-    clientRoutes          = require("./routes/clients"),
-    agencyRoutes          = require("./routes/agencies"),
-    vehicleRoutes         = require("./routes/vehicles"),
-    requestRoutes         = require("./routes/requests"),
-    userRoutes            = require("./routes/users"),
-    loginRoutes           = require("./routes/login"),
-    catalogRoutes         = require("./routes/catalog"),
-    salesRoutes           = require("./routes/sales"),
-    comparerRoutes        = require("./routes/comparer"),
-    comparerExtRoutes     = require("./routes/comparerExt"),
-    locationRoutes        = require("./routes/location"),
-    indexRoutes           = require("./routes/index"),
-    authRoutes            = require("./routes/authentication");
+var carRoutes      = require("./routes/cars"),
+    clientRoutes   = require("./routes/clients"),
+    agencyRoutes   = require("./routes/agencies"),
+    vehicleRoutes  = require("./routes/vehicles"),
+    requestRoutes  = require("./routes/requests"),
+    userRoutes     = require("./routes/users"),
+    loginRoutes    = require("./routes/login"),
+    catalogRoutes  = require("./routes/catalog"),
+    salesRoutes    = require("./routes/sales"),
+    comparerRoutes = require("./routes/comparer"),
+    locationRoutes = require("./routes/location"),
+    stockRoutes    = require("./routes/stock"),
+    indexRoutes    = require("./routes/index"),
+    authRoutes     = require("./routes/authentication");
 
 //=======================App setup===============================
 
@@ -88,6 +89,7 @@ app.use(function(req, res, next){
 
 app.use(indexRoutes);
 app.use(authRoutes);
+app.use(catalogRoutes);
 app.use("/cars", carRoutes);
 app.use("/clients", clientRoutes);
 app.use("/agency", agencyRoutes);
@@ -95,10 +97,10 @@ app.use("/vehicles", vehicleRoutes);
 app.use("/requests", requestRoutes);
 app.use("/employees", userRoutes);
 app.use("/login", loginRoutes);
-app.use(catalogRoutes);
 app.use("/sales", salesRoutes);
 app.use("/comparerExt", cors(), comparerExtRoutes);
 app.use("/comparer", comparerRoutes);
 app.use("/locations", locationRoutes);
+app.use(stockRoutes);
 
 module.exports = app;

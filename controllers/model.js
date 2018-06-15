@@ -3,6 +3,10 @@
 var Model   = require("../models/model");
 var Version = require("../models/version");
 
+function showModelsPage(req, res){
+    res.render("admin/models");
+}
+
 function findModels(req, res){
     
     //Looks for all the models within the database
@@ -62,6 +66,36 @@ function findModelImages(req ,res){
 
 }
 
+function findModelsDistinct(req, res){
+    Model.find({"meta.active": true}, (err, foundModels) => {
+        if(err){
+            res.send(err);
+        }else{
+            if(!foundModels)
+                return res.send("No hay modelos.");
+
+            var models = [];
+
+            foundModels.forEach(function(model){
+                models.push(model.modelo);
+            });
+            
+            models = models.filter(function(element, position) {
+                return models.indexOf(element) == position;
+            });
+
+            models = JSON.stringify(models);
+
+            res.send(models);
+        }
+    });
+}
+
+//To Do
+function findVersions(req, res){
+
+}
+
 function addModel(req, res){
 
     //Creates the object of the model to be added and its properties
@@ -72,10 +106,11 @@ function addModel(req, res){
         categoria: req.body.category,
         anio: req.body.year,
         colores: req.body.colors,
-        variantes: req.body.versions,
         photos: req.body.photos,
         imagenes: req.body.photos.imagesURL
     };
+
+    console.log(req.body.colors);
 
     //Creates the model and adds it to the database
     Model.create(newModel, (err, modelAdded) =>{
@@ -84,7 +119,7 @@ function addModel(req, res){
         }else{
             res.send(modelAdded);
         }
-    });
+    }); 
 
 }
 
@@ -101,7 +136,6 @@ function updateModel(req, res){
             modelUpdated.category         = req.body.category;
             modelUpdated.year             = req.body.year;
             modelUpdated.colors           = req.body.colors;
-            modelUpdated.versions         = req.body.versions;
             modelUpdated.photos           = req.body.photos;
             modelUpdated.meta.modified_at = Date.now;
 
@@ -110,7 +144,6 @@ function updateModel(req, res){
             res.send(modelUpdated);
         }
     });
-
 }
 
 function removeModel(req, res){
@@ -192,6 +225,7 @@ function removeVersion(req, res){
 }
 
 module.exports = {
+    showModelsPage,
     findModels,
     findModelsByCategory,
     findModelById,

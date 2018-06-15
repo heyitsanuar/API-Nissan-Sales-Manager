@@ -2,11 +2,24 @@
 
 <section class="main">
     <div class="heading container">
-        <h1 class="heading__title">Employees</h1>
+        <h1 class="heading__title">Clients</h1>
         <div class="heading__controls">
-            <div class="table-filter__group"></div>
-            <a class="table-filter__btn" href="#" data-toggle="modal" data-target=".add-employee">
-                Add Employee
+            <div class="table-filter__group">
+                <div class="table-filter__item">
+                    <p class="table-filter__title">State</p>
+                    <select class="modal-form__input modal-form__input--select" name="" id="filter-client-state">
+                        <option value="">Select one</option>
+                    </select>
+                </div>
+                <div class="table-filter__item">
+                    <p class="table-filter__title">City</p>
+                    <select class="modal-form__input modal-form__input--select" name="" id="filter-client-city">
+                        <option value="">Select one</option>
+                    </select>
+                </div>
+            </div>
+            <a class="table-filter__btn" href="#" data-toggle="modal" data-target=".add-client">
+                Add Client
             </a>
         </div>
         <table class="table">
@@ -15,32 +28,27 @@
                     <th class="table__th table__th--is-active">NAME <span class=""></span></th>
                     <th class="table__th">PHONE <span class=""></span></th>
                     <th class="table__th">EMAIL <span class=""></span></th>
+                    <th class="table__th">STATE <span class=""></span></th>
+                    <th class="table__th">CITY <span class=""></span></th>
+                    <th class="table__th">CP <span class=""></span></th>
                     <th class="table__th">ADDRESS <span class=""></span></th>
                 </tr>
             </thead>
-            <tbody class="table__body" id="table-employees">			
+            <tbody class="table__body" id="table-clients">			
             </tbody>
         </table>
     </div>
 
-    <!--Add employee-->
-    <div class="modal--fade modal fade add-employee" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="add-branch">
+    <!--Add client-->
+    <div class="modal--fade modal fade add-client" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="add-branch">
             <div class="modal-dialog modal--form-size">
                 <div class="modal-form modal-content">
-                    <form id="add-employee-form">
+                    <form id="add-client-form">
                         <div class="modal-form__header">
-                            <h2 class="modal-form__title">Add Employee</h2>
+                            <h2 class="modal-form__title">Add Client</h2>
                             <i class="modal-form__exit fas fa-times" id="modal-exit" data-dismiss="modal" aria-label="Close"></i>
                         </div>
                         <div class="modal-form__body">
-                            <div class="modal-form__group modal-form__group--small">
-                                <label for="" class="modal-form__label">Username</label>
-                                <input type="text" class="modal-form__input" name="username">
-                            </div>
-                            <div class="modal-form__group modal-form__group--small">
-                                <label for="" class="modal-form__label">Password</label>
-                                <input type="password" class="modal-form__input" name="password">
-                            </div>
                             <div class="modal-form__group modal-form__group--small">
                                 <label for="" class="modal-form__label">Name</label>
                                 <input type="text" class="modal-form__input" name="name">
@@ -57,6 +65,18 @@
                                 <label for="" class="modal-form__label">Email</label>
                                 <input type="email" class="modal-form__input" name="email">
                             </div>
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">State</label>
+                                <input type="text" class="modal-form__input" name="state">
+                            </div>
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">City</label>
+                                <input type="text" class="modal-form__input" name="city">
+                            </div>
+                            <div class="modal-form__group modal-form__group--minium">
+                                <label for="" class="modal-form__label">CP</label>
+                                <input type="text" class="modal-form__input" name="cp">
+                            </div>
                             <div class="modal-form__group modal-form__group--large">
                                 <label for="" class="modal-form__label">Address</label>
                                 <input type="text" class="modal-form__input" name="address">
@@ -65,7 +85,7 @@
                         <div class="modal-form__footer">
                             <div class="modal-form__btn-group">
                                 <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close">Cancel</a>
-                                <a href="#" id="add-employee-submit" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Confirm</a>
+                                <a href="#" id="add-client-submit" data-dismiss="modal" aria-label="Close" class="modal-form__btn modal-form__btn--confirm">Confirm</a>
                             </div>
                         </div>
                     </form>
@@ -73,68 +93,40 @@
             </div>
     </div>
         
-    <!--Edit employee agency manager-->
-    <div class="modal--fade modal fade edit-employee" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="edit-branch">
+    <!--Edit client-->
+    <div class="modal--fade modal fade edit-client" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="edit-branch">
             <div class="modal-dialog modal--form-size">
                 <div class="modal-form modal-content">
-                    <form action=""></form>
                     <div class="modal-form__header">
-                        <h2 class="modal-form__title">Add Employee</h2>
+                        <h2 class="modal-form__title">Edit Employee</h2>
                         <i class="modal-form__exit fas fa-times" id="modal-exit" data-dismiss="modal" aria-label="Close"></i>
                     </div>
                     <div class="modal-form__body">
                         <div class="modal-form__group modal-form__group--small">
-                            <label for="" class="modal-form__label">Username</label>
-                            <input type="text" class="modal-form__input" name="username">
-                        </div>
-                        <div class="modal-form__group modal-form__group--small">
-                            <label for="" class="modal-form__label">Password</label>
-                            <input type="password" class="modal-form__input" name="password">
-                        </div>
-                        <div class="modal-form__group modal-form__group--small">
                             <label for="" class="modal-form__label">Name</label>
-                            <input type="text" class="modal-form__input" name="name">
+                            <input type="text" class="modal-form__input">
                         </div>
                         <div class="modal-form__group modal-form__group--small">
                             <label for="" class="modal-form__label">Last Name</label>
-                            <input type="text" class="modal-form__input" name="surname">
+                            <input type="text" class="modal-form__input">
                         </div>
                         <div class="modal-form__group modal-form__group--small">
                             <label for="" class="modal-form__label">Phone</label>
-                            <input type="text" class="modal-form__input" name="phone">
+                            <input type="text" class="modal-form__input">
                         </div>
                         <div class="modal-form__group modal-form__group--small">
                             <label for="" class="modal-form__label">Email</label>
-                            <input type="email" class="modal-form__input" name="email">
+                            <input type="email" class="modal-form__input">
                         </div>
                         <div class="modal-form__group modal-form__group--large">
                             <label for="" class="modal-form__label">Address</label>
-                            <input type="text" class="modal-form__input" name="address">
-                        </div>
-                        <p class="modal-form__label modal-form__label--title">Agency</p>
-                        <div class="modal-form__group modal-form__group--small">
-                            <label for="" class="modal-form__label">State</label>
-                            <select id="form-stock-state" class="modal-form__input" name="agencyState">
-                                <option value="Servicio">Select a city</option>
-                            </select>
-                        </div>
-                        <div class="modal-form__group modal-form__group--small">
-                            <label for="" class="modal-form__label">City</label>
-                            <select id="form-stock-city" class="modal-form__input" name="agencyCity">
-                                <option value="Servicio">Select a city</option>
-                            </select>								  
-                        </div>
-                        <div class="modal-form__group modal-form__group--small">
-                            <label for="" class="modal-form__label">Agency</label>
-                            <select id="form-stock-agency" class="modal-form__input" name="agencyName">
-                                <option value="Servicio">Select an agency</option>
-                            </select>								  
+                            <input type="text" class="modal-form__input">
                         </div>
                     </div>
                     <div class="modal-form__footer">
                         <div class="modal-form__btn-group">
                             <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close">Cancel</a>
-                            <a href="#" id="add-employee-submit" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Confirm</a>
+                            <a href="#" class="modal-form__btn modal-form__btn--confirm">Confirm</a>
                         </div>
                     </div>
                 </div>
@@ -163,7 +155,7 @@
                 <div class="modal-form__footer modal-form__footer--centered">
                     <div class="modal-form__btn-group modal-form__btn-group--centered">
                         <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close">Nel, prro</a>
-                        <a href="#" id="btn-remove-employee" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Saimón</a>
+                        <a href="#" id="btn-remove-client" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Saimón</a>
                     </div>
                 </div>
             </div>
@@ -172,11 +164,10 @@
 
 </section>
 
+
 <% include ../partials/footer %>
-<script src="/js/ajax/manager/employee.js"></script>
+<script src="/js/ajax/salesman/client.js"></script>
 <script src="/js/Script.js"></script>
-<script src="/js/sessionControl.js"></script>
 
 </body>
 </html>
-

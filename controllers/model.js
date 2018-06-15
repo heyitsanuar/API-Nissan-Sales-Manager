@@ -158,6 +158,13 @@ function addVersion(req, res){
             res.send(err);
         }else{
 
+            if(!foundModel){
+                console.log("No hay modelo");
+                return res.send("No hay modelo");
+            }
+
+            console.log(foundModel);
+            
             var newVersion = {
                 variante: req.body.variante,
                 precio: req.body.precio,
@@ -165,11 +172,13 @@ function addVersion(req, res){
             };
 
             foundModel.variantes.push(newVersion);
+            
             foundModel.save((err, updatedModel) => {
                 if (err) {
                     res.send(err);
+                }else{
+                    res.send(updatedModel);
                 }
-                res.send(updatedModel)
             });
         }
 

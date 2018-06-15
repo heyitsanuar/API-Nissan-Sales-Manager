@@ -4,6 +4,7 @@ $(document).ready(function(){
     refreshModels();
 
     $("#add-model-submit").on('click', addModel);
+    $("#add-version-submit").on('click', addVersion);
     $("#filter-category").on('change', filterCategory);
 
     function showModels(models){
@@ -20,6 +21,7 @@ $(document).ready(function(){
             result += "<div class='table__dropdown dropdown dropleft'>";
             result += "<a class='table__dropdown-button' id='data1' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>...</a>";
             result += "<div class='table__dropdown-menu dropdown-menu' aria-labelledby='data1'>";
+            result += "<a class='add-version_show table__dropdown-item dropdown-item' href='#' data-toggle='modal' data-target='.add-version' data-id='" + model._id + "'>Add Version</a>";
             result += "<a class='edit-employee_show table__dropdown-item dropdown-item' href='#' data-toggle='modal' data-target='.edit-employee' data-id='" + model._id + "'>Edit</a>";
             result += "<a class='remove-employee_show table__dropdown-item dropdown-item' href='#' data-toggle='modal' data-target='.delete-element' data-id='" + model._id + "'>Delete</a>";
             result += "</div>";
@@ -29,6 +31,12 @@ $(document).ready(function(){
         });
     
         $("#table-models").html(result);
+
+        $(".add-version_show").on('click', function(){
+            var id = $(this).attr("data-id");
+
+            $("#add-version-submit").attr("data-id", id);
+        });
         
         editButtons = $(".edit-model_show");
         editButtons.on('click', fillFormWithModelInfo);
@@ -54,6 +62,30 @@ $(document).ready(function(){
             data = {};
         
         modelForm.find('[name]').each(function(index, value){
+            var name  = $(this).attr('name'),
+                value = $(this).val();
+
+            data[name] = value;
+        });
+        
+        $.ajax({
+            url: url,
+            method: "POST",
+            data: data,
+            success: refreshModels
+        });
+    }
+
+    function addVersion(){
+        
+        var versionForm = $("#add-version-form"),
+            id = $("#add-version-submit").attr("data-id");
+            url = "/cars/version/new/" + id,
+            data = {};
+        
+        console.log(url);
+        
+        versionForm.find('[name]').each(function(index, value){
             var name  = $(this).attr('name'),
                 value = $(this).val();
 

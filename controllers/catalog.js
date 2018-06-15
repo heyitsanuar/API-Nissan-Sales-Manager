@@ -9,7 +9,14 @@ function showDetailsPage(req, res){
 
 function showCatalog(req, res){
     //Renders catalog main page
-    res.render("home");
+    Model.find({"meta.active": true}, (err, foundModels) => {
+        if(err){
+            res.send(err);
+        }else{
+            res.render("home", {models: foundModels});
+        }
+    });
+
 }
 
 module.exports = {

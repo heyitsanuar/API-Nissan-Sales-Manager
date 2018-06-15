@@ -243,62 +243,56 @@
         </div>
     </div>
 
-    <!--Add stock-->
-    <div class="modal--fade modal fade add-stock" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="add-stock">
+    <!--Add version-->
+    <div class="modal--fade modal fade add-version" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="add-stock">
     <div class="modal-dialog modal--form-size">
         <div class="modal-form modal-content">
             <div class="modal-form__header">
-                <h2 class="modal-form__title">Send Stock</h2>
+                <h2 class="modal-form__title">Add Version</h2>
                 <i class="modal-form__exit fas fa-times" id="modal-exit" data-dismiss="modal" aria-label="Close"></i>
             </div>
-            <form action="" id="add-model-form">
+            <form action="" id="add-version-form">
                 <div class="modal-form__body">
-                        <div class="modal-form__group modal-form__group--small">
-                            <label for="" class="modal-form__label">State</label>
-                            <select id="form-stock-state" class="modal-form__input" name="state">
-                                <option value="Servicio">Select a city</option>
-                            </select>
-                        </div>
-                        <div class="modal-form__group modal-form__group--small">
-                            <label for="" class="modal-form__label">City</label>
-                            <select id="form-stock-city" class="modal-form__input" name="city">
-                                <option value="Servicio">Select a city</option>
-                            </select>								  
-                        </div>
-                        <div class="modal-form__group modal-form__group--small">
-                            <label for="" class="modal-form__label">Agency</label>
-                            <select id="form-stock-agency" class="modal-form__input" name="agency">
-                                <option value="Servicio">Select an agency</option>
-                            </select>								  
-                        </div>
-                        <div class="modal-form__group modal-form__group--small">
-                            <label for="" class="modal-form__label">Category</label>
-                            <select class="modal-form__input" name="category">
-                                <option value="Servicio">Full stock</option>
-                                <option value="Servicio">Servicio</option>
-                                <option value="Auto">Auto</option>
-                                <option value="Pick Up">PickUp</option>
-                                <option value="SUV">SUV</option>
-                            </select>								  
-                        </div>                    
+                    <div class="modal-form__group modal-form__group--small">
+                        <label for="" class="modal-form__label">Nombre</label>
+                        <input type="text" class="modal-form__input" name="variante">
+                    </div>
+                    <div class="modal-form__group modal-form__group--small">
+                        <label for="" class="modal-form__label">Precio</label>
+                        <input type="text" class="modal-form__input" name="precio">								  
+                    </div>
+                    <div class="modal-form__group modal-form__group--small">
+                        <label for="" class="modal-form__label">Rendimiento</label>
+                        <input type="text" class="modal-form__input" name="caracteristicas[rendimiento]">							  
+                    </div>
+                    <div class="modal-form__group modal-form__group--small">
+                        <label for="" class="modal-form__label">Potencia</label>
+                        <input type="text" class="modal-form__input" name="caracteristicas[potencia]">							  
+                    </div>
+                    <div class="modal-form__group modal-form__group--small">
+                        <label for="" class="modal-form__label">Torque</label>
+                        <input type="text" class="modal-form__input" name="caracteriticas[torque]">							  
+                    </div>
+                    <div class="modal-form__group modal-form__group--small">
+                        <label for="" class="modal-form__label">Transmisión</label>
+                        <input type="text" class="modal-form__input" name="caracteristicas[transmision]">							  
+                    </div>
+                    <div class="modal-form__group modal-form__group--small">
+                        <label for="" class="modal-form__label">Tracción</label>
+                        <input type="text" class="modal-form__input" name="caracteristicas[traccion]">							  
+                    </div>                     
                 </div>
             </form>
             <div class="modal-form__footer">
                 <div class="modal-form__btn-group">
                     <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close">Cancel</a>
-                    <a id="add-stock-submit" href="#" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Confirm</a>
+                    <a id="add-version-submit" href="#" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Confirm</a>
                 </div>
             </div>
-            </div>
-            <div class="modal-form__footer">
-                <div class="modal-form__btn-group">
-                    <a href="#" class="modal-form__btn modal-form__btn--cancel" data-dismiss="modal" aria-label="Close">Cancel</a>
-                    <a id="add-stock-submit" href="#" class="modal-form__btn modal-form__btn--confirm" data-dismiss="modal" aria-label="Close">Confirm</a>
-                </div>
             </div>
         </div>
     </div>
-</div>
+    </div>
     
     <div class="modal--fade modal fade save-changes" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="add-branch">
       <div class="modal-dialog modal-dialog-centered">

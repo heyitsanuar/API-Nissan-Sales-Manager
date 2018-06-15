@@ -99,102 +99,16 @@
                 </div>
             </div>
             <div class="cars__car-list">
-                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
-                        <img class="car__image" src="/img/home/car-1.jpg" alt="">
-                        <div class="car__info">
-                            <p class="car__name">Tsuru Bochito</p>
+                <% models.forEach(function(model) { %>
+                    <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4" data-id="<%= model._id %>">
+                        <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
+                            <img class="car__image" src="<%= model.photos.imagesURL[0] %>" alt="">
+                            <div class="car__info">
+                                <p class="car__name"><%= model.modelo %></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
-                        <img class="car__image" src="/img/home/car-2.jpg" alt="">
-                        <div class="car__info">
-                            <p class="car__name">Tsuru Bochito</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
-                        <img class="car__image" src="/img/home/car-3.jpg" alt="">
-                        <div class="car__info">
-                            <p class="car__name">Tsuru Bochito</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
-                        <img class="car__image" src="/img/home/car-4.jpg" alt="">
-                        <div class="car__info">
-                            <p class="car__name">Tsuru Bochito</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
-                        <img class="car__image" src="/img/home/car-5.jpg" alt="">
-                        <div class="car__info">
-                            <p class="car__name">Tsuru Bochito</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
-                        <img class="car__image" src="/img/home/car-6.jpg" alt="">
-                        <div class="car__info">
-                            <p class="car__name">Tsuru Bochito</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
-                        <img class="car__image" src="/img/home/car-7.jpg" alt="">
-                        <div class="car__info">
-                            <p class="car__name">Tsuru Bochito</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
-                        <img class="car__image" src="/img/home/car-8.jpg" alt="">
-                        <div class="car__info">
-                            <p class="car__name">Tsuru Bochito</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
-                        <img class="car__image" src="/img/home/car-1.jpg" alt="">
-                        <div class="car__info">
-                            <p class="car__name">Tsuru Bochito</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
-                        <img class="car__image" src="/img/home/car-2.jpg" alt="">
-                        <div class="car__info">
-                            <p class="car__name">Tsuru Bochito</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
-                        <img class="car__image" src="/img/home/car-3.jpg" alt="">
-                        <div class="car__info">
-                            <p class="car__name">Tsuru Bochito</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="car__container col-xs-12 col-sm-6 col-md-6 col-lg-4">
-                    <div class="car" data-toggle="modal" data-target=".bd-example-modal-lg">
-                        <img class="car__image" src="/img/home/car-4.jpg" alt="">
-                        <div class="car__info">
-                            <p class="car__name">Tsuru Bochito</p>
-                        </div>
-                    </div>
-                </div>
+                <% }); %>
             </div>
             <nav class="pagination" aria-label="Page navigation example">
               <ul class="pagination__list pagination">
@@ -225,7 +139,7 @@
       <div class="modal-dialog modal-dialog-centered modal--lg">
         <div class="modal__car modal-content">
             <i class="modal__exit fas fa-times" id="modal-exit" data-dismiss="modal" aria-label="Close"></i>
-            <div class="modal__gallery">
+            <div class="modal__gallery" id="modal-gallery">
                 <img class="modal__image" id="modal-image" src="/img/home/gallery/active.jpg" alt="">
                 <div class="modal__thumb-group" id="thumb-group">
                     <img class="modal__thumbnail modal__thumbnail--is-active" src="/img/home/gallery/thumbnails/car-1.jpg" alt="">
@@ -236,7 +150,7 @@
                     <img class="modal__thumbnail" src="/img/home/gallery/thumbnails/car-6.jpg" alt="">
                 </div>
             </div>
-            <div class="modal__info">
+            <div class="modal__info" id="modal-info">
                 <h2 class="modal__title">X-Terra</h2>
                 <p class="modal__description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis nihil facilis, aperiam voluptatum asperiores temporibus!</p>
                 <div class="modal-feature">

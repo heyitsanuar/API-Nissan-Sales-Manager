@@ -9,7 +9,7 @@ var Vehicle               = require("./models/vehicle");
 var User                  = require("./models/user");
 var Sale                  = require("./models/sale");
 var Version               = require("./models/version");
-var Version               = require("./models/stock");
+// var Version               = require("./models/stock");
 var seedDB                = require("./seeds");
 var expressSanitizer      = require("express-sanitizer");
 var methodOverride        = require("method-override");
@@ -17,6 +17,8 @@ var bodyParser            = require("body-parser");
 var passport              = require("passport");
 var LocalStrategy         = require("passport-local");
 var passportLocalMongoose = require("passport-local-mongoose");
+let swaggerUi = require('swagger-ui-express');
+let swaggerDocument = require('./swagger.json');
 
 //seedDB();
 
@@ -35,7 +37,11 @@ var carRoutes      = require("./routes/cars"),
     locationRoutes = require("./routes/location"),
     stockRoutes    = require("./routes/stock"),
     indexRoutes    = require("./routes/index"),
-    authRoutes     = require("./routes/authentication");
+    authRoutes     = require("./routes/authentication"),
+    clientesRouter = require("./routes/ClientesRouter"),
+    agenciasRouter = require("./routes/AgenciasRouter"),
+    agentesRouter = require("./routes/AgentesRouter"),
+    modelosRouter = require("./routes/ModelosRouter");
 
 //=======================App setup===============================
 
@@ -62,29 +68,32 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-var disallowedWithLogin = [
-    "/login",
-    "/sign-in"
-];
+// var disallowedWithLogin = [
+//     "/login",
+//     "/sign-in",
+// ];
 
-var allowedWithoutLogin = [
-    "/comparerExt",
-    "/login",
-    "/sign-in"
-];
+// var allowedWithoutLogin = [
+//     "/comparerExt",
+//     "/login",
+//     "/sign-in"
+// ];
 
 //Setting current user for local's
 app.use(function(req, res, next){
     res.locals.currentUser = req.user;
-    console.log(req.user);
-    if (res.locals.currentUser == undefined && !allowedWithoutLogin.includes(req.url)) {
-        res.redirect("/login")
-    } else if (res.locals.currentUser != undefined && disallowedWithLogin.includes(req.url)) {
-        res.redirect("/home");
-    } else {
-        next();
-    }
+    // console.log(req.user);
+    // if (res.locals.currentUser == undefined && !allowedWithoutLogin.includes(req.url)) {
+    //     res.redirect("/login")
+    // } else if (res.locals.currentUser != undefined && disallowedWithLogin.includes(req.url)) {
+    //     res.redirect("/home");
+    // } else {
+    next();
+    // }
 });
+
+// Swagger
+app.use('/api/Docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //Routing instances
 
@@ -102,6 +111,10 @@ app.use("/sales", salesRoutes);
 app.use("/comparerExt", cors(), comparerExtRoutes);
 app.use("/comparer", comparerRoutes);
 app.use("/locations", locationRoutes);
+app.use("/api/Clientes", clientesRouter);
+app.use("/api/Agencias", agenciasRouter);
+app.use("/api/Agentes", agentesRouter);
+app.use("/api/Modelo", modelosRouter);
 app.use(stockRoutes);
 
 module.exports = app;

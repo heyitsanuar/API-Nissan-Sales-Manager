@@ -15,6 +15,7 @@ $(document).ready(function(){
 
             result += "<tr class='table__row-td'>";
             result += "<td class='table__td'>" + agency.name + "</td>";
+            result += "<td class='table__td'>" + agency.manager.fullName + "</td>";
             result += "<td class='table__td state'>" + agency.state + "</td>";
             result += "<td class='table__td city'>" + agency.city + "</td>";
             result += "<td class='table__td'>" + agency.cp + "</td>";

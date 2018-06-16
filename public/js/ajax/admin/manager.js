@@ -17,7 +17,6 @@ $(document).ready(function(){
         $.each(managers, function(index, manager){
             result += "<tr class='table__row-td'>";
             result += "<td class='table__td'>" + manager.name + " " + manager.surname + "</td>";
-            result += "<td class='table__td'>Tabaranch</td>";
             result += "<td class='table__td'>" + manager.phone + "</td>";
             result += "<td class='table__td'>" + manager.email + "</td>";
             result += "<td class='table__td'>" + manager.address + "</td>";

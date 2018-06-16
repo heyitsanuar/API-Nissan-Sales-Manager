@@ -1,14 +1,24 @@
 <% include ../partials/header %>
+<style>
+    .dropdown-item.active{
+        background-color: #dc3545 !important;
+    }
 
-<script src="js/comparer.js"></script>
+    .dropdown-item:active{
+        background-color: #dc3545 !important;
+    }
+</style>
+
 <section class="main">
     <div class="heading container">
         <h1 class="heading__title">Model Comparer</h1>
-        <select id="cb_agencias"></select>
-        <select id="cb_categorias"></select>
-        <select id="cb_modelos"></select>
-        <select id="cb_variantes"></select>
-        <button id="bt_agregar">Agregar a Comparación</button>
+        <div class="div_controles_comparer">
+            <select id="cb_agencias" class="selectpicker" data-style="btn-secondary"></select>
+            <select id="cb_categorias" class="selectpicker"></select>
+            <select id="cb_modelos" class="selectpicker"></select>
+            <select id="cb_variantes" class="selectpicker"></select>
+            <button id="bt_agregar" class="btn btn-light" style="float: right;">Comparar</button>
+        </div>
         <table id="tabla" class="table">
             <thead class="table__head">
                 <tr id="tRow_Modelo" class="table__row-th">
@@ -43,7 +53,10 @@
             </tbody>
         </table>
     </div>
-
 </section>
+
+<script src="/js/bootstrap-select.min.js"></script>
+<script src="/js/ajax/salesman/comparer.js"></script>
+<script src="/js/Script.js"></script>
 
 <% include ../partials/footer %>

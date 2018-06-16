@@ -170,7 +170,7 @@ $(() => {
         if (variantesComparadas.includes(varianteSeleccionada)) {
             return;
         }
-
+        
         let cellModelo = $("<td>").addClass("table__td_comparer");
         let cellCategoria = $("<td>").addClass("table__td_comparer");
         let cellDimensiones = $("<td>").addClass("table__td_comparer");

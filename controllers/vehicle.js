@@ -50,6 +50,102 @@ function findVehiclesByAgency(req, res){
 
 }
 
+function findVehiclesBySalesman(req, res){
+    Agency.findOne({"employees._id": req.user._id ,"meta.active": true} , (err, foundAgency) => {
+        if(err){
+            res.send(err);
+        }else{
+            if(!foundAgency)
+                return res.send("No hay agencia");
+
+            Vehicle.find({"agency.id": foundAgency._id, "meta.active": true}, (err, foundVehicles) => {
+                if(err){
+                    res.send(err);
+                }else{
+                    res.send(foundVehicles);
+                }
+            })
+        }
+    });
+}
+
+function findVehiclesByModel(req, res){
+
+    var level = req.params.level;
+
+    console.log(level);
+    console.log(req.body);
+
+    if(level == "global"){
+        Vehicle.find({"model.name": req.body.name, "meta.active": true}, (err, foundModels) => {
+            if(err){
+                res.send(err);
+            }else{
+                res.send(foundModels);
+            }
+        });
+    }else{
+        if(level == "local"){
+
+            Agency.findOne({"employees._id": req.user._id ,"meta.active": true} , (err, foundAgency) => {
+                if(err){
+                    res.send(err);
+                }else{
+                    if(!foundAgency)
+                        return res.send("No hay agencia");
+        
+                    Vehicle.find({"agency.id": foundAgency._id ,"model.name": req.body.name, "meta.active": true}, (err, foundModels) => {
+                        if(err){
+                            res.send(err);
+                        }else{
+                            res.send(foundModels);
+                        }
+                    });
+                }
+            });
+            
+        }
+    }
+}
+
+function findVehiclesByVersion(req, res){
+    var level = req.params.level;
+
+    console.log(level);
+    console.log(req.body);
+
+    if(level == "global"){
+        Vehicle.find({"model.name": req.body.name, "model.version": req.body.version, "meta.active": true}, (err, foundModels) => {
+            if(err){
+                res.send(err);
+            }else{
+                res.send(foundModels);
+            }
+        });
+    }else{
+        if(level == "local"){
+
+            Agency.findOne({"employees._id": req.user._id ,"meta.active": true} , (err, foundAgency) => {
+                if(err){
+                    res.send(err);
+                }else{
+                    if(!foundAgency)
+                        return res.send("No hay agencia");
+        
+                    Vehicle.find({"agency.id": foundAgency._id ,"model.name": req.body.name, "model.version": req.body.version, "meta.active": true}, (err, foundModels) => {
+                        if(err){
+                            res.send(err);
+                        }else{
+                            res.send(foundModels);
+                        }
+                    });
+                }
+            });
+            
+        }
+    }
+}
+
 function addVehicle(req, res){
 
     Model.findOne({
@@ -70,7 +166,8 @@ function addVehicle(req, res){
                         model: {
                             id: foundModel._id,
                             name: req.body.model.name,
-                            version: req.body.model.version
+                            version: req.body.model.version,
+                            category: foundModel.category
                         },
                         serieNumber: req.body.serieNumber,
                         agency: {
@@ -162,6 +259,9 @@ module.exports = {
     showSalesmanStock,
     findVehicles,
     findVehiclesByAgency,
+    findVehiclesBySalesman,
+    findVehiclesByModel,
+    findVehiclesByVersion,
     addVehicle,
     updateVehicle,
     removeVehicle,

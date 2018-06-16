@@ -109,6 +109,7 @@ function addUser(req, res){
                         console.log(registeredUser);
 
                         var employee = {
+                            _id: registeredUser._id,
                             fullName: registeredUser.name + " " + registeredUser.surname,
                             email: registeredUser.email,
                             phone: registeredUser.phone,
